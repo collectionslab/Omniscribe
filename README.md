@@ -7,7 +7,8 @@
 
 ## 01/18/18
 - Discuss about last week ML materials
-- [Data](https://calisphere.org/item/7334deb2-fbf2-4af8-9643-23e8ae1225d9/?order=44)
+- [Sample data](https://calisphere.org/item/7334deb2-fbf2-4af8-9643-23e8ae1225d9/?order=44)
+- [Raw data: the annotated books image set (first 10 books only)](http://babylon.library.ucla.edu/~broadwell/clark_annotated/)
 - Go through [Tesseract](https://github.com/madmaze/pytesseract)
 - Develop a simple ML model on recognizing handwriting text on images, including:
   - doing text recognition using tesseract
