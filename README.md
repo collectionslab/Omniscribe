@@ -31,6 +31,8 @@
   - Goal: how good naive CNN can classify labeled images? What about images with different fonts and styles? What about multi-box classification (majority vote)?
 - Research
   - Goal: What's the state of the art method for printed vs written text classification research?
+- Data, web workstation
+  - Goal: create a dataset
 - *Note: My suggestion is only for guidance. The ultimate solution is created together (Does not have to follow my suggestions).*  
 
   
