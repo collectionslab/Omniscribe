@@ -1,4 +1,4 @@
-# annotations-computervision
+# Meeting agendas
 
 ## 01/11/18
 - Go through some ML background:
