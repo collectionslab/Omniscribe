@@ -35,9 +35,9 @@
   - Goal: create a dataset
 - *Note: My suggestion is only for guidance. The ultimate solution is created together (Does not have to follow my suggestions).*  
 
-  ## 02/2/18
-  -Uploaded labeled dataset of our initial 10 manuscripts.
-   -Dataset consists of an annotated (+) folder, unannotated (-) folder, and a README abou edge cases of classification
-    -1977 annotated, 842 unannotated ~1.6gb
+## 02/2/18
+-Uploaded labeled dataset of our initial 10 manuscripts.
+ -Dataset consists of an annotated (+) folder, unannotated (-) folder, and a README abou edge cases of classification
+  -1977 annotated, 842 unannotated ~1.6gb
 
 
