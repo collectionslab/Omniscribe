@@ -1,4 +1,4 @@
-# annotations-computervision
+# Book Annotation Classification Engine
 
 Computer vision experiments to identify and classify annotations in digitized printed books.
 
