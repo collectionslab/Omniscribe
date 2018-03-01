@@ -29,7 +29,11 @@ def threshold(img,factor=None):
 	if(factor != None):
 		#reperform thresholding with otsu's threshold modified by factor
 		ret, bh =cv2.threshold(img,ret * factor,255,cv2.THRESH_BINARY)
-	return bh	
+	return bh
+def thresholdMagic(img):
+	#Threshold by magic number = 30
+	ret, res = cv2.threshold(img,30,255,cv2.THRESH_BINARY)
+	return res
 	
 def ExtractArea(img,mask):
 	#Extracts Dark areas of an image that are in the white areas of the mask
@@ -53,7 +57,7 @@ def QuickPreprocess(img):
 	mask = threshold(mask)
 	return mask
 
-#for running as a command line script
+#for running as a command line script for testing
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument('files',nargs=1)
