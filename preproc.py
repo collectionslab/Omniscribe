@@ -9,6 +9,9 @@ import numpy
 import cv2
 import argparse
 
+from os import listdir, makedirs
+from os.path import isfile, join, exists
+
 
 
 #https://stackoverflow.com/questions/32125281/removing-watermark-out-of-an-image-using-opencv
@@ -55,13 +58,34 @@ def QuickPreprocess(img):
 	mask = HighlightDark(img)
 	mask = NoiseFilter(mask)
 	mask = threshold(mask)
+	
+	numpy.bitwise_not(mask, mask)
 	return mask
+
+def PreprocessImageFile(inFilename, outFilename):
+	img = cv2.imread(inFilename, 0)
+	cv2.imwrite(outFilename, QuickPreprocess(img))
+
+def PreprocessImageFolder(inFoldername, outFoldername):
+	if not exists(outFoldername):
+		makedirs(outFoldername)
+
+	for f in listdir(inFoldername):
+		fname = join(inFoldername, f)
+		if isfile(fname):
+			PreprocessImageFile(fname, join(outFoldername, str(f)))
 
 #for running as a command line script for testing
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
-	parser.add_argument('files',nargs=1)
+	parser.add_argument('files', help="Can be a file or a folder containing images. If it is a folder, the --out argument must also be included.")
+	parser.add_argument('--out', default = "", help="Folder in which to output processed images from input folder.")
     
 	args=parser.parse_args()
-	img = cv2.imread(args.files[0],0)
-	cv2.imwrite("h.jpg",QuickPreprocess(img))
+	if isfile(args.files):
+		PreprocessImageFile(args.files, "preprocessed-" + str(args.files))
+	elif args.out == "":
+		print("Since " + str(args.files) + " is a folder, --out argument needed.")
+	else:
+		PreprocessImageFolder(args.files, args.out)
+
