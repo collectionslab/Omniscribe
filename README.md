@@ -16,6 +16,6 @@ https://ucla.app.box.com/folder/45481483089
 * Andrew Wallace
 * Johnny Ho
 * Emily Chen
+* Jonathan Quach
 * Morgan Madjukie
 * Rahul Malavalli
-* Johnathan Qasd
