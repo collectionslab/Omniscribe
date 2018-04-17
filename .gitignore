@@ -1,0 +1,7 @@
+# gitignore
+
+# emacs
+*~
+
+# jupyter
+.ipynb_checkpoints
