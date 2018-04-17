@@ -55,6 +55,8 @@ def QuickPreprocess(img):
 	mask = HighlightDark(img)
 	mask = NoiseFilter(mask)
 	mask = threshold(mask)
+	
+	numpy.bitwise_not(mask, mask)
 	return mask
 
 #for running as a command line script for testing
