@@ -2,3 +2,6 @@
 
 # emacs
 *~
+
+# jupyter
+.ipynb_checkpoints
