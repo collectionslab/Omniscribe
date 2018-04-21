@@ -2,7 +2,7 @@
 
 A UCLA Collections Lab/BuildUCLA project: computer vision experiments to identify and classify annotations in digitized printed books.
 
-Status: Experimenting with different neural network architectures and evaluating their performance on a dataset of over 3000 images. 
+Status: Experimenting with different neural network architectures and evaluating their performances on a dataset of over 3000 images. 
 
 Want to help us build our training data? Tag and classify annotation here: https://www.zooniverse.org/projects/kirschbombe/book-annotation-classification
 
