@@ -31,6 +31,10 @@ class MLP(nn.Module):
         #print(self.model)
 
     def forward(self, input):
+        print(input.size())
+        print(self.input_dims)
+        
+              
         input = input.view(input.size(0), -1)
         assert input.size(1) == self.input_dims
         return self.model.forward(input)
