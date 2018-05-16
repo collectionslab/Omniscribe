@@ -6,5 +6,9 @@
 # jupyter
 .ipynb_checkpoints
 
-experiments/cnn/notebooks/__pycache__/
+# python cache
+*__pycache__*
+
+# python compiled file
+*.pyc
 
