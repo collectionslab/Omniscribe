@@ -6,6 +6,11 @@ It is based on the git repo root directory preproc.py
 Reference: 
 #https://stackoverflow.com/questions/32125281/removing-watermark-out-of-an-image-using-opencv
 
+by
+Johnny Ho
+Emily Chen
+Morgan Madjukie
+
 """
 
 
@@ -15,7 +20,7 @@ except ImportError:
     from PIL import Image
 import pytesseract
 import matplotlib.pyplot as plt
-import numpy
+import numpy as np
 import cv2
 import argparse
 
@@ -67,12 +72,15 @@ class ImgProcessor:
 
         return img
 
-    def QuickPreprocess(self, img):
-        mask = HighlightDark(img)
-        mask = NoiseFilter(mask)
-        mask = threshold(mask)
+    def quickPreprocess(self, img):
+        """
+        A quick complete image preprocessing step
+        """
+        mask = self.HighlightDark(img)
+        mask = self.NoiseFilter(mask)
+        mask = self.threshold(mask)
 
-        numpy.bitwise_not(mask, mask)
+        mask = np.bitwise_not(mask, mask)
         return mask
 
     def loadImage(self, inFilename):
