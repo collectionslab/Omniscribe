@@ -11,10 +11,10 @@ Steps to finish the ROIs detection:
 6. Plot the bounding box and save the boxes into a corresponding txt file.
 
 Several classes are needed in this work:
-- ACUtils.py
-- ACOCREngine.py
-- ACImgProcessor.py
-- ACPlot.py
+- Utils.py
+- OCREngine.py
+- ImgProcessor.py
+- Plot.py
 
 
 
