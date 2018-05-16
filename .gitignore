@@ -5,3 +5,6 @@
 
 # jupyter
 .ipynb_checkpoints
+
+experiments/cnn/notebooks/__pycache__/
+
