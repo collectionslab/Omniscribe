@@ -1,6 +1,6 @@
 # Book Annotation Classification Engine
 
-A UCLA Collections Lab/BuildUCLA project: computer vision experiments to identify and classify annotations in digitized printed books.
+A UCLA Collections Lab/BuildUCLA project: computer vision experiments to identify and classify annotations in digitized printed books in IIIF-hosted collections.
 
 Status: Experimenting with different neural network architectures and evaluating their performances on a dataset of over 3000 images. 
 
