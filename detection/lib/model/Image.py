@@ -8,6 +8,7 @@ class Image:
     def __init__(self,ID,boxes):
         self.ID=ID
         self.ROIs=ROIs
+        
     def loadBoundingBoxesCSV(filename,skipTitle):
         '''
         Load ROIs from manual CSV. skipTitle tells whether to skip first line

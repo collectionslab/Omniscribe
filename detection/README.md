@@ -17,8 +17,8 @@ Steps to finish the ROIs detection:
 Addtionals:
 1. Identify if the rois contains annotation --> the likelihood that an image contains annotation
 2. Perform two experiments:
-- bounding box evaluation: calculate IoU between the box detection and the ground truth
-- annotation classification: calculate AUC, precision, recall, accuracy on annotation classification
+    - bounding box evaluation: calculate IoU between the box detection and the ground truth
+    - annotation classification: calculate AUC, precision, recall, accuracy on annotation classification
 
 
 ## Classes

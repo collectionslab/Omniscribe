@@ -2,6 +2,10 @@
 OCR engine that supports tesseract or opencv
 """
 import pytesseract
+import pandas as pd
+from lib.utils.RoiUtils import *
+from io import StringIO
+
 
 class OCREngine:
     
@@ -22,21 +26,21 @@ class OCREngine:
         
     def tess_image_to_data(self, img):
         """
-        Tesseract specific function. Convert the image into verbose data, including boxes, confidences, line and page numbers
+        Tesseract specific function. Convert the image into verbose data, including boxes, 
+        confidences, line and page numbers
+        
+        return: list of imageROIs and the df for the original content
         """
         data = self.ocr.image_to_data(img, config = self.ocr_config)
         
-        #####################
-        #
-        # Should decompose data into an array of ImageROI that stores each boxing box location, and the correpsonding text
-        # 
-        # TODO!
-        #
-        # e.g., data = [ImageROI1, ImageROI2, ...]
-        #
-        #####################
+        # convert the tabular data into pandas
+        tmp = StringIO(data)
+        data_df = pd.read_table(tmp)
+
+        # convert the data_df into ImageROI object
+        imgROIs = df_to_ImageROI(data_df)
         
-        return data
+        return imgROIs, data_df
     
     
     def _tess_ocr_config(self):
