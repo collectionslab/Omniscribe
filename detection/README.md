@@ -14,6 +14,12 @@ Steps to finish the ROIs detection:
 5. Run the ROIs algorithm to obtain a list of refined ROIs (bounding box location, x,y,width,height)
 6. Plot the bounding box and save the boxes into a corresponding txt file.
 
+Addtionals:
+1. Identify if the rois contains annotation --> the likelihood that an image contains annotation
+2. Perform two experiments:
+- bounding box evaluation: calculate IoU between the box detection and the ground truth
+- annotation classification: calculate AUC, precision, recall, accuracy on annotation classification
+
 
 ## Classes
 Several classes are needed in this work:
@@ -21,6 +27,8 @@ Several classes are needed in this work:
 - OCREngine.py
 - ImgProcessor.py
 - Plot.py
+
+
 
 
 
