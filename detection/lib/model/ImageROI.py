@@ -33,8 +33,8 @@ class ImageROI:
                   "text:{4}\t"
                   "confidence:{5}\t"
                   "level:{6}\t"
-                  "isAnnotation:{7}".format(self.x, self.y, self.width, self.height, self.confidence, 
-                                            self.text, self.level, self.isAnnotation))
+                  "isAnnotation:{7}".format(self.x, self.y, self.width, self.height, self.text,
+                                            self.confidence, self.level, self.isAnnotation))
         return content
               
         
