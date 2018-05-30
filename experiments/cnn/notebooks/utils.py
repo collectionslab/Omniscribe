@@ -77,6 +77,36 @@ def write_metrics_to_csv(raw_metrics, metric_names, dirname, filename):
     return
 
 
+def plot_values(train_values, val_values, title, ylabel='Loss'):
+    plt.plot(train_values,label = "train")
+    plt.plot(val_values,label = "validation")
+    plt.title(title)
+    plt.ylabel(ylabel)
+    plt.xlabel("Epochs")
+    plt.legend()
+    plt.show()
 
+
+    print("Average Training Score: " + str(np.mean(train_values)))
+    print("Average Validation Score: " + str(np.mean(val_values)))
+    
+    
+def write_metrics_to_csv(raw_metrics, metric_names, dirname, filename):
+    import csv
+    import os
+    
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
+        
+    fileloc = os.path.join(dirname, filename)
+    with open(fileloc, 'w') as outfile:
+        filewriter = csv.writer(outfile, delimiter=',')
+        filewriter.writerow(metric_names)
+        for epoch in range(len(raw_metrics[metric_names[0]])):
+            newrow = [raw_metrics[metric][epoch] for metric in metric_names]
+            filewriter.writerow(newrow)
+            
+    print("Wrote metrics to '" + str(fileloc) + "'")
+    return
 
 

@@ -24,12 +24,15 @@ from __future__ import print_function
 # load memory profiler
 # %load_ext memory_profiler
 
-import time
-import torchnet as tnt
-import torch
-
 
 def train(model, criterion, optimizer, train_data_loader, val_data_loader, num_epochs = 25, use_gpu = False):
+    
+    import time
+    import torchnet as tnt
+    import torch
+    from torch.autograd import Variable
+    from utils import compute_f1_score
+    
     since = time.time()
     
     device_name = 'cuda' if use_gpu else 'cpu'
@@ -60,7 +63,7 @@ def train(model, criterion, optimizer, train_data_loader, val_data_loader, num_e
             # iterate over data in appropraite phase
             for data in data_loaders[phase]:
                 inputs, labels = data
-                inputs, labels = Variable(inputs.to(device_name)), Variable(labels.to(device))
+                inputs, labels = Variable(inputs.to(device_name)), Variable(labels.to(device_name))
                 
                 # zero optimizer gradients
                 optimizer.zero_grad()
