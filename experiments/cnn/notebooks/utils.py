@@ -42,10 +42,39 @@ def valid_imshow_data(data):
         return False
 
 
+def safe_div(n1, n2):
+    if n2 == 0:
+        return 0
+    return n1/n2
+
+def compute_f1_score(tn, fp, fn, tp, class_type='pos'):
+    if class_type == 'pos':
+        prec   = safe_div(float(tp),(float(tp) + float(fp)))
+        recall = safe_div(float(tp),(float(tp) + float(fn)))
+    elif class_type == 'neg':
+        prec   = safe_div(float(tn),(float(tn) + float(fn)))
+        recall = safe_div(float(tn),(float(tn) + float(fp)))
+        
+    return safe_div(float(2) * (prec * recall), (prec + recall))
 
 
-
-
+def write_metrics_to_csv(raw_metrics, metric_names, dirname, filename):
+    import csv
+    import os
+    
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
+        
+    fileloc = os.path.join(dirname, filename)
+    with open(fileloc, 'w') as outfile:
+        filewriter = csv.writer(outfile, delimiter=',')
+        filewriter.writerow(metric_names)
+        for epoch in range(len(raw_metrics[metric_names[0]])):
+            newrow = [raw_metrics[metric][epoch] for metric in metric_names]
+            filewriter.writerow(newrow)
+            
+    print("Wrote metrics to '" + str(fileloc) + "'")
+    return
 
 
 
