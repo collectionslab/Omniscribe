@@ -151,7 +151,7 @@ def get_pos_rois(model, page_info, model_transform = None, model_input_size = (3
             loc.confidence = conf
         
         # Add these new positive ROIs to the overall list of positive ROIs for this page
-        all_pos_locs.extend([sub_roi for (sub_roi, conf) in pos_roi_items])
+        all_pos_locs.append([sub_roi for (sub_roi, conf) in pos_roi_items])
         
     # Return a list of all positive ROIs in this image
     return all_pos_locs
