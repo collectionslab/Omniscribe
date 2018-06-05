@@ -89,6 +89,8 @@ def CountourMerge(img,ROIs):
         x,y,w,h=cv2.boundingRect(cntr)
         new_ROIs.append(ImageROI(x,y,w,h,None,None,None))
     return new_ROIs
+
+
 def WhiteInCrop(img,ROI=None):
     '''
     Given an image and a corresponding crop, calculate the number of 
@@ -99,6 +101,7 @@ def WhiteInCrop(img,ROI=None):
         crop=img[ ROI.x : ROI.x+ ROI.width][ROI.y: ROI.y + ROI.height]
     pxnum= cv2.countNonZero(crop)
     return pxnum
+
 
 def CalculateF1(img,ROI):
     '''
@@ -115,9 +118,7 @@ def CalculateF1(img,ROI):
 
     F1 = 2 * (precision * recall) / (precision + recall)
 
-    return (F1,recall,precision)
-    
-                    
+    return (F1,recall,precision)         
 
 
 def F1Merge(img, ROIs,elim):
