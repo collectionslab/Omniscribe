@@ -5,6 +5,7 @@ import pytesseract
 import pandas as pd
 from lib.utils.RoiUtils import *
 from io import StringIO
+from lib.CannyEngine import *
 
 
 class OCREngine:
@@ -13,18 +14,36 @@ class OCREngine:
         """
         :params engine: which engine we are using: tesseract, opencv2
         """        
+        self.engine = engine
         self.ocr_config = ocr_config
-        if engine == 'tesseract':
+        if self.engine == 'tesseract':
             self.ocr = pytesseract
             
             # configuration 
             if ocr_config is None:
                 self.ocr_config = self._tess_ocr_config()
-        elif engine == 'cv2':
-            pass #To be implemented
+                
+        elif self.engine == 'cv2':
+            cannyEngine = CannyEngine()
+            self.ocr = cannyEngine
+        else:
+            print('Did not initiate the ocr engine correctly. Error will occur.')
+            self.ocr = None
+            
+    
+    def image_to_data(self, img):
+        """
+        Extract rois using the ocr engine.
+        """
+        if self.engine == 'tesseract':
+            imgROIs, data_df = self._tess_image_to_data(img)
+        elif self.engine == 'cv2':
+            imgROIs = self._opencv_image_to_data(img)
+            data_df = None
+        return imgROIs, data_df        
         
         
-    def tess_image_to_data(self, img):
+    def _tess_image_to_data(self, img):
         """
         Tesseract specific function. Convert the image into verbose data, including boxes, 
         confidences, line and page numbers
@@ -41,6 +60,18 @@ class OCREngine:
         imgROIs = df_to_ImageROI(data_df)
         
         return imgROIs, data_df
+    
+    
+    def _opencv_image_to_data(self, img):
+        """
+        Opencv specific function. Convert the image into verbose data, including boxes, 
+        confidences, line and page numbers
+        
+        return: list of imageROIs 
+        """
+        imgROIs = self.ocr.image_to_data(img)
+        
+        return imgROIs
     
     
     def _tess_ocr_config(self):
