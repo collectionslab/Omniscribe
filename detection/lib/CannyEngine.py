@@ -10,13 +10,14 @@ import numpy
 class CannyEngine:
         def __init__(self):
                 pass
-        def CannyBoxes(img):
-                '''
+            
+        def image_to_data(self, img):
+                """
                 Given an image as a numpy array (PIL or opencv image) 
                 find ROIs using Canny Image Detection
                 Returns a list of ImageROI objects denoting ROIs found.
-                '''
-		#white if px >225 or near px that is >225. Black if below 200
+                """
+                #white if px >225 or near px that is >225. Black if below 200
                 img = cv2.bilateralFilter(img,9,75,75)
                 img=cv2.Canny(img,150,225)
                 img = cv2.medianBlur(img,3)
@@ -34,13 +35,14 @@ class CannyEngine:
                 
                 for cntr in countours :
                         x,y,w,h=cv2.boundingRect(cntr)
-                        areas.append(ImageROI(x,y,w,h,None,None,None))
+                        areas.append(ImageROI(x,y,w,h,level=3))
                 return areas
-        def CannySimple(img):
-                ''' 
+           
+        def image_to_data_easy(self, img):
+                """ 
                 Takes an image and returns basic bounding boxes
                 with simple countour based merge.
-                '''
+                """
                 preproc=CannyEngine.CannyBoxes(img)
                 final=CountourMerge(img.shape,preproc)
                 return final
