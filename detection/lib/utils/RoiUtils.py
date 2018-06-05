@@ -3,8 +3,8 @@ Utility functions for ROI operations
 """
 
 from lib.model.ImageROI import ImageROI
-
-
+import cv2
+import numpy
 def df_to_ImageROI(df):
     """
     Convert a dataframe into a list of ImageROIs
@@ -58,12 +58,16 @@ def mergeROI(box1,box2):
     return ImageROI(x,y,x1-x,y1-y,None,None,None)
 
 
-def CountourMerge(ROIs):
-    #Given a List of ROIs, merges them based on their overlap.
-    #Returns a List of ROIs.
-    canvas =numpy.zeros(img.shape)
+def CountourMerge(img,ROIs):
+    """
+    Given a List of ROIs, merges them based on their overlap.
+    img = tuple with image shape
+    ROIs = List of ROIs
+    Returns a List of ROIs.
+    """
+    canvas =numpy.zeros(img)
     for roi in ROIs:
-        cv2.rectangle(canvas,(x,y),(x+w,y+h),255,1)
+        cv2.rectangle(canvas,(roi.x,roi.y),(roi.x+roi.width,roi.y+roi.height),255,-1)
     oldBB=0
     newBB=1
     new_ROIs=[]
@@ -74,17 +78,46 @@ def CountourMerge(ROIs):
         im2 ,countours, hr = cv2.findContours(bb,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         oldBB=newBB
         newBB=len(countours)
-        canvas = numpy.zeros(img.shape)
+        canvas = numpy.zeros(img)
+        for cntr in countours :
+            x,y,w,h=cv2.boundingRect(cntr)
+            cv2.rectangle(canvas,(roi.x,roi.y),(roi.x+roi.width,roi.y+roi.height),255,-1)
+    
+            cv2.rectangle(canvas,(x,y),(x+w,y+h),255,-1)
     
     for cntr in countours :
         x,y,w,h=cv2.boundingRect(cntr)
-
-    cv2.rectangle(canvas,(x,y),(x+w,y+h),255,-1)
-    
-    for cntr in countours :
-        x,y,w,h=cv2.boundingRect(cntr)
-        areas.append(ImageROI(x,y,w,h,None,None,None))
+        new_ROIs.append(ImageROI(x,y,w,h,None,None,None))
     return new_ROIs
+def WhiteInCrop(img,ROI=None):
+    '''
+    Given an image and a corresponding crop, calculate the number of 
+    nonzero/nonblack pixels. None calculates nonblack pixels in whole image
+    '''
+    crop=img
+    if ROI == None:
+        crop=img[ ROI.x : ROI.x+ ROI.width][ROI.y: ROI.y + ROI.height]
+    pxnum= cv2.countNonZero(crop)
+    return pxnum
+
+def CalculateF1(img,ROI):
+    '''
+    Given an image and an ROI, calculates F1 score, recall and
+    precision of ROI
+    recall is fraction of white pixels in ROI
+    precision is fraction of image cropped by ROI
+    '''
+                        
+    imgpx= self.WhiteInCrop(img)
+    croppx= self.WhiteInCrop(img,ROI)
+    recall=croppx/imgpx
+    precision = ROI.width*ROI.height / img.size
+
+    F1 = 2 * (precision * recall) / (precision + recall)
+
+    return (F1,recall,precision)
+    
+                    
 
 
 def F1Merge(img, ROIs,elim):
@@ -95,34 +128,46 @@ def F1Merge(img, ROIs,elim):
     '''
     #sort ROIs by size:
     ROIs.sort(key=lambda ROI: ROI.h*ROI.y,reverse=True)
+
     length = len(ROIs)
     added = [False] * length
     count=0
     base=None
     final=[]
     changed=False
-    PC=0
+    base_F1=0
+    imgpx=0
     while count != length:
         for i in range(0,length):
             if not added[i]:
                 if base == None:
                     base=ROIs[i]
+                    base_F1= self.CalculateF1(img,base)  
                     added[i]=True
                     changed=True
                     count+=1
-                    #PC=#calculate F1
+                    base_F1= self.CalculateF1(img,base)
+                    if base_F1[2] <elim:
+                        #reset the base
+                        base=None
+                    else:
+                        base_F1=base_F1[0]
+                    
                 else:	
-        #TODO : finish F1 calculation
-                    self.MergeROI(base,ROIs[i])
-                    #calculate F1
-                    if new_F1 >= old_F1:
-                        #base=#new ROI
+
+                    new_ROI=self.MergeROI(base,ROIs[i])
+                    new_F1= self.CalculateF1(img,new_ROI)
+                    if new_F1[2] > elim and new_F1[0] >= base_F1:
+                        base=new_ROI
+                        base_F1=new_F1[0]
                         added[i]=True
                         count+=1
                         changed=True
         if not changed:
             final.append(base)
             base=None
+    if base != None:
+        final.append(base)
     return final
 
 

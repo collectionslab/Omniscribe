@@ -1,14 +1,16 @@
+
+from .model.ImageROI import ImageROI
+from .utils.RoiUtils import *
 import cv2
 import numpy
-import ImageROI
 #Based on http://www.danvk.org/2015/01/07/finding-blocks-of-text-in-an-image-using-python-opencv-and-numpy.html
 
 #Class for detecting ROIs using Canny Image Detection
 
-class CannyDetector:
-	def __init__(self):
-		pass
-	def CannyBoxes(img):
+class CannyEngine:
+        def __init__(self):
+                pass
+        def CannyBoxes(img):
                 '''
                 Given an image as a numpy array (PIL or opencv image) 
                 find ROIs using Canny Image Detection
@@ -29,8 +31,9 @@ class CannyDetector:
 
                 areas=[]
                 canvas = numpy.zeros(img.shape)
+                
                 for cntr in countours :
-	                x,y,w,h=cv2.boundingRect(cntr)
+                        x,y,w,h=cv2.boundingRect(cntr)
                         areas.append(ImageROI(x,y,w,h,None,None,None))
                 return areas
         def CannySimple(img):
@@ -38,6 +41,6 @@ class CannyDetector:
                 Takes an image and returns basic bounding boxes
                 with simple countour based merge.
                 '''
-                preproc=self.CannyBoxes(img)
-                final=ImageROI.CountourMerge(preproc)
+                preproc=CannyEngine.CannyBoxes(img)
+                final=CountourMerge(img.shape,preproc)
                 return final
