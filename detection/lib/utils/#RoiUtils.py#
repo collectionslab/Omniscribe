@@ -67,7 +67,7 @@ def CountourMerge(img,ROIs):
     """
     canvas =numpy.zeros(img)
     for roi in ROIs:
-        cv2.rectangle(canvas,(roi.x,roi.y),(roi.x+roi.width,roi.y+roi.height),255,-1)
+        cv2.rectangle(canvas,(roi.x,roi.y),(roi.x+roi.w,roi.y+roi.h),255,1)
     oldBB=0
     newBB=1
     new_ROIs=[]
@@ -78,16 +78,12 @@ def CountourMerge(img,ROIs):
         im2 ,countours, hr = cv2.findContours(bb,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         oldBB=newBB
         newBB=len(countours)
-        canvas = numpy.zeros(img)
-        for cntr in countours :
-            x,y,w,h=cv2.boundingRect(cntr)
-            cv2.rectangle(canvas,(roi.x,roi.y),(roi.x+roi.width,roi.y+roi.height),255,-1)
+        canvas = numpy.zeros(img.shape)
     
-            cv2.rectangle(canvas,(x,y),(x+w,y+h),255,-1)
     
     for cntr in countours :
         x,y,w,h=cv2.boundingRect(cntr)
-        new_ROIs.append(ImageROI(x,y,w,h,None,None,None))
+        areas.append(ImageROI(x,y,w,h,None,None,None))
     return new_ROIs
 def WhiteInCrop(img,ROI=None):
     '''
