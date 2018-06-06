@@ -14,8 +14,8 @@ class ImageROI:
         self.y = y
         self.width = width
         self.height = height
-        self.confidence = confidence
         self.text = text
+        self.confidence = confidence
         self.level = level
         
         # for annoation classification labeling
@@ -36,17 +36,30 @@ class ImageROI:
                   "isAnnotation:{7}".format(self.x, self.y, self.width, self.height, self.text,
                                             self.confidence, self.level, self.isAnnotation))
         return content
-              
-        
-        
-        
-   
+    
+def roi_to_csv(roi, outfilename):
+    import csv
+    with open(outfilename, 'w') as outfile:
+        writer = csv.writer(outfile, delimiter = ',', quoting = csv.QUOTE_NONNUMERIC)
+        all_data = [roi.x, roi.y, roi.width, roi.height, roi.text, roi.confidence, roi.level, 1 if roi.isAnnotation else 0]
+        writer.writerow(all_data)
+    return
 
-            
-            
-
-                            
-                        
-            
-
-
+def csv_to_roi(infilename):
+    import csv
+    rois = []
+    with open(infilename, 'r') as infile:
+        reader = csv.reader(infile, delimiter = ',', quoting = csv.QUOTE_NONNUMERIC)
+        for row in reader:
+            rois.append(ImageROI(x=int(row[0]),
+                                 y=int(row[1]),
+                                 width=int(row[2]),
+                                 height=int(row[3]),
+                                 text=str(row[4]),
+                                 confidence=float(row[5]),
+                                 level=int(row[6]),
+                                 isAnnotation= (int(row[7]) == 1)  ))
+    if len(rois) == 1:
+        return rois[0]
+    else:
+        return rois
