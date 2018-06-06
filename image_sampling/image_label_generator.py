@@ -87,14 +87,16 @@ def generate_labels(input_dir, pos_output_dir, neg_output_dir, precropped = Fals
         
         # update plot image
         if pltobj is None:
-            pltobj = plt.imshow(img_arr)
-        pltobj.set_data(img_arr)
+            pltobj = plt.imshow(img_arr, aspect = 'equal')
+#         pltobj.set_data(img_arr)
+        pltobj = plt.imshow(img_arr, aspect = 'equal')
         
         roi = None
         if not precropped:
             # get ROI
             roi = csv_to_roi(fname)
-
+            print(roi.toString())
+            
             if rect is not None:
                 rect.remove()
             rect = patches.Rectangle((roi.x,roi.y),roi.width, roi.height,
@@ -125,6 +127,7 @@ def generate_labels(input_dir, pos_output_dir, neg_output_dir, precropped = Fals
                         outloc = os.path.join(outdir, f_basename + '.png')
                         cropimg.convert('RGB').save(outloc)
                         os.remove(fname)
+                        print("Moved '" + str(imgname) + "' to '" + str(outdir) + "'")
                         
                 elif keyval == 'down':
                     os.remove(fname)
