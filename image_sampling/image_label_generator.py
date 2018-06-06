@@ -30,14 +30,16 @@ def generate_labels(input_dir, pos_output_dir, neg_output_dir):
     # button press to output directory mappings
     key_to_dir = {'left' : neg_output_dir,
                   'right' : pos_output_dir,
-                  'down' : None}
+                  'down' : None,
+                  'up' : None
+                 }
     
     # disable toolbar
     matplotlib.rcParams['toolbar'] = 'None'
     
     # setup figure
     fig = plt.figure()
-    plt.suptitle("Use arrows to label: 'left'=negative, 'down'=delete, 'right'=positive",
+    plt.suptitle("Use arrows to label: 'left'=negative, 'right'=positive, 'down'=delete, 'up'=skip",
                 fontweight='bold')
     pltobj = None
     key_connection = None
@@ -80,9 +82,11 @@ def generate_labels(input_dir, pos_output_dir, neg_output_dir):
                 if outdir is not None:
                     shutil.move(fname, outdir)
                     print("Moved '" + str(fname) + "' to '" + str(outdir) + "'")
-                else:
+                elif keyval == 'down':
                     os.remove(fname)
                     print("Deleted '" + str(fname) + "'")
+                else:
+                    print("Skipped '" + str(fname) + "'")
                 break
             else:
                 print("Key '" + str(keyval) + "' is not accepted. Only left, right, and down arrows are allowed.")
