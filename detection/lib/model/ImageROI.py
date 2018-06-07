@@ -3,7 +3,7 @@ Image ROI data object that stores the information of the bounding boxes
 """
 
 class ImageROI:
-    def __init__(self, x=0, y=0, width=10, height=20, text='', confidence=1.00, level=1,
+    def __init__(self, x=0, y=0, width=10, height=20, text='', confidence=1.00, level=2,
                  isAnnotation=False
                 ):
         """
