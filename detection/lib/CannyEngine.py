@@ -28,14 +28,14 @@ class CannyEngine:
                         
                 ret,thresh=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
                         
-                im2 ,countours, hr = cv2.findContours (img,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                im2 ,countours, hr = cv2.findContours(img,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
                 areas=[]
                 canvas = numpy.zeros(img.shape)
                 
                 for cntr in countours :
                         x,y,w,h=cv2.boundingRect(cntr)
-                        areas.append(ImageROI(x,y,w,h,level=3))
+                        areas.append(ImageROI(x,y,w,h))
                 return areas
            
         def image_to_data_easy(self, img):
