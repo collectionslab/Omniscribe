@@ -1,10 +1,10 @@
 
-def subsample_images(input_loc, output_dir_loc, sample_dimensions, stride = (1,1), num_samples = None):
+def subsample_images(input_loc, output_dir_loc, sample_dimensions, stride = (1,1), num_samples = None, do_crop = False):
     # import necessary packages
     import sys
     import os
     sys.path.append(os.path.abspath('..'))
-    from detection.lib.model.ImageROI import ImageROI
+    from detection.lib.model.ImageROI import ImageROI, roi_to_csv
     from PIL import Image
     import numpy as np
     
@@ -27,8 +27,8 @@ def subsample_images(input_loc, output_dir_loc, sample_dimensions, stride = (1,1
     for fname in input_files:
         
         # get info about image file path
-        f_basename = os.path.basename(fname)
-        f_basename, f_ext = os.path.splitext(f_basename)
+        f_full_basename = os.path.basename(fname)
+        f_basename, f_ext = os.path.splitext(f_full_basename)
         
         # get image PIL
         img = Image.open(fname)
@@ -43,14 +43,25 @@ def subsample_images(input_loc, output_dir_loc, sample_dimensions, stride = (1,1
         if num_samples is not None:
             rois = np.random.choice(rois, num_samples, replace=False)
         
-        # for each ROI, crop the image and save it
-        for i in range(len(rois)):
-            roi = rois[i]
-            im = img.crop((roi.x, roi.y, roi.x + roi.width, roi.y + roi.height))
-            outfilename = os.path.join(output_dir_loc, f_basename + '-' + str(i) + f_ext)
-            im.convert('RGB').save(outfilename)
+        if do_crop:
+            # for each ROI, crop the image and save it
+            for i in range(len(rois)):
+                roi = rois[i]
+                im = img.crop((roi.x, roi.y, roi.x + roi.width, roi.y + roi.height))
+                outfilename = os.path.join(output_dir_loc, f_basename + '-' + str(i) + f_ext)
+                im.convert('RGB').save(outfilename)
+        else:
+            # copy the entire page to the output directory
+            outfilename = os.path.join(output_dir_loc, f_full_basename)
+            img.convert('RGB').save(outfilename)
             
-    
+            # write each ImageROI out to a csv with the format (ex.) 'outputdir/f_full_basename(includes .png)-roi_5.csv'
+            # so, when generating labels, for each ROI csv, we remove everything including and after the last '-' to get the image filename
+            for i in range(len(rois)):
+                roi = rois[i]
+                outfilename = os.path.join(output_dir_loc, f_full_basename + '-roi_' + str(i) + '.csv')
+                roi_to_csv(roi, outfilename)
+
     
 if __name__ == '__main__':
     """
@@ -81,6 +92,9 @@ if __name__ == '__main__':
     parser.add_argument('-n', '--number', action = 'store', required = False, default = None,
                        help = 'number of random subsamples of each image to generate and save. defaults to all possible samples.')
     
+    parser.add_argument('-c', '--crop', action = 'store_true', required = False, default = False,
+                        help = 'setting this flag will save the actual cropped images, instead of bounding boxes, in the output directory.')
+    
     args = parser.parse_args()
     
     # preprocess a few formatted arguments
@@ -105,7 +119,8 @@ if __name__ == '__main__':
                      output_dir_loc = args.output,
                      sample_dimensions = dims,
                      stride = stride,
-                     num_samples = number)
+                     num_samples = number,
+                     do_crop = args.crop)
     
     print('completed subsampling images from ' + str(args.input) + '. Images output to ' + str(args.output) + '.')
     
