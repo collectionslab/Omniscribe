@@ -1,0 +1,496 @@
+x:0	y:0	width:1000	height:1643	text:-1	confidence:nan	level:1	isAnnotation:False
+x:35	y:1627	width:398	height:14	text:-1	confidence:nan	level:2	isAnnotation:False
+x:35	y:1627	width:398	height:14	text:-1	confidence:nan	level:3	isAnnotation:False
+x:35	y:1627	width:398	height:14	text:-1	confidence:nan	level:4	isAnnotation:False
+x:35	y:1627	width:398	height:14	text:95	confidence: 	level:5	isAnnotation:False
+x:53	y:9	width:943	height:11	text:-1	confidence:nan	level:2	isAnnotation:False
+x:53	y:9	width:943	height:11	text:-1	confidence:nan	level:3	isAnnotation:False
+x:53	y:9	width:943	height:11	text:-1	confidence:nan	level:4	isAnnotation:False
+x:53	y:10	width:46	height:2	text:54	confidence:-	level:5	isAnnotation:False
+x:551	y:11	width:3	height:1	text:65	confidence:_	level:5	isAnnotation:False
+x:578	y:10	width:243	height:3	text:47	confidence:--_-_--___	level:5	isAnnotation:False
+x:830	y:9	width:166	height:11	text:67	confidence:..____..._...'	level:5	isAnnotation:False
+x:194	y:129	width:799	height:49	text:-1	confidence:nan	level:2	isAnnotation:False
+x:194	y:129	width:799	height:49	text:-1	confidence:nan	level:3	isAnnotation:False
+x:194	y:129	width:799	height:49	text:-1	confidence:nan	level:4	isAnnotation:False
+x:194	y:144	width:402	height:23	text:78	confidence:CHRISTIANISME.	level:5	isAnnotation:False
+x:687	y:153	width:35	height:16	text:76	confidence:m	level:5	isAnnotation:False
+x:977	y:129	width:16	height:49	text:60	confidence:ll	level:5	isAnnotation:False
+x:67	y:182	width:927	height:1076	text:-1	confidence:nan	level:2	isAnnotation:False
+x:67	y:182	width:927	height:1076	text:-1	confidence:nan	level:3	isAnnotation:False
+x:68	y:182	width:926	height:30	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:184	width:29	height:21	text:93	confidence:les	level:5	isAnnotation:False
+x:111	y:184	width:160	height:28	text:77	confidence:quaranre-deux	level:5	isAnnotation:False
+x:286	y:183	width:100	height:21	text:74	confidence:AncGtres	level:5	isAnnotation:False
+x:402	y:182	width:104	height:21	text:83	confidence:différents	level:5	isAnnotation:False
+x:521	y:190	width:38	height:20	text:72	confidence:que	level:5	isAnnotation:False
+x:581	y:183	width:101	height:22	text:72	confidence:Matthieu	level:5	isAnnotation:False
+x:697	y:185	width:30	height:20	text:94	confidence:lui	level:5	isAnnotation:False
+x:977	y:183	width:17	height:26	text:32	confidence:ii'	level:5	isAnnotation:False
+x:68	y:217	width:923	height:28	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:219	width:70	height:21	text:92	confidence:donne	level:5	isAnnotation:False
+x:150	y:218	width:71	height:27	text:89	confidence:depuis	level:5	isAnnotation:False
+x:232	y:218	width:18	height:20	text:94	confidence:le	level:5	isAnnotation:False
+x:263	y:217	width:66	height:20	text:68	confidence:mihne	level:5	isAnnotation:False
+x:341	y:217	width:119	height:26	text:77	confidence:Abraham;	level:5	isAnnotation:False
+x:474	y:218	width:23	height:21	text:61	confidence:s.	level:5	isAnnotation:False
+x:510	y:219	width:25	height:20	text:92	confidence:ils	level:5	isAnnotation:False
+x:546	y:217	width:47	height:22	text:85	confidence:font	level:5	isAnnotation:False
+x:603	y:219	width:125	height:23	text:58	confidence:effurouchés	level:5	isAnnotation:False
+x:989	y:229	width:2	height:15	text:67	confidence:1	level:5	isAnnotation:False
+x:69	y:253	width:881	height:38	text:-1	confidence:nan	level:4	isAnnotation:False
+x:69	y:262	width:39	height:20	text:87	confidence:que	level:5	isAnnotation:False
+x:119	y:254	width:113	height:23	text:90	confidence:Matthieu,	level:5	isAnnotation:False
+x:245	y:260	width:25	height:14	text:90	confidence:en	level:5	isAnnotation:False
+x:282	y:253	width:114	height:27	text:89	confidence:parlantde	level:5	isAnnotation:False
+x:411	y:253	width:159	height:28	text:70	confidence:quavante-deux	level:5	isAnnotation:False
+x:581	y:255	width:147	height:35	text:76	confidence:Générations,	level:5	isAnnotation:False
+x:753	y:264	width:144	height:27	text:47	confidence:406.3024	level:5	isAnnotation:False
+x:907	y:274	width:43	height:10	text:54	confidence:.4	level:5	isAnnotation:False
+x:68	y:288	width:854	height:31	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:290	width:48	height:22	text:78	confidence:n'en	level:5	isAnnotation:False
+x:129	y:294	width:94	height:22	text:71	confidence:rapporte	level:5	isAnnotation:False
+x:233	y:293	width:100	height:22	text:76	confidence:pennant	level:5	isAnnotation:False
+x:344	y:295	width:39	height:21	text:92	confidence:que	level:5	isAnnotation:False
+x:393	y:294	width:96	height:22	text:75	confidence:quarante	level:5	isAnnotation:False
+x:501	y:288	width:21	height:21	text:87	confidence:&	level:5	isAnnotation:False
+x:533	y:295	width:48	height:14	text:93	confidence:une.	level:5	isAnnotation:False
+x:739	y:291	width:109	height:18	text:42	confidence:Odd/.1	level:5	isAnnotation:False
+x:855	y:293	width:36	height:15	text:63	confidence:d.	level:5	isAnnotation:False
+x:899	y:292	width:23	height:27	text:61	confidence:5:	level:5	isAnnotation:False
+x:95	y:317	width:840	height:35	text:-1	confidence:nan	level:4	isAnnotation:False
+x:95	y:325	width:28	height:20	text:92	confidence:Ils	level:5	isAnnotation:False
+x:134	y:324	width:92	height:21	text:86	confidence:forment	level:5	isAnnotation:False
+x:236	y:330	width:73	height:14	text:90	confidence:encore	level:5	isAnnotation:False
+x:323	y:324	width:34	height:20	text:92	confidence:des	level:5	isAnnotation:False
+x:370	y:323	width:108	height:21	text:74	confidence:difh"cultu'as	level:5	isAnnotation:False
+x:489	y:323	width:33	height:21	text:88	confidence:fur	level:5	isAnnotation:False
+x:532	y:331	width:20	height:13	text:90	confidence:ce	level:5	isAnnotation:False
+x:563	y:331	width:40	height:20	text:90	confidence:que	level:5	isAnnotation:False
+x:613	y:324	width:57	height:28	text:67	confidence:Jel‘us	level:5	isAnnotation:False
+x:680	y:325	width:50	height:21	text:67	confidence:n'el	level:5	isAnnotation:False
+x:748	y:317	width:116	height:28	text:39	confidence:ttr"''"	level:5	isAnnotation:False
+x:878	y:319	width:57	height:19	text:56	confidence:ct'.?	level:5	isAnnotation:False
+x:68	y:358	width:786	height:30	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:360	width:62	height:28	text:91	confidence:point	level:5	isAnnotation:False
+x:139	y:360	width:31	height:20	text:78	confidence:fils	level:5	isAnnotation:False
+x:180	y:360	width:24	height:20	text:93	confidence:de	level:5	isAnnotation:False
+x:210	y:359	width:77	height:29	text:84	confidence:Jofeph	level:5	isAnnotation:False
+x:295	y:375	width:6	height:9	text:92	confidence:,	level:5	isAnnotation:False
+x:312	y:360	width:51	height:20	text:90	confidence:mais	level:5	isAnnotation:False
+x:371	y:359	width:25	height:21	text:91	confidence:de	level:5	isAnnotation:False
+x:407	y:360	width:71	height:20	text:89	confidence:Marie.	level:5	isAnnotation:False
+x:490	y:360	width:28	height:21	text:91	confidence:Ils	level:5	isAnnotation:False
+x:529	y:360	width:76	height:21	text:73	confidence:élevent	level:5	isAnnotation:False
+x:616	y:361	width:47	height:20	text:70	confidence:auili	level:5	isAnnotation:False
+x:674	y:361	width:56	height:27	text:89	confidence:quel-	level:5	isAnnotation:False
+x:777	y:358	width:77	height:22	text:66	confidence:l'	level:5	isAnnotation:False
+x:69	y:387	width:837	height:51	text:-1	confidence:nan	level:4	isAnnotation:False
+x:69	y:402	width:48	height:21	text:92	confidence:ques	level:5	isAnnotation:False
+x:132	y:395	width:71	height:20	text:90	confidence:doutes	level:5	isAnnotation:False
+x:214	y:394	width:33	height:21	text:85	confidence:fur	level:5	isAnnotation:False
+x:259	y:395	width:29	height:20	text:91	confidence:les	level:5	isAnnotation:False
+x:301	y:394	width:93	height:21	text:91	confidence:miracles	level:5	isAnnotation:False
+x:406	y:395	width:24	height:20	text:92	confidence:de	level:5	isAnnotation:False
+x:441	y:400	width:59	height:15	text:72	confidence:non-e	level:5	isAnnotation:False
+x:514	y:395	width:101	height:24	text:88	confidence:Sauveur,	level:5	isAnnotation:False
+x:627	y:403	width:25	height:13	text:93	confidence:en	level:5	isAnnotation:False
+x:666	y:387	width:240	height:51	text:26	confidence:citarttjé;:::;::	level:5	isAnnotation:False
+x:68	y:430	width:814	height:36	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:431	width:29	height:21	text:38	confidence:St.	level:5	isAnnotation:False
+x:109	y:430	width:117	height:29	text:77	confidence:Augui1in,	level:5	isAnnotation:False
+x:235	y:431	width:30	height:21	text:77	confidence:St.	level:5	isAnnotation:False
+x:278	y:431	width:90	height:23	text:90	confidence:Hilaire,	level:5	isAnnotation:False
+x:382	y:431	width:22	height:20	text:62	confidence:tk	level:5	isAnnotation:False
+x:416	y:430	width:86	height:22	text:76	confidence:d'autres	level:5	isAnnotation:False
+x:514	y:432	width:36	height:27	text:94	confidence:qui	level:5	isAnnotation:False
+x:561	y:437	width:37	height:15	text:91	confidence:ont	level:5	isAnnotation:False
+x:609	y:432	width:69	height:21	text:90	confidence:donné	level:5	isAnnotation:False
+x:689	y:439	width:40	height:13	text:88	confidence:aux	level:5	isAnnotation:False
+x:757	y:444	width:21	height:22	text:55	confidence:d	level:5	isAnnotation:False
+x:797	y:445	width:85	height:18	text:45	confidence:3,“,	level:5	isAnnotation:False
+x:69	y:465	width:856	height:34	text:-1	confidence:nan	level:4	isAnnotation:False
+x:69	y:467	width:58	height:20	text:77	confidence:récits	level:5	isAnnotation:False
+x:138	y:466	width:25	height:21	text:91	confidence:de	level:5	isAnnotation:False
+x:173	y:473	width:32	height:14	text:91	confidence:ces	level:5	isAnnotation:False
+x:216	y:467	width:91	height:20	text:91	confidence:miracles	level:5	isAnnotation:False
+x:317	y:473	width:28	height:14	text:86	confidence:un	level:5	isAnnotation:False
+x:357	y:465	width:44	height:21	text:63	confidence:fens	level:5	isAnnotation:False
+x:412	y:474	width:29	height:20	text:83	confidence:m)	level:5	isAnnotation:False
+x:450	y:466	width:73	height:28	text:74	confidence:ftique,	level:5	isAnnotation:False
+x:536	y:474	width:28	height:13	text:92	confidence:un	level:5	isAnnotation:False
+x:579	y:467	width:43	height:21	text:89	confidence:fens	level:5	isAnnotation:False
+x:633	y:468	width:95	height:27	text:78	confidence:allégori-	level:5	isAnnotation:False
+x:734	y:477	width:97	height:22	text:51	confidence:ja/J‘L	level:5	isAnnotation:False
+x:839	y:470	width:86	height:24	text:47	confidence:.,,-t.	level:5	isAnnotation:False
+x:68	y:500	width:868	height:34	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:508	width:40	height:20	text:93	confidence:que	level:5	isAnnotation:False
+x:120	y:509	width:4	height:12	text:98	confidence:.
+5	1	4	1	10	3	136	508	82	14	92	comme
+5	1	4	1	10	4	230	507	25	15	80	an
+5	1	4	1	10	5	267	501	72	27	81	figuier
+5	1	4	1	10	6	352	500	80	21	88	maudit
+5	1	4	1	10	7	442	501	22	21	66	&
+5	1	4	1	10	8	475	500	56	21	69	l'éché
+5	1	4	1	10	9	542	508	52	20	87	pour
+5	1	4	1	10	10	606	502	78	20	73	n’avoir
+5	1	4	1	10	11	694	502	242	32	35	paspeeerCre-r
+4	1	4	1	11	0	68	534	872	35	-1	
+5	1	4	1	11	1	68	537	58	28	79	porté
+5	1	4	1	11	2	137	537	25	21	93	de
+5	1	4	1	11	3	173	536	77	29	80	figues,
+5	1	4	1	11	4	266	537	70	28	70	quand
+5	1	4	1	11	5	349	544	21	14	92	ce
+5	1	4	1	11	6	381	537	70	21	79	n’était
+5	1	4	1	11	7	462	544	36	20	90	pas
+5	1	4	1	11	8	511	538	18	20	91	le
+5	1	4	1	11	9	538	543	66	22	92	temps
+5	1	4	1	11	10	611	539	34	20	91	des
+5	1	4	1	11	11	652	534	216	32	54	figues/r'sertde
+5	1	4	1	11	12	876	539	49	25	61	1	level:5	isAnnotation:False
+x:933	y:562	width:7	height:7	text:89	confidence:.	level:5	isAnnotation:False
+x:69	y:565	width:893	height:36	text:-1	confidence:nan	level:4	isAnnotation:False
+x:69	y:580	width:38	height:14	text:87	confidence:aux	level:5	isAnnotation:False
+x:119	y:573	width:86	height:21	text:92	confidence:démons	level:5	isAnnotation:False
+x:215	y:573	width:89	height:27	text:90	confidence:envoyés	level:5	isAnnotation:False
+x:314	y:572	width:51	height:22	text:77	confidence:clans	level:5	isAnnotation:False
+x:375	y:573	width:28	height:21	text:94	confidence:les	level:5	isAnnotation:False
+x:413	y:579	width:59	height:21	text:92	confidence:corps	level:5	isAnnotation:False
+x:483	y:572	width:33	height:22	text:91	confidence:des	level:5	isAnnotation:False
+x:526	y:574	width:89	height:20	text:91	confidence:cochons	level:5	isAnnotation:False
+x:623	y:588	width:5	height:10	text:85	confidence:,	level:5	isAnnotation:False
+x:640	y:574	width:51	height:20	text:90	confidence:dans	level:5	isAnnotation:False
+x:700	y:581	width:28	height:13	text:88	confidence:un	level:5	isAnnotation:False
+x:739	y:565	width:109	height:36	text:35	confidence:sat"?	level:5	isAnnotation:False
+x:859	y:566	width:103	height:27	text:56	confidence:lvl-y-it',	level:5	isAnnotation:False
+x:67	y:600	width:887	height:43	text:-1	confidence:nan	level:4	isAnnotation:False
+x:67	y:609	width:53	height:27	text:91	confidence:Pays	level:5	isAnnotation:False
+x:130	y:608	width:28	height:21	text:64	confidence:on	level:5	isAnnotation:False
+x:166	y:609	width:43	height:20	text:74	confidence:You	level:5	isAnnotation:False
+x:220	y:607	width:151	height:22	text:69	confidence:nenouvriirsit	level:5	isAnnotation:False
+x:380	y:608	width:60	height:27	text:93	confidence:point	level:5	isAnnotation:False
+x:448	y:608	width:24	height:20	text:93	confidence:de	level:5	isAnnotation:False
+x:482	y:608	width:102	height:26	text:82	confidence:cochons;	level:5	isAnnotation:False
+x:595	y:608	width:66	height:21	text:67	confidence:gl'eau	level:5	isAnnotation:False
+x:667	y:609	width:63	height:21	text:75	confidence:chan-	level:5	isAnnotation:False
+x:743	y:600	width:51	height:30	text:47	confidence:r-"	level:5	isAnnotation:False
+x:802	y:600	width:77	height:15	text:48	confidence:FfradF	level:5	isAnnotation:False
+x:888	y:600	width:66	height:43	text:46	confidence:cr"	level:5	isAnnotation:False
+x:68	y:622	width:865	height:54	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:645	width:36	height:28	text:90	confidence:gée	level:5	isAnnotation:False
+x:114	y:652	width:25	height:13	text:87	confidence:en	level:5	isAnnotation:False
+x:151	y:645	width:34	height:20	text:94	confidence:vin	level:5	isAnnotation:False
+x:196	y:644	width:35	height:22	text:71	confidence:fur	level:5	isAnnotation:False
+x:244	y:645	width:19	height:20	text:89	confidence:la	level:5	isAnnotation:False
+x:278	y:638	width:30	height:27	text:76	confidence:4n	level:5	isAnnotation:False
+x:322	y:644	width:50	height:21	text:68	confidence:d'un	level:5	isAnnotation:False
+x:386	y:651	width:59	height:20	text:79	confidence:repas	level:5	isAnnotation:False
+x:459	y:644	width:28	height:20	text:60	confidence:
+5	1	4	1	14	10	502	644	29	21	68	les
+5	1	4	1	14	11	546	645	95	20	88	convives
+5	1	4	1	14	12	655	645	74	21	82	émient
+5	1	4	1	14	13	745	622	188	54	42	'ett?t,tt'.t.t,
+4	1	4	1	15	0	67	679	883	30	-1	
+5	1	4	1	15	1	67	681	46	26	80	déji
+5	1	4	1	15	2	125	681	109	21	67	échaufftfs.
+5	1	4	1	15	3	247	680	55	22	74	Mais
+5	1	4	1	15	4	313	685	67	16	74	routes
+5	1	4	1	15	5	392	687	31	14	91	ces
+5	1	4	1	15	6	432	679	95	28	90	critiques
+5	1	4	1	15	7	539	679	33	21	92	des
+5	1	4	1	15	8	583	679	85	21	88	Savants
+5	1	4	1	15	9	680	679	47	21	88	font
+5	1	4	1	15	10	742	680	208	29	43	-'-4reffep-	level:5	isAnnotation:False
+x:67	y:708	width:900	height:44	text:-1	confidence:nan	level:4	isAnnotation:False
+x:67	y:716	width:131	height:22	text:87	confidence:confondues	level:5	isAnnotation:False
+x:208	y:723	width:37	height:21	text:90	confidence:par	level:5	isAnnotation:False
+x:254	y:716	width:20	height:20	text:89	confidence:la	level:5	isAnnotation:False
+x:281	y:715	width:30	height:21	text:90	confidence:foi	level:5	isAnnotation:False
+x:319	y:730	width:5	height:10	text:83	confidence:,	level:5	isAnnotation:False
+x:335	y:716	width:37	height:27	text:94	confidence:qui	level:5	isAnnotation:False
+x:380	y:715	width:47	height:21	text:83	confidence:n'en	level:5	isAnnotation:False
+x:439	y:716	width:81	height:20	text:90	confidence:devient	level:5	isAnnotation:False
+x:529	y:722	width:38	height:20	text:92	confidence:que	level:5	isAnnotation:False
+x:577	y:715	width:46	height:27	text:93	confidence:plus	level:5	isAnnotation:False
+x:634	y:722	width:56	height:21	text:80	confidence:pure.	level:5	isAnnotation:False
+x:701	y:708	width:266	height:44	text:47	confidence:Lea-ti/cr-att'?:,	level:5	isAnnotation:False
+x:67	y:748	width:865	height:32	text:-1	confidence:nan	level:4	isAnnotation:False
+x:67	y:753	width:37	height:21	text:92	confidence:but	level:5	isAnnotation:False
+x:122	y:754	width:24	height:20	text:91	confidence:de	level:5	isAnnotation:False
+x:161	y:759	width:30	height:16	text:92	confidence:cet	level:5	isAnnotation:False
+x:202	y:753	width:70	height:21	text:88	confidence:article	level:5	isAnnotation:False
+x:284	y:752	width:27	height:21	text:67	confidence:ell	level:5	isAnnotation:False
+x:323	y:753	width:135	height:27	text:80	confidence:uniquement	level:5	isAnnotation:False
+x:469	y:752	width:24	height:21	text:92	confidence:de	level:5	isAnnotation:False
+x:504	y:752	width:66	height:21	text:87	confidence:fuivre	level:5	isAnnotation:False
+x:584	y:753	width:18	height:20	text:96	confidence:le	level:5	isAnnotation:False
+x:617	y:752	width:22	height:21	text:84	confidence:fil	level:5	isAnnotation:False
+x:650	y:752	width:81	height:21	text:75	confidence:hillori-	level:5	isAnnotation:False
+x:745	y:763	width:51	height:16	text:46	confidence:hwy	level:5	isAnnotation:False
+x:820	y:748	width:112	height:30	text:51	confidence:sia'dtTtt
+4	1	4	1	18	0	67	783	883	37	-1	
+5	1	4	1	18	1	67	796	50	20	89	que,
+5	1	4	1	18	2	133	788	23	22	59	&
+5	1	4	1	18	3	169	788	25	21	93	de
+5	1	4	1	18	4	208	788	82	21	82	dormer
+5	1	4	1	18	5	305	795	40	13	93	une
+5	1	4	1	18	6	359	788	45	20	93	idée
+5	1	4	1	18	7	414	787	75	28	74	précife
+5	1	4	1	18	8	500	788	34	21	92	des
+5	1	4	1	18	9	548	787	47	22	75	fairs
+5	1	4	1	18	10	601	787	33	22	73	fur
+5	1	4	1	18	11	643	787	144	33	45	lefquelsfn	level:5	isAnnotation:False
+x:798	y:789	width:22	height:29	text:48	confidence:J:	level:5	isAnnotation:False
+x:828	y:783	width:122	height:26	text:39	confidence:srttesito,	level:5	isAnnotation:False
+x:67	y:812	width:829	height:50	text:-1	confidence:nan	level:4	isAnnotation:False
+x:67	y:824	width:101	height:27	text:88	confidence:perfonne	level:5	isAnnotation:False
+x:178	y:830	width:26	height:13	text:93	confidence:ne	level:5	isAnnotation:False
+x:217	y:822	width:87	height:28	text:70	confidence:difpute.	level:5	isAnnotation:False
+x:744	y:812	width:152	height:50	text:39	confidence:ti/YZ,-,',	level:5	isAnnotation:False
+x:94	y:853	width:850	height:41	text:-1	confidence:nan	level:4	isAnnotation:False
+x:94	y:860	width:171	height:24	text:90	confidence:Premiérement,	level:5	isAnnotation:False
+x:273	y:858	width:58	height:29	text:65	confidence:Jefus	level:5	isAnnotation:False
+x:338	y:859	width:71	height:28	text:89	confidence:naquit	level:5	isAnnotation:False
+x:417	y:858	width:46	height:23	text:77	confidence:fous	level:5	isAnnotation:False
+x:472	y:859	width:18	height:21	text:87	confidence:la	level:5	isAnnotation:False
+x:498	y:860	width:38	height:20	text:89	confidence:Loi	level:5	isAnnotation:False
+x:544	y:859	width:121	height:28	text:75	confidence:Mofaique;	level:5	isAnnotation:False
+x:676	y:859	width:15	height:21	text:91	confidence:il	level:5	isAnnotation:False
+x:699	y:858	width:31	height:21	text:83	confidence:fat	level:5	isAnnotation:False
+x:739	y:853	width:72	height:38	text:46	confidence:11;"	level:5	isAnnotation:False
+x:818	y:866	width:96	height:28	text:39	confidence:“$1.,”	level:5	isAnnotation:False
+x:924	y:868	width:20	height:18	text:39	confidence:A	level:5	isAnnotation:False
+x:67	y:894	width:858	height:37	text:-1	confidence:nan	level:4	isAnnotation:False
+x:67	y:896	width:99	height:21	text:81	confidence:circuncis	level:5	isAnnotation:False
+x:178	y:895	width:80	height:21	text:69	confidence:fuivant	level:5	isAnnotation:False
+x:270	y:901	width:50	height:15	text:91	confidence:cette	level:5	isAnnotation:False
+x:335	y:895	width:49	height:24	text:92	confidence:Loi,	level:5	isAnnotation:False
+x:399	y:895	width:14	height:20	text:96	confidence:il	level:5	isAnnotation:False
+x:429	y:902	width:26	height:13	text:92	confidence:en	level:5	isAnnotation:False
+x:466	y:896	width:110	height:26	text:88	confidence:accomplit	level:5	isAnnotation:False
+x:586	y:901	width:47	height:15	text:86	confidence:tons	level:5	isAnnotation:False
+x:645	y:896	width:28	height:19	text:93	confidence:les	level:5	isAnnotation:False
+x:687	y:894	width:91	height:37	text:46	confidence:ptfVAr"	level:5	isAnnotation:False
+x:788	y:898	width:67	height:31	text:34	confidence:-r'	level:5	isAnnotation:False
+x:863	y:904	width:5	height:13	text:78	confidence:'	level:5	isAnnotation:False
+x:876	y:907	width:49	height:20	text:53	confidence:(,1,	level:5	isAnnotation:False
+x:68	y:928	width:860	height:30	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:937	width:75	height:21	text:89	confidence:ceptes,	level:5	isAnnotation:False
+x:155	y:930	width:15	height:21	text:95	confidence:il	level:5	isAnnotation:False
+x:181	y:937	width:25	height:14	text:95	confidence:en	level:5	isAnnotation:False
+x:216	y:930	width:78	height:21	text:80	confidence:célébra	level:5	isAnnotation:False
+x:306	y:935	width:65	height:16	text:82	confidence:toutes	level:5	isAnnotation:False
+x:381	y:930	width:28	height:21	text:90	confidence:les	level:5	isAnnotation:False
+x:415	y:929	width:61	height:24	text:61	confidence:fetes,	level:5	isAnnotation:False
+x:487	y:930	width:21	height:21	text:73	confidence:&	level:5	isAnnotation:False
+x:517	y:930	width:13	height:20	text:84	confidence:il	level:5	isAnnotation:False
+x:542	y:938	width:24	height:12	text:78	confidence:ne	level:5	isAnnotation:False
+x:577	y:930	width:74	height:27	text:64	confidence:prtcha	level:5	isAnnotation:False
+x:662	y:936	width:38	height:21	text:71	confidence:que	level:5	isAnnotation:False
+x:710	y:929	width:20	height:20	text:86	confidence:la	level:5	isAnnotation:False
+x:742	y:937	width:23	height:9	text:64	confidence:a	level:5	isAnnotation:False
+x:774	y:928	width:154	height:30	text:47	confidence:T-""vt'r'	level:5	isAnnotation:False
+x:69	y:956	width:857	height:44	text:-1	confidence:nan	level:4	isAnnotation:False
+x:69	y:966	width:87	height:25	text:92	confidence:morale;	level:5	isAnnotation:False
+x:168	y:966	width:13	height:19	text:96	confidence:il	level:5	isAnnotation:False
+x:194	y:972	width:25	height:14	text:92	confidence:ne	level:5	isAnnotation:False
+x:229	y:965	width:67	height:21	text:79	confidence:révéla	level:5	isAnnotation:False
+x:311	y:965	width:85	height:27	text:82	confidence:pointle	level:5	isAnnotation:False
+x:407	y:964	width:86	height:28	text:65	confidence:myllerc	level:5	isAnnotation:False
+x:503	y:965	width:24	height:20	text:91	confidence:de	level:5	isAnnotation:False
+x:537	y:964	width:38	height:21	text:66	confidence:fon	level:5	isAnnotation:False
+x:586	y:965	width:144	height:25	text:85	confidence:Incarnation;	level:5	isAnnotation:False
+x:739	y:956	width:187	height:44	text:51	confidence:1ct.'ic'ft,	level:5	isAnnotation:False
+x:67	y:989	width:887	height:42	text:-1	confidence:nan	level:4	isAnnotation:False
+x:67	y:999	width:15	height:21	text:90	confidence:il	level:5	isAnnotation:False
+x:93	y:1007	width:25	height:14	text:93	confidence:ne	level:5	isAnnotation:False
+x:128	y:1001	width:31	height:20	text:90	confidence:dit	level:5	isAnnotation:False
+x:167	y:1000	width:74	height:27	text:76	confidence:jamais	level:5	isAnnotation:False
+x:251	y:1007	width:40	height:14	text:87	confidence:aux	level:5	isAnnotation:False
+x:299	y:999	width:55	height:29	text:85	confidence:Juifs	level:5	isAnnotation:False
+x:364	y:999	width:50	height:28	text:78	confidence:qu'il	level:5	isAnnotation:False
+x:425	y:999	width:48	height:21	text:76	confidence:érait	level:5	isAnnotation:False
+x:484	y:1000	width:26	height:20	text:90	confidence:né	level:5	isAnnotation:False
+x:517	y:999	width:60	height:21	text:82	confidence:d’une	level:5	isAnnotation:False
+x:584	y:999	width:87	height:27	text:89	confidence:Vierge;	level:5	isAnnotation:False
+x:680	y:1000	width:15	height:20	text:95	confidence:il	level:5	isAnnotation:False
+x:702	y:1006	width:29	height:14	text:80	confidence:re-	level:5	isAnnotation:False
+x:739	y:994	width:12	height:9	text:50	confidence:.	level:5	isAnnotation:False
+x:765	y:989	width:174	height:42	text:47	confidence:2'.U22,'i.f1"	level:5	isAnnotation:False
+x:946	y:992	width:8	height:4	text:51	confidence:-	level:5	isAnnotation:False
+x:68	y:1034	width:893	height:35	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:1042	width:34	height:22	text:74	confidence:gut	level:5	isAnnotation:False
+x:115	y:1037	width:19	height:20	text:87	confidence:la	level:5	isAnnotation:False
+x:145	y:1036	width:132	height:22	text:60	confidence:bePnédié1ioa	level:5	isAnnotation:False
+x:290	y:1036	width:24	height:21	text:91	confidence:de	level:5	isAnnotation:False
+x:325	y:1036	width:52	height:28	text:84	confidence:Jean	level:5	isAnnotation:False
+x:389	y:1035	width:51	height:21	text:73	confidence:clans	level:5	isAnnotation:False
+x:452	y:1035	width:52	height:21	text:69	confidence:l'eau	level:5	isAnnotation:False
+x:516	y:1035	width:27	height:21	text:94	confidence:du	level:5	isAnnotation:False
+x:552	y:1034	width:113	height:29	text:77	confidence:Jourdain,	level:5	isAnnotation:False
+x:678	y:1035	width:53	height:20	text:84	confidence:céré-	level:5	isAnnotation:False
+x:737	y:1038	width:148	height:31	text:45	confidence:”4414,.0,	level:5	isAnnotation:False
+x:913	y:1045	width:48	height:11	text:56	confidence:a“-	level:5	isAnnotation:False
+x:67	y:1068	width:897	height:33	text:-1	confidence:nan	level:4	isAnnotation:False
+x:67	y:1072	width:72	height:20	text:92	confidence:monie	level:5	isAnnotation:False
+x:155	y:1072	width:11	height:20	text:77	confidence:d	level:5	isAnnotation:False
+x:182	y:1071	width:88	height:28	text:91	confidence:laquelle	level:5	isAnnotation:False
+x:287	y:1070	width:100	height:28	text:83	confidence:plufiears	level:5	isAnnotation:False
+x:401	y:1069	width:53	height:29	text:89	confidence:Juifs	level:5	isAnnotation:False
+x:471	y:1070	width:18	height:21	text:88	confidence:fe	level:5	isAnnotation:False
+x:501	y:1069	width:160	height:26	text:75	confidence:foumettaient;	level:5	isAnnotation:False
+x:679	y:1071	width:51	height:20	text:89	confidence:mais	level:5	isAnnotation:False
+x:741	y:1068	width:223	height:33	text:38	confidence:rr-s/Hr""'.---	level:5	isAnnotation:False
+x:67	y:1096	width:893	height:39	text:-1	confidence:nan	level:4	isAnnotation:False
+x:67	y:1108	width:16	height:20	text:93	confidence:il	level:5	isAnnotation:False
+x:98	y:1115	width:25	height:14	text:93	confidence:ne	level:5	isAnnotation:False
+x:141	y:1107	width:79	height:28	text:86	confidence:baptifa	level:5	isAnnotation:False
+x:234	y:1107	width:71	height:25	text:83	confidence:iamais	level:5	isAnnotation:False
+x:315	y:1105	width:114	height:29	text:85	confidence:perfonne;	level:5	isAnnotation:False
+x:440	y:1106	width:14	height:20	text:94	confidence:il	level:5	isAnnotation:False
+x:465	y:1113	width:25	height:14	text:92	confidence:ne	level:5	isAnnotation:False
+x:500	y:1106	width:57	height:27	text:90	confidence:parla	level:5	isAnnotation:False
+x:568	y:1105	width:61	height:27	text:90	confidence:point	level:5	isAnnotation:False
+x:639	y:1105	width:34	height:21	text:93	confidence:des	level:5	isAnnotation:False
+x:687	y:1104	width:43	height:29	text:79	confidence:fept	level:5	isAnnotation:False
+x:740	y:1096	width:120	height:36	text:46	confidence:e'.e"	level:5	isAnnotation:False
+x:868	y:1102	width:92	height:21	text:52	confidence:rr"--
+4	1	4	1	28	0	67	1132	874	56	-1	
+5	1	4	1	28	1	67	1143	137	26	76	Sucrements;
+5	1	4	1	28	2	216	1144	14	20	95	il
+5	1	4	1	28	3	239	1143	105	20	77	n'inftitua
+5	1	4	1	28	4	351	1142	61	27	93	point
+5	1	4	1	28	5	422	1142	24	20	92	de
+5	1	4	1	28	6	454	1141	117	21	86	Hiérarchie
+5	1	4	1	28	7	579	1140	152	28	72	Eccléfiaftique
+5	1	4	1	28	8	744	1132	197	56	49	1i7'dricry,	level:5	isAnnotation:False
+x:68	y:1165	width:886	height:42	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:1179	width:24	height:21	text:68	confidence:de	level:5	isAnnotation:False
+x:100	y:1178	width:38	height:22	text:70	confidence:fan	level:5	isAnnotation:False
+x:147	y:1179	width:75	height:21	text:82	confidence:vivant.	level:5	isAnnotation:False
+x:233	y:1179	width:17	height:20	text:92	confidence:Il	level:5	isAnnotation:False
+x:261	y:1178	width:60	height:21	text:90	confidence:cacha	level:5	isAnnotation:False
+x:329	y:1178	width:10	height:20	text:73	confidence:i	level:5	isAnnotation:False
+x:346	y:1176	width:30	height:23	text:71	confidence:a	level:5	isAnnotation:False
+x:385	y:1177	width:176	height:27	text:90	confidence:Contemporains	level:5	isAnnotation:False
+x:571	y:1176	width:50	height:28	text:76	confidence:qu'il	level:5	isAnnotation:False
+x:631	y:1176	width:48	height:21	text:89	confidence:était	level:5	isAnnotation:False
+x:688	y:1176	width:43	height:21	text:78	confidence:Flll	level:5	isAnnotation:False
+x:744	y:1165	width:61	height:40	text:45	confidence:7sr.f	level:5	isAnnotation:False
+x:813	y:1166	width:141	height:41	text:40	confidence:2GCA.	level:5	isAnnotation:False
+x:68	y:1203	width:880	height:55	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:1214	width:26	height:21	text:90	confidence:de	level:5	isAnnotation:False
+x:103	y:1214	width:65	height:24	text:90	confidence:Dieu,	level:5	isAnnotation:False
+x:181	y:1214	width:155	height:21	text:78	confidence:érernellement	level:5	isAnnotation:False
+x:347	y:1212	width:114	height:29	text:89	confidence:engendré,	level:5	isAnnotation:False
+x:473	y:1211	width:159	height:21	text:71	confidence:confubftantiel	level:5	isAnnotation:False
+x:643	y:1211	width:11	height:20	text:67	confidence:é	level:5	isAnnotation:False
+x:666	y:1211	width:64	height:24	text:79	confidence:Dieu,	level:5	isAnnotation:False
+x:744	y:1208	width:48	height:23	text:56	confidence:M}.	level:5	isAnnotation:False
+x:800	y:1203	width:148	height:55	text:53	confidence:::jeiit"r	level:5	isAnnotation:False
+x:68	y:1233	width:932	height:44	text:-1	confidence:nan	level:2	isAnnotation:False
+x:68	y:1233	width:932	height:44	text:-1	confidence:nan	level:3	isAnnotation:False
+x:68	y:1233	width:932	height:44	text:-1	confidence:nan	level:4	isAnnotation:False
+x:68	y:1250	width:23	height:21	text:65	confidence:&	level:5	isAnnotation:False
+x:102	y:1257	width:39	height:20	text:91	confidence:que	level:5	isAnnotation:False
+x:153	y:1250	width:18	height:20	text:93	confidence:le	level:5	isAnnotation:False
+x:181	y:1250	width:30	height:21	text:79	confidence:St.	level:5	isAnnotation:False
+x:223	y:1250	width:69	height:27	text:66	confidence:Efpsit	level:5	isAnnotation:False
+x:304	y:1249	width:102	height:28	text:72	confidence:procédait	level:5	isAnnotation:False
+x:416	y:1249	width:29	height:21	text:95	confidence:du	level:5	isAnnotation:False
+x:456	y:1249	width:46	height:20	text:92	confidence:Pere	level:5	isAnnotation:False
+x:514	y:1247	width:23	height:22	text:90	confidence:&	level:5	isAnnotation:False
+x:548	y:1247	width:27	height:20	text:92	confidence:du	level:5	isAnnotation:False
+x:586	y:1246	width:49	height:21	text:91	confidence:Fils.	level:5	isAnnotation:False
+x:646	y:1246	width:85	height:20	text:77	confidence:Ilnedit	level:5	isAnnotation:False
+x:744	y:1243	width:34	height:18	text:61	confidence:or.	level:5	isAnnotation:False
+x:786	y:1249	width:30	height:9	text:79	confidence:'
+5	1	5	1	1	15	834	1233	89	27	52	”341’
+5	1	5	1	1	16	998	1254	2	12	52	i
+2	1	6	0	0	0	905	821	33	12	-1	
+3	1	6	1	0	0	905	821	33	12	-1	
+4	1	6	1	1	0	905	821	33	12	-1	
+5	1	6	1	1	1	905	821	33	12	95	 
+2	1	7	0	0	0	888	842	71	20	-1	
+3	1	7	1	0	0	888	842	71	20	-1	
+4	1	7	1	1	0	888	842	71	20	-1	
+5	1	7	1	1	1	888	842	71	20	95	  
+2	1	8	0	0	0	66	1265	903	168	-1	
+3	1	8	1	0	0	66	1265	903	168	-1	
+4	1	8	1	1	0	750	1265	138	20	-1	
+5	1	8	1	1	1	750	1265	110	17	48	,napJI-f-
+5	1	8	1	1	2	883	1281	5	4	50	.
+4	1	8	1	2	0	66	1275	881	59	-1	
+5	1	8	1	2	1	66	1285	61	27	87	point
+5	1	8	1	2	2	138	1292	40	21	83	que
+5	1	8	1	2	3	188	1284	20	21	88	fa
+5	1	8	1	2	4	219	1284	101	22	86	Perfonne
+5	1	8	1	2	5	330	1286	47	20	87	était
+5	1	8	1	2	6	386	1283	109	29	86	compofée
+5	1	8	1	2	7	505	1283	24	21	89	de
+5	1	8	1	2	8	540	1283	54	20	92	deux
+5	1	8	1	2	9	603	1287	91	19	79	natures.
+5	1	8	1	2	10	706	1281	24	21	71	dt
+5	1	8	1	2	11	738	1284	84	50	43	Jeet
+5	1	8	1	2	12	828	1275	119	51	37	ttite:
+4	1	8	1	3	0	244	1316	693	19	-1	
+5	1	8	1	3	1	244	1321	6	7	81	.
+5	1	8	1	3	2	269	1329	3	3	50	t
+5	1	8	1	3	3	288	1322	4	4	69	.
+5	1	8	1	3	4	511	1328	3	4	90	.
+5	1	8	1	3	5	611	1326	5	4	51	v
+5	1	8	1	3	6	652	1326	3	4	97	.
+5	1	8	1	3	7	722	1331	8	4	74	..
+5	1	8	1	3	8	766	1322	26	8	58	(4
+5	1	8	1	3	9	806	1325	5	5	60	.
+5	1	8	1	3	10	829	1318	17	10	61	u
+5	1	8	1	3	11	862	1316	75	11	62	M‘r‘b
+4	1	8	1	4	0	67	1317	869	49	-1	
+5	1	8	1	4	1	67	1321	25	22	90	de
+5	1	8	1	4	2	103	1322	53	22	90	deux
+5	1	8	1	4	3	167	1322	107	28	73	volontes,
+5	1	8	1	4	4	286	1323	15	21	80	il
+5	1	8	1	4	5	312	1322	73	23	82	voulut
+5	1	8	1	4	6	396	1328	39	22	91	que
+5	1	8	1	4	7	447	1328	31	16	71	ces
+5	1	8	1	4	8	490	1319	77	30	89	grands
+5	1	8	1	4	9	580	1318	97	30	64	myfletes
+5	1	8	1	4	10	688	1317	42	45	49	fag
+5	1	8	1	4	11	740	1319	196	47	35	',',1Cp'i,Ci;722'
+4	1	8	1	5	0	725	1366	159	13	-1	
+5	1	8	1	5	1	725	1367	22	9	59	.u
+5	1	8	1	5	2	775	1369	41	10	53	6"	level:5	isAnnotation:False
+x:846	y:1366	width:22	height:8	text:56	confidence:at	level:5	isAnnotation:False
+x:879	y:1370	width:5	height:6	text:86	confidence:.	level:5	isAnnotation:False
+x:688	y:1380	width:188	height:28	text:-1	confidence:nan	level:4	isAnnotation:False
+x:688	y:1380	width:43	height:28	text:56	confidence:22',i	level:5	isAnnotation:False
+x:745	y:1390	width:14	height:15	text:72	confidence:f	level:5	isAnnotation:False
+x:769	y:1387	width:28	height:16	text:53	confidence:'4	level:5	isAnnotation:False
+x:807	y:1382	width:69	height:23	text:56	confidence:1197'	level:5	isAnnotation:False
+x:266	y:1395	width:703	height:38	text:-1	confidence:nan	level:4	isAnnotation:False
+x:266	y:1425	width:6	height:5	text:87	confidence:.	level:5	isAnnotation:False
+x:648	y:1395	width:125	height:36	text:45	confidence:avCly/2	level:5	isAnnotation:False
+x:784	y:1406	width:112	height:19	text:53	confidence:.w,s.-o."	level:5	isAnnotation:False
+x:909	y:1397	width:60	height:36	text:36	confidence:rw	level:5	isAnnotation:False
+x:261	y:1420	width:670	height:43	text:-1	confidence:nan	level:2	isAnnotation:False
+x:261	y:1420	width:670	height:43	text:-1	confidence:nan	level:3	isAnnotation:False
+x:261	y:1420	width:670	height:43	text:-1	confidence:nan	level:4	isAnnotation:False
+x:261	y:1421	width:78	height:35	text:51	confidence:jun,	level:5	isAnnotation:False
+x:346	y:1420	width:300	height:42	text:41	confidence:es-sw-js-st-,	level:5	isAnnotation:False
+x:656	y:1444	width:5	height:5	text:94	confidence:.	level:5	isAnnotation:False
+x:676	y:1437	width:82	height:16	text:42	confidence:-	level:5	isAnnotation:False
+x:766	y:1427	width:151	height:36	text:44	confidence:'.efe'rs-ezL	level:5	isAnnotation:False
+x:924	y:1437	width:7	height:6	text:59	confidence:-	level:5	isAnnotation:False
+x:259	y:1416	width:6	height:26	text:-1	confidence:nan	level:2	isAnnotation:False
+x:259	y:1416	width:6	height:26	text:-1	confidence:nan	level:3	isAnnotation:False
+x:259	y:1416	width:6	height:26	text:-1	confidence:nan	level:4	isAnnotation:False
+x:259	y:1416	width:6	height:26	text:95	confidence:  	level:5	isAnnotation:False
+x:246	y:1434	width:5	height:11	text:-1	confidence:nan	level:2	isAnnotation:False
+x:246	y:1434	width:5	height:11	text:-1	confidence:nan	level:3	isAnnotation:False
+x:246	y:1434	width:5	height:11	text:-1	confidence:nan	level:4	isAnnotation:False
+x:246	y:1434	width:5	height:11	text:95	confidence: 	level:5	isAnnotation:False
+x:55	y:1415	width:191	height:41	text:-1	confidence:nan	level:2	isAnnotation:False
+x:55	y:1415	width:191	height:41	text:-1	confidence:nan	level:3	isAnnotation:False
+x:55	y:1415	width:191	height:41	text:-1	confidence:nan	level:4	isAnnotation:False
+x:55	y:1415	width:158	height:41	text:51	confidence:J-IL--	level:5	isAnnotation:False
+x:226	y:1418	width:20	height:24	text:53	confidence:I	level:5	isAnnotation:False

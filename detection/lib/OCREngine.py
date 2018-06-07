@@ -53,8 +53,10 @@ class OCREngine:
         data = self.ocr.image_to_data(img, config = self.ocr_config)
         
         # convert the tabular data into pandas
+        # pd.read_table(...,quoting=3) fix EOF problem. See more:
+        # https://stackoverflow.com/questions/27158922/read-csv-eof-character-in-string-cause-parsing-issue
         tmp = StringIO(data)
-        data_df = pd.read_table(tmp)
+        data_df = pd.read_table(tmp, quoting=3)
 
         # convert the data_df into ImageROI object
         imgROIs = df_to_ImageROI(data_df)
