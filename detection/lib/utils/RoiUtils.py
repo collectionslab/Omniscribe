@@ -103,7 +103,7 @@ def WhiteInCrop(img,ROI=None):
 def CalculateF1(img,ROI):
     '''
     Given an image and an ROI, calculates F1 score, recall and
-    precision of ROI
+    precision of ROI. image must be white on black background
     recall is fraction of white pixels in ROI
     precision is fraction of image cropped by ROI
     '''
