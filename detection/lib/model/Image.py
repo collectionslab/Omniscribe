@@ -2,7 +2,7 @@
 Image object that stores images and relevant data
 
 '''
-from . import ImageROI
+from .ImageROI import ImageROI
 
 class Image:
     def __init__(self,ID,ROIs):
@@ -27,15 +27,16 @@ class Image:
                 if skipTitle:
                     skipTitle = False
                     continue
-                print(line)
+                
                 line=line.split(',')
                 if not line[0] in collection:
-                    collection[line[0]]=ImageBoundingBoxes(int(line[0]),[])
+                    collection[line[0]]=[]
+           
                 x1=int(line[2])
                 y1=int(line[3])
                 x2=int(line[4])
                 y2=int(line[5])
                 isAnnotated=int(line[6])
-                collection[line[0]].boxes.append(ImageROI(x1,y1,x2-x1,y2-y1,None,None,None))    
+                collection[line[0]].append(ImageROI(x1,y1,x2-x1,y2-y1))    
         return collection
             
