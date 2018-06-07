@@ -1,0 +1,6 @@
+x:109	y:262	width:158	height:290	text:	confidence:1.0	level:2	isAnnotation:False
+x:307	y:96	width:57	height:38	text:	confidence:1.0	level:2	isAnnotation:False
+x:496	y:98	width:173	height:32	text:	confidence:1.0	level:2	isAnnotation:False
+x:764	y:100	width:138	height:31	text:	confidence:1.0	level:2	isAnnotation:False
+x:284	y:147	width:531	height:1068	text:	confidence:1.0	level:2	isAnnotation:False
+x:840	y:1268	width:42	height:25	text:	confidence:1.0	level:2	isAnnotation:False
