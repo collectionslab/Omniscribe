@@ -76,7 +76,8 @@ class Net1(nn.Module):
         super(Net1, self).__init__()
         device = torch.device('cuda' if use_gpu else 'cpu')
         
-        self.input_size = (32, 32)
+#         self.input_size = (32, 32)
+        self.input_size = (64, 64)
         
         self.conv1 = nn.Conv2d(1, 10, kernel_size=4).to(device)
         self.maxpool1 = nn.MaxPool2d(2).to(device)
@@ -85,7 +86,9 @@ class Net1(nn.Module):
         self.maxpool2 = nn.MaxPool2d(6).to(device)
 
         # Todo: check input size of this layer
-        self.fc1 = nn.Linear(8000, 100).to(device)
+#         self.fc1 = nn.Linear(8000, 100).to(device)
+        self.fc1 = nn.Linear(320, 100).to(device)
+
         
         self.batchnorm1 = nn.BatchNorm1d(100).to(device)
         
@@ -97,9 +100,11 @@ class Net1(nn.Module):
     def forward(self, x):
         x = F.relu(self.maxpool1(self.conv1(x)))
         x = F.relu(self.maxpool2(self.conv2(x)))
-            
+        
+#         print(x.size())
         # Expand x based on batch size (x.size(0))
         x = x.view(x.size(0), -1)
+#         print(x.size())
         x = self.fc1(x)
         
         x = self.batchnorm1(x)
