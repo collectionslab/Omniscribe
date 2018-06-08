@@ -102,9 +102,10 @@ def predict_on_boxes(model, images):
 # Only predicts on ROIs for one page
 ###
 
-def get_pos_rois(model, page_info, model_transform = None, model_input_size = (32, 32), stride = (8,8)):
+def get_pos_rois(model, page_info, model_transform = None, model_input_size = (32, 32), stride = (8,8), use_gpu = False):
     model.train(False)
     # todo
+    device_name = 'cuda' if use_gpu else 'cpu'
     
     # Get page image and ROIs
     page_img, page_rois = page_info
@@ -122,7 +123,11 @@ def get_pos_rois(model, page_info, model_transform = None, model_input_size = (3
     for roi in page_rois:
         
         # Create all possible sub-ROIs in the given ROI
-        sub_roi_locs = [ImageROI(y, x, model_input_size[1], model_input_size[0])
+#         sub_roi_locs = [ImageROI(y, x, model_input_size[1], model_input_size[0])
+#                         for y in range(roi.y, roi.y + roi.height - model_input_size[1], stride[1])
+#                         for x in range(roi.x, roi.x + roi.width - model_input_size[0], stride[0])
+#                        ]
+        sub_roi_locs = [ImageROI(x, y, model_input_size[0], model_input_size[1])
                         for y in range(roi.y, roi.y + roi.height - model_input_size[1], stride[1])
                         for x in range(roi.x, roi.x + roi.width - model_input_size[0], stride[0])
                        ]
@@ -133,10 +138,12 @@ def get_pos_rois(model, page_info, model_transform = None, model_input_size = (3
             model_transform = ToTensor()
             
         # Create cropped images for each sub-ROI
-        sub_rois = [model_transform(crop(page_img, sr.y, sr.x, sr.height, sr.width)) for sr in sub_roi_locs]
+#         sub_rois = [model_transform(crop(page_img, sr.y, sr.x, sr.height, sr.width)) for sr in sub_roi_locs]
+        sub_rois = [model_transform(crop(page_img, sr.y, sr.x, sr.height, sr.width)).to(device_name) for sr in sub_roi_locs]
         
         # Concatenate all sub-ROI cropped images into a tensor for batched input to a model
-        sub_rois = default_collate(sub_rois)
+        sub_rois = default_collate(sub_rois).to(device_name)
+        print(type(sub_rois))
         
         # Obtain predictions from model for sub-ROI images
         outputs = model(sub_rois)
