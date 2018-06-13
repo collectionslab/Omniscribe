@@ -1,6 +1,6 @@
 from image_sample_generator import subsample_images
 
-def subsample_books(input_dir_loc, output_dir_loc, sample_dimensions, stride = (1,1), num_samples = None):
+def subsample_books(input_dir_loc, output_dir_loc, sample_dimensions, stride = (1,1), num_samples = None, do_crop = False):
     # import necessary packages
     import os
     import math
@@ -49,7 +49,8 @@ def subsample_books(input_dir_loc, output_dir_loc, sample_dimensions, stride = (
                              output_dir_loc = output_label_dir,
                              sample_dimensions = sample_dimensions,
                              stride = stride,
-                             num_samples = samples_per_image)
+                             num_samples = samples_per_image,
+                             do_crop = do_crop)
     
     
     
@@ -82,6 +83,8 @@ if __name__ == '__main__':
                         help = 'stride to use when creating image subsamples. in format xstride,ystride or just one number stride for both x and y. defaults to 1 pixel stride.')
     parser.add_argument('-n', '--number', action = 'store', required = False, default = None,
                        help = 'number of total random subsamples (approximate).')
+    parser.add_argument('-c', '--crop', action = 'store_true', required = False, default = False,
+                        help = 'setting this flag will save the actual cropped images, instead of bounding boxes, in the output directory.')
     
     args = parser.parse_args()
     
@@ -107,7 +110,8 @@ if __name__ == '__main__':
                      output_dir_loc = args.output,
                      sample_dimensions = dims,
                      stride = stride,
-                     num_samples = number)
+                     num_samples = number,
+                     do_crop = args.crop)
     
     print('completed subsampling images from ' + str(args.input) + '. Images output to ' + str(args.output) + '.')
     
