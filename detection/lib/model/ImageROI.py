@@ -62,7 +62,4 @@ def csv_to_roi(infilename):
                                  confidence=float(row[5]),
                                  level=int(row[6]),
                                  isAnnotation= (int(row[7]) == 1)  ))
-    if len(rois) == 1:
-        return rois[0]
-    else:
-        return rois
+    return rois
