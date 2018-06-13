@@ -94,16 +94,17 @@ def generate_labels(input_dir, pos_output_dir, neg_output_dir, precropped = Fals
         roi = None
         if not precropped:
             # get ROI
-            roi = csv_to_roi(fname)
-            print(roi.toString())
-            
-            if rect is not None:
-                rect.remove()
-            rect = patches.Rectangle((roi.x,roi.y),roi.width, roi.height,
-                                     linewidth=2,
-                                     edgecolor='r',
-                                     facecolor='none')
-            axes.add_patch(rect)
+            rois = csv_to_roi(fname)
+            for roi in rois:
+                print(roi.toString())
+
+                if rect is not None:
+                    rect.remove()
+                rect = patches.Rectangle((roi.x,roi.y),roi.width, roi.height,
+                                         linewidth=2,
+                                         edgecolor='r',
+                                         facecolor='none')
+                axes.add_patch(rect)
         
         plt.pause(0.1)
         
