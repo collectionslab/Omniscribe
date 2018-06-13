@@ -131,6 +131,12 @@ def get_pos_rois(model, page_info, model_transform = None, model_input_size = (3
                         for y in range(roi.y, roi.y + roi.height - model_input_size[1], stride[1])
                         for x in range(roi.x, roi.x + roi.width - model_input_size[0], stride[0])
                        ]
+        for srl in sub_roi_locs:
+            print(srl.toString())
+        print(len(sub_roi_locs))
+        
+        from detection.lib.utils.Utils import plt_img
+        plt_img(page_img, rois = [(sub_roi_locs, 'r')])
         
         # If no model transform is given, create a basic ToTensor() that can be passed into a model
         # TODO: decide if this necessary
@@ -139,7 +145,10 @@ def get_pos_rois(model, page_info, model_transform = None, model_input_size = (3
             
         # Create cropped images for each sub-ROI
 #         sub_rois = [model_transform(crop(page_img, sr.y, sr.x, sr.height, sr.width)) for sr in sub_roi_locs]
-        sub_rois = [model_transform(crop(page_img, sr.y, sr.x, sr.height, sr.width)).to(device_name) for sr in sub_roi_locs]
+#         sub_rois = [model_transform(crop(page_img, sr.y, sr.x, sr.height, sr.width)).to(device_name) for sr in sub_roi_locs]
+        sub_rois = [model_transform(page_img.crop((sr.x, sr.y, sr.x + sr.width, sr.y + sr.height))).to(device_name) for sr in sub_roi_locs]
+        print(len(sub_rois))
+        print(sub_rois[0].size())
         
         # Concatenate all sub-ROI cropped images into a tensor for batched input to a model
         sub_rois = default_collate(sub_rois).to(device_name)
