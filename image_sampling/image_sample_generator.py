@@ -40,7 +40,7 @@ def subsample_images(input_loc, output_dir_loc, sample_dimensions, stride = (1,1
                    for y in range(0, h - sample_dimensions[1], stride[1])]
         
         # randomly choose num_samples number of ImageROIs from rois
-        if num_samples is not None:
+        if (num_samples is not None) and (num_samples < len(rois)):
             rois = np.random.choice(rois, num_samples, replace=False)
         
         if do_crop:
