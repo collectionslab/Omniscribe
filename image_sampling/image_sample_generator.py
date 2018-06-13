@@ -34,6 +34,9 @@ def subsample_images(input_loc, output_dir_loc, sample_dimensions, stride = (1,1
         img = Image.open(fname)
         w, h = img.size
         
+        if (w < sample_dimensions[0]) or (h < sample_dimensions[1]):
+            continue
+        
         # create list of ImageROIs for this image
         rois = [ImageROI(x, y, sample_dimensions[0], sample_dimensions[1])
                    for x in range(0, w - sample_dimensions[0], stride[0])
