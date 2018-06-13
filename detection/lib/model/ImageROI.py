@@ -37,12 +37,15 @@ class ImageROI:
                                             self.confidence, self.level, self.isAnnotation))
         return content
     
-def roi_to_csv(roi, outfilename):
+def roi_to_csv(rois, outfilename):
     import csv
+    if isinstance(rois, ImageROI):
+        rois = [rois]
     with open(outfilename, 'w') as outfile:
         writer = csv.writer(outfile, delimiter = ',', quoting = csv.QUOTE_NONNUMERIC)
-        all_data = [roi.x, roi.y, roi.width, roi.height, roi.text, roi.confidence, roi.level, 1 if roi.isAnnotation else 0]
-        writer.writerow(all_data)
+        for roi in rois:
+            all_data = [roi.x, roi.y, roi.width, roi.height, roi.text, roi.confidence, roi.level, 1 if roi.isAnnotation else 0]
+            writer.writerow(all_data)
     return
 
 def csv_to_roi(infilename):
