@@ -135,8 +135,8 @@ def get_pos_rois(model, page_info, model_transform = None, model_input_size = (3
             print(srl.toString())
         print(len(sub_roi_locs))
         
-        from detection.lib.utils.Utils import plt_img
-        plt_img(page_img, rois = [(sub_roi_locs, 'r')])
+        #from detection.lib.utils.Utils import plt_img
+        #plt_img(page_img, rois = [(sub_roi_locs, 'r')])
         
         # If no model transform is given, create a basic ToTensor() that can be passed into a model
         # TODO: decide if this necessary
