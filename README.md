@@ -19,3 +19,32 @@ https://ucla.app.box.com/folder/45481483089
 * Jonathan Quach
 * Morgan Madjukie
 * Rahul Malavalli
+
+
+### More Info on Some Files in this Path
+
+.gitignore
+
+Intentionally not track pycache .pyc and .ipynb_checkpoints since they do not
+provide convenient information about changes that may have occured to the code.
+
+__init__.py
+
+Standard file to be included to treat folders as packages (list of modules)
+so as to allow modularization
+
+preproc.py
+
+Binarizes an image or a folder of images (NOTE: must provide an output 
+path if binarizing an entire folder) 
+
+E.g. 
+
+$ python preproc.py img.png #one image
+$ python preproc.py --out /Users/John/Desktop/outputFolder /Users/John/Desktop/inputFolder
+
+
+sampler.py
+
+Randomly generates "number" square subsamples of side length "px" from
+file(s) "files" where "number" "px" and "files" are from user input.
