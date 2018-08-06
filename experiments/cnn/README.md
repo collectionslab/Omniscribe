@@ -1,7 +1,7 @@
 annotations-computervision/experiments/cnn/
 =========================================== 
 
-rawlogs
+raw_logs
 
 JQNet1-cross_val-500epochs
 JQNet1-cross_val-lr_0.001-f1-100epochs
