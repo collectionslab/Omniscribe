@@ -1,6 +1,6 @@
 # Annotation Detector
 
-![BuildUCLA.png](<https://imgur.com/a/bQjxTLH>)
+![BuildUCLA.png](builducla.png)
 
 ## Collections Lab Team
 
@@ -12,7 +12,7 @@ faculty and students based in the Charles E. Young Research Library.
 Develop software that detects annotations in historical printed books that are
 stored in International Image Interoperability Framework (IIIF) servers.
 
-![annotations.png](<https://imgur.com/a/vuspbDu>)
+![annotations.png](sample.png)
 **Fig. 1 A sample image generated from using Mask-RCNN.**
 
 This tool will automate the process of sifting through every page manually to
