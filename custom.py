@@ -74,8 +74,8 @@ class CustomConfig(Config):
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 50
 
-    # Skip detections with < 90% confidence
-    DETECTION_MIN_CONFIDENCE = 0.90
+    # Skip detections with < 95% confidence
+    DETECTION_MIN_CONFIDENCE = 0.95
 
 
 ############################################################
@@ -209,9 +209,7 @@ def color_splash(image, mask):
     # has 3 RGB channels, though.
     
 
-    #gray = skimage.color.gray2rgb(skimage.color.rgb2gray(image)) * 255
-
-    gray = image
+    gray = skimage.color.gray2rgb(skimage.color.rgb2gray(image)) * 255
     
     # We're treating all instances as one, so collapse the mask into one layer
     mask = (np.sum(mask, -1, keepdims=True) >= 1)
@@ -247,6 +245,14 @@ def detect_and_color_splash(model, image_path=None, video_path=None):
 
         # Detect objects
         r = model.detect([image], verbose=1)[0]
+
+        for e in r['scores']:
+        	print(e)
+
+        if len(r['scores']) == 0:
+        	print('NO ROIS!')
+        	return
+
         # Color splash
         splash = color_splash(image, r['masks'])
         # Save output

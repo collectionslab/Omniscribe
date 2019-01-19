@@ -37,11 +37,6 @@ def getImageURIs(manifestURL=None):
     return imageURIs
 
 
-
-
-
-
-
 def main():
     url='https://marinus.library.ucla.edu/cantaloupe-4.0.1/iiif/2/toganoo%7C1%7Cucla_1564390_002.tif/full/full/0/default.jpg'
 
@@ -50,7 +45,8 @@ def main():
     someList = getImageURIs('asd')
 
     for e in someList:
-        getImage(e)
+        print(e)
+        #getImage(e)
 
 if __name__ == '__main__':
     main()  
