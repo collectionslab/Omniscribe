@@ -29,6 +29,11 @@ import cv2
 from mrcnn.visualize import display_instances
 import matplotlib.pyplot as plt
 
+
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
+
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
 
@@ -216,12 +221,23 @@ def color_splash(image, mask):
 def detect_and_color_splash(model, image_path=None, video_path=None):
     assert image_path or video_path
 
+    # this seems frowned upon 
+    
+
     # Image or video?
     if image_path:
         # Run model detection and generate the color splash effect
         print("Running on {}".format(args.image))
         # Read image
-        image = skimage.io.imread(args.image)
+        #image = skimage.io.imread(args.image)
+
+        import requests
+        import Image
+        response = requests.get(image_path, verify=False)
+    	print(response)
+    	image = Image.open(BytesIO(response.content))
+
+
         # Detect objects
         r = model.detect([image], verbose=1)[0]
         # Color splash
