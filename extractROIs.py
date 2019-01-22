@@ -8,7 +8,7 @@ CSV_PATH = '/Users/silver/Desktop/buildUCLA/stripped-book-annotation-classificat
 # ASSUMES FILES ARE .PNG FORMAT
 META_DATA_PATH = '/Users/silver/Desktop/buildUCLA/phase2/annotations-computervision/books meta data.csv'
 
-# WARNING CSV file is inconsistent with the key identifier for the key names. For now, we will only retain the data that uses 'filename' as the key to retrieve the file name
+# WARNING CSV file is inconsistent with the key identifier for the key names. 'filename' 'manifest.csv' and 'uclaclark_QD25S87_0291.png' are keys to retrieve the file name
 def extractROIs(csv_file_path):
 	assert csv_file_path
 	df = pd.read_csv(csv_file_path, usecols=['annotations', 'subject_data','subject_ids'])
@@ -33,8 +33,7 @@ def extractROIs(csv_file_path):
 			
 			fn = s_data[s_id]['filename']
 
-			print(name2id[fn])
-
+			# name2id to convert file name to our id naming convention
 			fileNames.append(name2id[s_data[s_id]['filename']])
 			
 			tasks = json.loads(df.iloc[index]['annotations'])
@@ -52,7 +51,50 @@ def extractROIs(csv_file_path):
 
 			coordinates.append(imageCoordinates)
 		except:
-			continue
+			try: # if this succeeds, then we are getting all the clark images
+			
+				fn = s_data[s_id]['manifest.csv']
+
+				fileNames.append(s_data[s_id]['manifest.csv'])
+			
+				tasks = json.loads(df.iloc[index]['annotations'])
+
+				imageCoordinates = []
+
+				for t in tasks:
+
+					if t['task'] == 'T1':
+						listOfCoordinates = t['value']
+
+						for coord in listOfCoordinates:
+							formattedCoord = coord['x'], coord['y'], coord['width'], coord['height']
+							imageCoordinates.append(formattedCoord)
+
+				coordinates.append(imageCoordinates)
+			except:
+				try: # if this succeeds, then we are getting all the remaining images
+			
+					fn = s_data[s_id]['uclaclark_QD25S87_0291.png']
+
+					fileNames.append(s_data[s_id]['uclaclark_QD25S87_0291.png'])
+			
+					tasks = json.loads(df.iloc[index]['annotations'])
+
+					imageCoordinates = []
+
+					for t in tasks:
+
+						if t['task'] == 'T1':
+							listOfCoordinates = t['value']
+
+							for coord in listOfCoordinates:
+								formattedCoord = coord['x'], coord['y'], coord['width'], coord['height']
+								imageCoordinates.append(formattedCoord)
+
+					coordinates.append(imageCoordinates)
+				except:
+					pass	
+
 
 	return zip(fileNames,coordinates)
 
