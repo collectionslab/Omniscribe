@@ -1,11 +1,8 @@
-# Annotation Detector
-
-![BuildUCLA.png](builducla.png)
+# Book Annotation Detection Engine
 
 ## Collections Lab Team
 
-Formed in December 2018, the Collections Lab team consists of a handful of UCLA
-faculty and students based in the Charles E. Young Research Library.
+Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboration with a team consisting of UCLA library staff and students based in the UCLA Digital Library Program.
 
 ### Objective
 
