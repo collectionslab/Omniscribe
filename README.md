@@ -22,14 +22,14 @@ active reading or even the annotations themselves.
 
 ### Project team
 
-* Dawn Childress
-* Pete Broadwell
-* Andrew Wallace
-* Johnny Ho
-* Emily Chen
-* Jonathan Quach
-* Morgan Madjukie
-* Rahul Malavalli
+* Dawn Childress (project lead, 12/17- )
+* Pete Broadwell (12/17-12/18)
+* Andrew Wallace (12/17- )
+* Jonathan Quach (12/17- )
+* Morgan Madjukie (12/17- )
+* Johnny Ho (12/17-06/18)
+* Emily Chen (12/17-06/18)
+* Rahul Malavalli (12/17-06/18)
 
 ### More Info on Some Files in this Path
 
