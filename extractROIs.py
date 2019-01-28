@@ -17,7 +17,7 @@ def extractROIs(csv_file_path):
 	df_meta = pd.read_csv(META_DATA_PATH, usecols=['ID','File Name'])
 	name2id = dict()
 	for index, row in df_meta.iterrows():
-		name2id[row[1].replace('.png','.jpg')] = row[0]
+		name2id[row[1].replace('.png','.jpg')] = str(row[0])
 
 	fileNames = []
 	coordinates = []
@@ -112,9 +112,9 @@ def extractROIs(csv_file_path):
 	print('This is the length of d: {}'.format(len(d)))
 
 	for key in d.keys():
-		print(key)
+		print(type(key))
 
-	print(d[779])
+	print(d['779'])
 
 	return d
 
