@@ -17,7 +17,7 @@ def extractROIs(csv_file_path):
 	df_meta = pd.read_csv(META_DATA_PATH, usecols=['ID','File Name'])
 	name2id = dict()
 	for index, row in df_meta.iterrows():
-		name2id[row[1].replace('.png','.jpg')] = str(row[0]) + '.png'
+		name2id[row[1].replace(".png",".jpg")] = str(row[0]) + ".png"
 
 	fileNames = []
 	coordinates = []
@@ -99,23 +99,56 @@ def extractROIs(csv_file_path):
 
 	d = dict()
 
+	unannotated_count= 0
 	for pair in duplicatedRegionData:
+
+		# skin unannotated regions
+		if not pair[1]:
+			unannotated_count += 1
+			continue
+
 		if pair[0] in d:
 			[d[pair[0]].append(r) for r in pair[1]]
 		else:
 			d[pair[0]] = pair[1]
 
-	print('This is the length of d: {}'.format(len(d)))
+	print('There are {} unannotated images'.format(unannotated_count))
 
+	#print('This is the length of d: {}'.format(len(d)))
 
 	# unit tests 
-	print('Here are the regions for image "779.png": {}'.format(d['779.png']))
-	print('Here are the regions for image "uclaclark_AY751Z71673_0065": {}'.format(d['uclaclark_AY751Z71673_0065.png']))
+	#print('Here are the regions for image "779.png": {}'.format(d['779.png']))
+	#print('Here are the regions for image "uclaclark_AY751Z71673_0065": {}'.format(d['uclaclark_AY751Z71673_0065.png']))
 
 	return d
 
+def convertToMaskRCNN(regionImageData: dict):
+	
+	# the actual JSON
+	regionDataFormatted = dict()
+
+	for img,regions in regionImageData.items():
+
+		regionDataFormatted[img] = dict()
+
+		regionValue = dict() #the region is itself a dictionary
+		for i in range(len(regions)):
+
+			someD = dict()
+
+			someD["shape_attributes"] = {"name" : "polygon", "all_points_x": [regions[i][0],regions[i][0] + regions[i][2]], "all_points_y": [regions[i][1],regions[i][1] + regions[i][3]]}
+
+			regionValue[str(i)] = dict()
+			regionValue[str(i)] = someD
+
+		regionDataFormatted[img]["filename"] = img
+		regionDataFormatted[img]["regions"] = regionValue
+
+	print(regionDataFormatted)
+	return regionDataFormatted
+
+
 regionData = extractROIs(CSV_PATH)
-#for img in regionData.keys():
-#	print(img)
+regionDataFormatted = convertToMaskRCNN(regionData)
 
 print('There are {} elements in our zooniverse list'.format(sum(1 for _ in regionData)))
