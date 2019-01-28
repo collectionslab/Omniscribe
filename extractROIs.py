@@ -95,10 +95,31 @@ def extractROIs(csv_file_path):
 				except:
 					pass	
 
+	duplicatedRegionData = list(zip(fileNames,coordinates))
 
-	return zip(fileNames,coordinates)
+	print(duplicatedRegionData)
+
+
+
+	d = dict()
+
+	for pair in duplicatedRegionData:
+		if pair[0] in d:
+			[d[pair[0]].append(r) for r in pair[1]]
+		else:
+			d[pair[0]] = pair[1]
+
+	print('This is the length of d: {}'.format(len(d)))
+
+	for key in d.keys():
+		print(key)
+
+	print(d[779])
+
+	return d
 
 regionData = extractROIs(CSV_PATH)
+#for img in regionData.keys():
+#	print(img)
 
-for rd in regionData:
-	print(rd)
+print('There are {} elements in our zooniverse list'.format(sum(1 for _ in regionData)))
