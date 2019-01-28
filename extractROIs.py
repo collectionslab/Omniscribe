@@ -46,7 +46,7 @@ def extractROIs(csv_file_path):
 					listOfCoordinates = t['value']
 
 					for coord in listOfCoordinates:
-						formattedCoord = coord['x'], coord['y'], coord['width'], coord['height']
+						formattedCoord = int(coord['x']), int(coord['y']), int(coord['width']), int(coord['height'])
 						imageCoordinates.append(formattedCoord)
 
 			coordinates.append(imageCoordinates)
@@ -67,7 +67,7 @@ def extractROIs(csv_file_path):
 						listOfCoordinates = t['value']
 
 						for coord in listOfCoordinates:
-							formattedCoord = coord['x'], coord['y'], coord['width'], coord['height']
+							formattedCoord = int(coord['x']), int(coord['y']), int(coord['width']), int(coord['height'])
 							imageCoordinates.append(formattedCoord)
 
 				coordinates.append(imageCoordinates)
@@ -88,7 +88,7 @@ def extractROIs(csv_file_path):
 							listOfCoordinates = t['value']
 
 							for coord in listOfCoordinates:
-								formattedCoord = coord['x'], coord['y'], coord['width'], coord['height']
+								formattedCoord = int(coord['x']), int(coord['y']), int(coord['width']), int(coord['height'])
 								imageCoordinates.append(formattedCoord)
 
 					coordinates.append(imageCoordinates)
