@@ -102,15 +102,14 @@ def extractROIs(csv_file_path):
 
 	falsePositives = ['2032.png', '2269.png', '2512.png', '2565.png','2710.png','2736.png', 'uclaclark_AY751Z71673_0061.png','uclaclark_AY751Z71673_0119.png','uclaclark_AY751Z71673_0124.png','uclaclark_QL955H34_0068.png',
 						'uclaclark_QL955H34_0071.png','uclaclark_QL955H34_0077.png','uclaclark_QL955H34_0108.png','uclaclark_QL955H34_0113.png','uclaclark_QL955H34_0125.png', 'uclaclark_QL955H34_0126.png','uclaclark_QL955H34_0139.png',
-						'uclaclark_QL955H34_0160.png','uclaclark_QL955H34_0178.png','uclaclark_QL955H34_0193.png','uclaclark_QL955H34_0316.png','uclaclark_QL955H34_0316.png','uclaclark_QL955H34_0321.png'
+						'uclaclark_QL955H34_0156.png', 'uclaclark_QL955H34_0160.png','uclaclark_QL955H34_0178.png','uclaclark_QL955H34_0193.png','uclaclark_QL955H34_0223.png','uclaclark_QL955H34_0316.png','uclaclark_QL955H34_0316.png','uclaclark_QL955H34_0321.png'
 					]
-	unannotated_count= 0
+
 	region_count = 0
 	for pair in duplicatedRegionData:
 
 		# skin unannotated regions
 		if pair[0] in falsePositives or not pair[1]:
-			unannotated_count += 1
 			continue
 
 		if pair[0] in d:
@@ -122,8 +121,6 @@ def extractROIs(csv_file_path):
 		for r in rl:
 			region_count += 1 
 
-
-	print('There are {} unannotated images'.format(unannotated_count))
 	print('There are {} regions of interest'.format(region_count))
 
 	#print('This is the length of d: {}'.format(len(d)))
@@ -165,7 +162,8 @@ for img in sorted(regionData.keys()):
 	print(img)
 regionDataFormatted = convertToMaskRCNN(regionData)
 
+print(regionDataFormatted)
 # the line below to be used for checking individual images and their ROIs
-#print(regionDataFormatted['uclaclark_QL955H34_0284.png'])
+#print(regionDataFormatted['1630.png'])
 
 print('There are {} elements in our zooniverse list'.format(sum(1 for _ in regionData)))
