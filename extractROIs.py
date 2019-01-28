@@ -100,7 +100,10 @@ def extractROIs(csv_file_path):
 	d = dict()
 
 
-	falsePositives = ['2032.png', '2269.png', '2512.png', '2565.png','2710.png','2736.png', 'uclaclark_AY751Z71673_0061.png','uclaclark_AY751Z71673_0119.png','uclaclark_AY751Z71673_0124.png']
+	falsePositives = ['2032.png', '2269.png', '2512.png', '2565.png','2710.png','2736.png', 'uclaclark_AY751Z71673_0061.png','uclaclark_AY751Z71673_0119.png','uclaclark_AY751Z71673_0124.png','uclaclark_QL955H34_0068.png',
+						'uclaclark_QL955H34_0071.png','uclaclark_QL955H34_0077.png','uclaclark_QL955H34_0108.png','uclaclark_QL955H34_0113.png','uclaclark_QL955H34_0125.png', 'uclaclark_QL955H34_0126.png','uclaclark_QL955H34_0139.png',
+						'uclaclark_QL955H34_0160.png','uclaclark_QL955H34_0178.png','uclaclark_QL955H34_0193.png','uclaclark_QL955H34_0316.png','uclaclark_QL955H34_0316.png','uclaclark_QL955H34_0321.png'
+					]
 	unannotated_count= 0
 	region_count = 0
 	for pair in duplicatedRegionData:
@@ -162,6 +165,7 @@ for img in sorted(regionData.keys()):
 	print(img)
 regionDataFormatted = convertToMaskRCNN(regionData)
 
-print(regionDataFormatted['uclaclark_AY751Z71673_0135.png'])
+# the line below to be used for checking individual images and their ROIs
+#print(regionDataFormatted['uclaclark_QL955H34_0284.png'])
 
 print('There are {} elements in our zooniverse list'.format(sum(1 for _ in regionData)))
