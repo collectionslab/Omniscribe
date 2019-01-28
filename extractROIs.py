@@ -17,7 +17,7 @@ def extractROIs(csv_file_path):
 	df_meta = pd.read_csv(META_DATA_PATH, usecols=['ID','File Name'])
 	name2id = dict()
 	for index, row in df_meta.iterrows():
-		name2id[row[1].replace('.png','.jpg')] = str(row[0])
+		name2id[row[1].replace('.png','.jpg')] = str(row[0]) + '.png'
 
 	fileNames = []
 	coordinates = []
@@ -97,10 +97,6 @@ def extractROIs(csv_file_path):
 
 	duplicatedRegionData = list(zip(fileNames,coordinates))
 
-	print(duplicatedRegionData)
-
-
-
 	d = dict()
 
 	for pair in duplicatedRegionData:
@@ -111,10 +107,10 @@ def extractROIs(csv_file_path):
 
 	print('This is the length of d: {}'.format(len(d)))
 
-	for key in d.keys():
-		print(type(key))
 
-	print(d['779'])
+	# unit tests 
+	print('Here are the regions for image "779.png": {}'.format(d['779.png']))
+	print('Here are the regions for image "uclaclark_AY751Z71673_0065": {}'.format(d['uclaclark_AY751Z71673_0065.png']))
 
 	return d
 
