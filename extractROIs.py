@@ -145,7 +145,14 @@ def convertToMaskRCNN(regionImageData: dict):
 
 			someD = dict()
 
-			someD["shape_attributes"] = {"name" : "polygon", "all_points_x": [regions[i][0],regions[i][0] + regions[i][2]], "all_points_y": [regions[i][1],regions[i][1] + regions[i][3]]}
+			x1 = regions[i][0]
+			x2 = x1 + regions[i][2]
+
+			y1 = regions[i][1]
+			y2 = y1 + regions[i][3] 
+
+			# four (x,y) points are needed to create a binding box
+			someD["shape_attributes"] = {"name" : "polygon", "all_points_x": [x1,x2,x2,x1], "all_points_y": [y1,y1,y2,y2]}
 
 			regionValue[str(i)] = dict()
 			regionValue[str(i)] = someD
