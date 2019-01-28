@@ -99,11 +99,14 @@ def extractROIs(csv_file_path):
 
 	d = dict()
 
+
+	falsePositives = ['2032.png', '2269.png', '2512.png', '2565.png','2710.png','2736.png', 'uclaclark_AY751Z71673_0061.png','uclaclark_AY751Z71673_0119.png','uclaclark_AY751Z71673_0124.png']
 	unannotated_count= 0
+	region_count = 0
 	for pair in duplicatedRegionData:
 
 		# skin unannotated regions
-		if not pair[1]:
+		if pair[0] in falsePositives or not pair[1]:
 			unannotated_count += 1
 			continue
 
@@ -112,7 +115,13 @@ def extractROIs(csv_file_path):
 		else:
 			d[pair[0]] = pair[1]
 
+	for rl in d.values():
+		for r in rl:
+			region_count += 1 
+
+
 	print('There are {} unannotated images'.format(unannotated_count))
+	print('There are {} regions of interest'.format(region_count))
 
 	#print('This is the length of d: {}'.format(len(d)))
 
@@ -144,11 +153,15 @@ def convertToMaskRCNN(regionImageData: dict):
 		regionDataFormatted[img]["filename"] = img
 		regionDataFormatted[img]["regions"] = regionValue
 
-	print(regionDataFormatted)
 	return regionDataFormatted
 
 
 regionData = extractROIs(CSV_PATH)
+
+for img in sorted(regionData.keys()):
+	print(img)
 regionDataFormatted = convertToMaskRCNN(regionData)
+
+print(regionDataFormatted['uclaclark_AY751Z71673_0135.png'])
 
 print('There are {} elements in our zooniverse list'.format(sum(1 for _ in regionData)))
