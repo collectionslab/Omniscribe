@@ -50,7 +50,7 @@ COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
 DEFAULT_LOGS_DIR = "/Users/silver/Desktop/mask-rcnn/Annotation-Detector/logs/"
 
 WEIGHTS_PATH = '/Users/silver/Desktop/mask-rcnn/Annotation-Detector/mask_rcnn_handwriting_0007.h5'
-MANIFEST_PATH  = '/Users/silver/Desktop/buildUCLA/phase2/annotations-computervision/iiif/5ff708ce-429f-4393-b7c3-128134387e3c.json'
+MANIFEST_PATH  = 'https://marinus.library.ucla.edu/iiif/annotated/uclaclark_SB322S53.json'
 ############################################################
 #  Configurations
 ############################################################
@@ -76,8 +76,8 @@ class CustomConfig(Config):
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 50
 
-    # Skip detections with < 95% confidence
-    DETECTION_MIN_CONFIDENCE = 0.95
+    # Skip detections with < 90% confidence
+    DETECTION_MIN_CONFIDENCE = 0.90
 
 
 def color_splash(image, mask):
@@ -170,27 +170,39 @@ def load_model(weights_path):
 
 
 def getImageURIs(manifestURL=None):
-    
+    import requests
     # retrieve a manifest.json file from url
 
-    #url = 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty'
-    #r = requests.get(url)
-    #print(json.loads(r.content))
+    url = 'https://marinus.library.ucla.edu/iiif/annotated/uclaclark_SB322S53.json'
+    r = requests.get(url, verify=False)
+    data = json.loads(r.content)
 
     imageURIs = []
 
-    with open(manifestURL) as data_file:    
-        data = json.load(data_file)
 
-        someSequence = data['sequences'][0] # since we do not care about the order, we can just arbitrarily choose the first one
+    someSequence = data['sequences'][0] # since we do not care about the order, we can just arbitrarily choose the first one
 
-        canvases = someSequence['canvases']
+    canvases = someSequence['canvases']
 
-        for c in canvases:
-            imgs = c['images']
+    for c in canvases:
+        imgs = c['images']
 
-            for i in imgs:
-                imageURIs.append(i['resource']['@id'] + '/full/full/0/default.jpg')
+        for i in imgs:
+            #imageURIs.append(i['resource']['@id'] + '/full/full/0/default.jpg')
+            imageURIs.append(i['resource']['@id'])
+
+    # with open(manifestURL) as data_file:    
+    #     data = json.load(data_file)
+
+    #     someSequence = data['sequences'][0] # since we do not care about the order, we can just arbitrarily choose the first one
+
+    #     canvases = someSequence['canvases']
+
+    #     for c in canvases:
+    #         imgs = c['images']
+
+    #         for i in imgs:
+    #             imageURIs.append(i['resource']['@id'] + '/full/full/0/default.jpg')
 
     return imageURIs
 
