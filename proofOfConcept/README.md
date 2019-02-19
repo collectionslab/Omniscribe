@@ -1,6 +1,6 @@
 # Proof of Concept
 
-The following files were used to verify the feasibility of our project and what our project can achieve. **extractROIs.py** and **assess.py** are scripts that the developers of this project used to prepare data for training and for sanity checks respectively. **inferencer.py** implements the command-line interface for users.
+The following files were used to verify the feasibility of our project and what our project can achieve. **extractROIs.py** is used to prepare crowd-sourced data for training. **inferencer.py** implements the command-line interface for users, but does require pre-trained weights as produced by Mask R-CNN.
 
 ## Files and Directories
 
