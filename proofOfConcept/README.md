@@ -53,7 +53,7 @@ and for the model trained on the data collected from zooniverse.
 
 ##### Training Loss Curve for *m*<sub>small</sub>
 
-![training loss graph for m_small](graphs/smallData_training_loss.png)
+![training loss graph for m_small](graphs/smallData_training_loss.PNG)
 
 ##### Validation Loss Curve for *m*<sub>small</sub>
 
@@ -65,7 +65,7 @@ and for the model trained on the data collected from zooniverse.
 
 ##### Validation Loss Curve for *m*<sub>zooniverse</sub>
 
-![validation loss graph for m_zooniverse](graphs/zooniverse_validation_loss.png)
+![validation loss graph for m_zooniverse](graphs/zooniverse_validation_loss.PNG)
 
 #### handwriting/
 
