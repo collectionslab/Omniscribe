@@ -25,6 +25,7 @@ from mrcnn import model as modellib, utils
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
+
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
 
@@ -80,7 +81,7 @@ def detect_and_color_splash(model, image_path=None, isImageSaved=False):
     assert image_path
 
     # Run model detection and generate the color splash effect
-    print("RUNNING ON IMAGE {}".format(image_path))
+    print("RUNNING ON IMAGE: {}".format(image_path))
 
     image = skimage.io.imread(image_path)
 
@@ -121,13 +122,12 @@ def load_model(weights_path):
         IMAGES_PER_GPU = 1
 
     config = InferenceConfig()
-    config.display()
 
     model = modellib.MaskRCNN(mode="inference", config=config,
                               model_dir=DEFAULT_LOGS_DIR)
 
     # Load weights
-    print("LOADING WEIGHTS ", weights_path)
+    print("LOADING WEIGHTS: ", weights_path)
     model.load_weights(weights_path, by_name=True)
 
     return model
@@ -173,8 +173,8 @@ def infer(manifests):
 
     results = set()
 
-    # an optional third parameter determines if images are saved locally
-    # this currently defaults to False such that only a text file is generated
+    # since isImageSaved defaults to False, no splashed images are saved
+    # set third argument to True to save splashed images to local directory
     for man in manifests:
         results = results.union(detect_annotations_from_manifest(m1, man))
         results = results.union(detect_annotations_from_manifest(m2, man))
