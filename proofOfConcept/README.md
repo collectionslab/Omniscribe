@@ -87,6 +87,11 @@ This is a directory where weights and TFEvents are to be stored for the training
 
 This is the vanilla Mask-RCNN that is re-purposed for detecting handwriting. For more information, please refer to <https://github.com/matterport/Mask_RCNN>.
 
+#### regionURIs.txt
+
+A list of images that was inferred to have handwriting. **inferencer.py** generates this text file. This is a sample file of what is generated when running the line in the **inferencer.py** section.
+
+
 #### requirements.txt
 
 A list of dependencies needed to run this package. To be used as follows:
@@ -95,7 +100,7 @@ $ pip3 install -r requirements.txt
 
 #### weights/
 
-This stores all the weights of any models of interest. It currently stores the best weights for *m*<sub>small </sub> and *m*<sub>zoo</sub>.
+This stores all the weights of any models of interest. It currently stores the best weights for *m*<sub>small </sub> and *m*<sub>zoo</sub>. (Note that these files tend to be large so they cannot be uploaded onto GitHub.)
 
 ## Current Issues to Address as of 2/18/19
 
