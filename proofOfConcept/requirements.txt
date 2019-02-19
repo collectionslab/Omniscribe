@@ -1,6 +1,6 @@
 h5py==2.8.0
 numpy==1.15.1
-requests==2.18.4
+requests>=2.20.0
 opencv_python==3.4.0.12
 matplotlib==3.0.0
 Keras==2.2.2
