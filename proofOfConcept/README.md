@@ -32,8 +32,8 @@ array and an "all_points_y" array such that all_points_x[i] and all_points_y[i] 
 coordinate point, where every region would have four of these coordinate points (to make a
 rectangle that captures the ROI).
 
-The way these ROIs are constructed as such are due to the fact that the Mask-RCNN as released
-on Github require that exact structure in order to do training.
+The way these ROIs are constructed as such due to the fact that the Mask-RCNN as released
+on GitHub require that structure in order to do training.
 
 $ python3 extractROIs.py
 
