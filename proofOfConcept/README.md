@@ -27,7 +27,7 @@ these regions lay; there is only simple binary labeling.
 
 #### detectedImages/
 
-This directory is where **inferencer.py** stores its results.
+This directory is where **inferencer.py** stores any splashed images if that boolean is set to True. Otherwise this remains an empty directory.
 
 #### extractROIs.py
 
