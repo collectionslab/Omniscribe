@@ -13,8 +13,8 @@ def submit():
 
    formattedInput = rawInput.replace('\r\n',' ').split()
 
-   print('You entered: {}'.format(formattedInput))
-   infer(formattedInput)
+   return('You got: {}'.format(infer(formattedInput)))
+   
 
 
 if __name__ == '__main__':
