@@ -1,5 +1,0 @@
-x:191	y:140	width:411	height:30	text:	confidence:1.0	level:2	isAnnotation:False
-x:681	y:146	width:47	height:28	text:	confidence:1.0	level:2	isAnnotation:False
-x:65	y:177	width:666	height:1172	text:	confidence:1.0	level:2	isAnnotation:False
-x:750	y:263	width:232	height:1074	text:	confidence:1.0	level:2	isAnnotation:False
-x:53	y:1340	width:921	height:123	text:	confidence:1.0	level:2	isAnnotation:False
