@@ -199,6 +199,4 @@ def infer(manifests):
         for img in lines[1:]:
             imgsFile.write('\n' + img)
 
-def hello():
-    return 'hello from inferencer.py'
-
+    return sorted(results)

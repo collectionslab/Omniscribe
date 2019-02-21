@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+
+        <table>
+            <tbody>
+            {% for img in imgURIs %}
+                <tr>
+                    <td>{{ img }}</td>
+                    <td><img src={{ img }} alt="{{ img_name }}"></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+</body>
+</html>
