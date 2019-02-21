@@ -20,6 +20,5 @@ def submit():
 
    return render_template('results.html', imgURIs = results)
 
-
 if __name__ == '__main__':
    app.run()
