@@ -12,3 +12,4 @@
 # python compiled file
 *.pyc
 
+.DS_Store

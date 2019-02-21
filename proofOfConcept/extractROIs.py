@@ -157,13 +157,19 @@ def extractROIs(csv_file_path):
                 continue
 
             if pair[0] in d:
-                [d[pair[0]].append(r) for r in pair[1]]
+                d[pair[0]] += pair[1]
             else:
                 d[pair[0]] = pair[1]
 
+        regions = []
         for rl in d.values():
+                region_count += len(rl)
+                print(rl)
             for r in rl:
-                region_count += 1
+                regions.append(r)
+
+        print('yo ' + len(regions))
+
 
         print("There are {} regions of interest".format(region_count))
 
