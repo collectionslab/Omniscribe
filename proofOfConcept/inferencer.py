@@ -6,8 +6,6 @@ Licensed under the MIT License (see LICENSE for details)
 Written by Jonathan Quach of BuildUCLA
 ------------------------------------------------------------
 """
-
-import sys
 import os
 import sys
 import json
@@ -104,7 +102,8 @@ def detect_and_color_splash(model, image_path=None, isImageSaved=False):
             # Save splashed image to a directory called detectedImages
             splash = color_splash(image, r['masks'])
             # file_name = "detectedImages/{}.png".format(fileName)
-            file_name = "splash_{:%Y%m%dT%H%M%S}.png".format(datetime.datetime.now())
+            identifier = datetime.datetime.now()
+            file_name = "splash_{:%Y%m%dT%H%M%S}.png".format(identifier)
             skimage.io.imsave(file_name, splash)
             print("IMAGE IS SAVED TO ", file_name)
         return image_path
@@ -151,7 +150,7 @@ def getImageURIs(manifestURL=None):
             resourceID = i['resource']['@id']
             potentialFileExtension = resourceID[-3:].lower()
 
-            fileExtensions = set(['jpg','peg','png','iff'])
+            fileExtensions = set(['jpg', 'peg', 'png', 'iff'])
             if potentialFileExtension not in fileExtensions:
                 if potentialFileExtension[-1] == '/':
                     imageURIs.append(resourceID + 'full/full/0/default.jpg')
@@ -188,8 +187,8 @@ def infer(manifests):
     # since isImageSaved defaults to False, no splashed images are saved
     # set third argument to True to save splashed images to local directory
     for man in manifests:
-        results = results.union(detect_annotations_from_manifest(m1, man, True))
-        results = results.union(detect_annotations_from_manifest(m2, man, True))
+        results = results.union(detect_annotations_from_manifest(m1, man))
+        results = results.union(detect_annotations_from_manifest(m2, man))
 
     # create a text file that contains all image URIS of the images
     # that contain handwriting (each line contains one image URI)
@@ -200,6 +199,8 @@ def infer(manifests):
             imgsFile.write('\n' + img)
 
 
-def hello():
-    print('hello from inferencer.py')
-    return 'hello from inferencer.py'
+def main():
+    infer(sys.argv[1:])
+
+if __name__ == '__main__':
+    main()
