@@ -7,16 +7,16 @@
 <body>
     {% if imgURIs %}
         <h2> Found {{ imgURIs | length }} images!</h2> 
-        <table>
-            <tbody>
+
+
             {% for img in imgURIs %}
-                <tr>
-                    <td>{{ img }}</td>
-                    <td><img src={{ img }} alt="{{ img_name }}" style="height: 100%; width: 100%; object-fit: contain"></td>
-                </tr>
+
+                    {{ img }}
+                    <img src={{ img }} alt="{{ img_name }}" style="height: 100%; width: 100%; object-fit: contain">
+
             {% endfor %}
-            </tbody>
-        </table>
+
+
     {% else %}
         No results :(
     {% endif %}
