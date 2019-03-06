@@ -1,5 +1,3 @@
-![logo.png](builducla.png)
-
 # Book Annotation Detection Engine
 
 ## Collections Lab Team
