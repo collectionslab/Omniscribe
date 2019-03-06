@@ -4,8 +4,10 @@
         </TITLE>
     </HEAD>
     <BODY>
-        <FORM>
+      {% for result in results %}
+          {{ result.image }}, {{ result.name }} </br>
+      {%- endfor %}
 
-        </FORM>
+        
     </BODY>
 </HTML>
