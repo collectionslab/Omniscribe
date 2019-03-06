@@ -9,42 +9,23 @@ from flask import (
 bp = Blueprint('annnotation', __name__, url_prefix='/annotation')
 
 def data_to_image(data,image_type):
+    pass
     #TODO: convert image to readable form
 
-@bp.route('/analyse', methods=(GET))
+@bp.route('/analyse', methods=('GET','POST'))
 def analyse():
     return render_template('analyse.html')
 
-@bp.route('/result', methods=(GET))
+@bp.route('/result', methods=('GET','POST'))
 def result():
     uri = request.form['uri']
-    try:
-        response = urllib.request.urlopen(uri)
-    except:
-        abort(404)
-
-    content_type = response.getheader("Content-Type").split(';')
-    mime_type = content_type[0].split['/']
-    images = []
-    if mime_type[0] == image:
-        img = data_to_image(response.read(),mime_type[1])
-        images.append(img)
     
-    else if mime_type[0] == "application" && mime_type[1] == "json"
-        response_js = json.loads(response.read())
-        for sequence in response_js["sequences"]:
-            for canvas in sequence["canvases"]:
-                for image in canvas["images"]:
-                    image_uri = image["resource"]["@id"]
-                    image_type = image["resource"]["format"].split('/')[1]
-                    response = urllib.request.urlopen(image_uri)
-                    img = data_to_image(response.read(),image_type)
-                    images.append(img)
-    else
-        abort(404)
 
     #TODO: call Processing AI with image
     
-    return render_template('result.html') 
+
+    
+    results = [{ "image":"image1", "name":"a"},{"image":"image2", "name" :"b"}]
+    return render_template('result.html',results=results ) 
 
 
