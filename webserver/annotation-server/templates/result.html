@@ -2,12 +2,14 @@
     <HEAD>
         <TITLE>
         </TITLE>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/stylesheet.css')}}">
     </HEAD>
     <BODY>
-      {% for result in results %}
-          {{ result.image }}, {{ result.name }} </br>
-      {%- endfor %}
-
+        <DIV id="mainbody">
+            {% for result in results %}
+                {{ result.image }}, {{ result.name }} </br>
+            {%- endfor %}
+	</DIV>
         
     </BODY>
 </HTML>

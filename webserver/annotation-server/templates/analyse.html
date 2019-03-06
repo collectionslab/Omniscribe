@@ -2,11 +2,14 @@
     <HEAD>
         <TITLE>
         </TITLE>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/stylesheet.css')}}">
     </HEAD>
     <BODY>
-        <FORM action="./result" method="POST">
-            <INPUT type="text" name="uri">
-            <INPUT type="submit">
-        </FORM>
+        <div id="mainbody">
+            <FORM action="./result" method="POST">
+                Input IIIF URLs here. Seperate each url with a comma (,) <INPUT type="submit">     
+                <TEXTAREA rows="15" cols="60" name="uri"></TEXTAREA>
+            </FORM>
+	</DIV>
     </BODY>
 </HTML>

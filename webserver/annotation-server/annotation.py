@@ -18,7 +18,7 @@ def analyse():
 
 @bp.route('/result', methods=('GET','POST'))
 def result():
-    uri = request.form['uri']
+    uri = request.form['uri'].split(',')
     
 
     #TODO: call Processing AI with image
