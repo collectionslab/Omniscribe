@@ -18,6 +18,7 @@ import requests
 from mrcnn.visualize import display_instances
 from mrcnn.config import Config
 from mrcnn import model as modellib, utils
+from tqdm import tqdm
 
 # frowned upon because of security breaches but needed to connect to manifests
 import ssl
@@ -36,8 +37,8 @@ DEFAULT_LOGS_DIR = "logs/"
 
 # Path to trained weights file
 COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
-WEIGHTS_PATH_1 = "weights/smallData_0007.h5"
-WEIGHTS_PATH_2 = "weights/zooniverse_0014.h5"
+WEIGHTS_PATH_1 = "../../weights/smallData_0007.h5"
+WEIGHTS_PATH_2 = "../../weights/zooniverse_0014.h5"
 
 ############################################################
 #  Configurations
@@ -64,21 +65,11 @@ class CustomConfig(Config):
     # Skip detections with < 96% confidence
     DETECTION_MIN_CONFIDENCE = 0.96
 
-
-def color_splash(image, mask):
-    gray = skimage.color.gray2rgb(skimage.color.rgb2gray(image)) * 255
-    mask = (np.sum(mask, -1, keepdims=True) >= 1)
-    if mask.shape[0] > 0:
-        splash = np.where(mask, image, gray).astype(np.uint8)
-    else:
-        splash = gray
-    return splash
-
-
-def detect_and_color_splash(model, image_path=None, isImageSaved=False):
+def detected(model, image_path=None):
     assert image_path
 
     # Run model detection and generate the color splash effect
+    print()
     print("RUNNING ON IMAGE: {}".format(image_path))
 
     image = skimage.io.imread(image_path)
@@ -88,25 +79,12 @@ def detect_and_color_splash(model, image_path=None, isImageSaved=False):
 
     if len(r['scores']) == 0:
         print('NO ROIS')
-        return None
+        return False
     else:
         print('ROIs FOUND WITH THE FOLLOWING SCORES:')
         for e in r['scores']:
             print(e)
-
-        if isImageSaved:
-            # using part of the image_path as an identifier
-            # endIndex = image_path[:image_path.rindex('.')].rindex('.')
-            # fileName = image_path[image_path.index('_'):endIndex]
-
-            # Save splashed image to a directory called detectedImages
-            splash = color_splash(image, r['masks'])
-            # file_name = "detectedImages/{}.png".format(fileName)
-            identifier = datetime.datetime.now()
-            file_name = "splash_{:%Y%m%dT%H%M%S}.png".format(identifier)
-            skimage.io.imsave(file_name, splash)
-            print("IMAGE IS SAVED TO ", file_name)
-        return image_path
+        return True
 
 ############################################################
 #  Load a trained model
@@ -162,23 +140,6 @@ def getImageURIs(manifestURL=None):
     return imageURIs
 
 
-def detect_annotations_from_manifest(model, manifest_path, isImageSaved=False):
-    assert model and manifest_path
-
-    annotatedPages = set()
-    imageURIs = getImageURIs(manifest_path)
-
-    print('LOOKING INTO THIS MANIFEST: ', manifest_path)
-    print('INFERENCING WITH THIS MODEL: ', model)
-
-    for img in imageURIs:
-        prediction = detect_and_color_splash(model, img, isImageSaved)
-        if prediction is not None:
-            annotatedPages.add(img)
-
-    return annotatedPages
-
-
 def infer(manifests):
     m1, m2 = load_model(WEIGHTS_PATH_1), load_model(WEIGHTS_PATH_2)
 
@@ -186,9 +147,13 @@ def infer(manifests):
 
     # since isImageSaved defaults to False, no splashed images are saved
     # set third argument to True to save splashed images to local directory
+    imageURIs = []
     for man in manifests:
-        results = results.union(detect_annotations_from_manifest(m1, man))
-        results = results.union(detect_annotations_from_manifest(m2, man))
+        imageURIs += getImageURIs(man)
+
+    for img in tqdm(imageURIs):
+        if detected(m1, img) or detected(m2, img):
+            results.add(img)
 
     # create a text file that contains all image URIS of the images
     # that contain handwriting (each line contains one image URI)
