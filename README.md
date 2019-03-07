@@ -31,29 +31,6 @@ active reading or even the annotations themselves.
 * Emily Chen (12/17-06/18)
 * Rahul Malavalli (12/17-06/18)
 
-### More Info on Some Files in this Path
-
-.gitignore
-
-Intentionally not track pycache .pyc and .ipynb_checkpoints since they do not
-provide convenient information about changes that may have occured to the code.
-
-preproc.py
-
-Binarizes an image or a folder of images (NOTE: must provide an output
-path if binarizing an entire folder)
-
-E.g.
-
-$ python preproc.py img.png #this is for one image
-
-$ python preproc.py --out /Users/John/Desktop/outputFolder /Users/John/Desktop/inputFolder
-
-sampler.py
-
-Randomly generates "number" square subsamples of side length "px" from
-file(s) "files" where "number" "px" and "files" are from user input.
-
 ## UPDATE #2 February 13, 2019
 
 🎉 Happy Valentine's Day Eve!🎉
