@@ -169,6 +169,8 @@ def infer(manifests):
         for img in lines[1:]:
             imgsFile.write('\n' + img)
 
+    print("FINISHED PROCESSING MANIFESTS. SAVED regionURIS.txt TO CURRENT DIRECTORY")
+
 
 def main():
     infer(sys.argv[1:])
