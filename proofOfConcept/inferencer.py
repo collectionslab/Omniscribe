@@ -36,9 +36,8 @@ sys.path.append(ROOT_DIR)  # To find local version of the library
 DEFAULT_LOGS_DIR = "logs/"
 
 # Path to trained weights file
-COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
-WEIGHTS_PATH_1 = "../../weights/smallData_0007.h5"
-WEIGHTS_PATH_2 = "../../weights/zooniverse_0014.h5"
+WEIGHTS_PATH_1 = "w_smallData.h5"
+WEIGHTS_PATH_2 = "w_bigData.h5"
 
 ############################################################
 #  Configurations
