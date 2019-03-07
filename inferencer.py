@@ -78,12 +78,8 @@ def detected(model, image_path=None):
     r = model.detect([image], verbose=0)[0]
 
     if len(r['scores']) == 0:
-        print('NO ROIS')
         return False
     else:
-        print('ROIs FOUND WITH THE FOLLOWING SCORES:')
-        for e in r['scores']:
-            print(e)
         return True
 
 ############################################################
@@ -105,7 +101,6 @@ def load_model(weights_path):
                               model_dir=DEFAULT_LOGS_DIR)
 
     # Load weights
-    print("LOADING WEIGHTS: ", weights_path)
     model.load_weights(weights_path, by_name=True)
 
     return model
