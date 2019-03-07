@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 import skimage.draw
 import cv2
 import requests
+import urllib
 from mrcnn.visualize import display_instances
 from mrcnn.config import Config
 from mrcnn import model as modellib, utils
@@ -111,9 +112,15 @@ def load_model(weights_path):
 
 
 def getImageURIs(manifestURL=None):
-    url = manifestURL
-    r = requests.get(url, verify=False)
-    data = json.loads(r.content)
+
+    data = None
+    if urllib.parse.urlparse(manifestURL).scheme != "":
+        r = requests.get(manifestURL, verify=False)
+        data = json.loads(r.content)
+    else:
+        with open(manifestURL, encoding='utf-8') as dataFile:
+            data = json.loads(dataFile.read())
+        
 
     imageURIs = []
     someSequence = data['sequences'][0]
