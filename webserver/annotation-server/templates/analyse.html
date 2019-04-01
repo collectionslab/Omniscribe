@@ -3,6 +3,11 @@
         <TITLE>
         </TITLE>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/stylesheet.css')}}">
+
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        
     </HEAD>
     <BODY>
         <div id="mainbody">
@@ -10,6 +15,23 @@
                 Input IIIF URLs here. Seperate each url with a comma (,) <INPUT type="submit">     
                 <TEXTAREA rows="15" cols="60" name="uri"></TEXTAREA>
             </FORM>
+            <button onclick="localprogress()">a button</button>
+            <div class="progress" style="width: 50%; margin: 50px; visibility: hidden;" >
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                <span class="progress-bar-label">0%</span>
+</div>
+</div>
 	</DIV>
+<script>
+        function localprogress(){
+            $('.progress').css('visibility', 'visible');
+            $('.progress-bar').css('width','10%').attr('aria-valuenow', 10);
+            $('.progress-bar-label').text('10%');
+    
+            if(event.data == 100){
+                source.close()
+            }
+        }
+        </script>
     </BODY>
 </HTML>
