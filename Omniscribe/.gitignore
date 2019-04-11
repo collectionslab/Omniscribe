@@ -1,0 +1,15 @@
+# gitignore
+
+# emacs
+*~
+
+# jupyter
+.ipynb_checkpoints
+
+# python cache
+*__pycache__*
+
+# python compiled file
+*.pyc
+
+.DS_Store
