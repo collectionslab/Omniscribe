@@ -13,4 +13,3 @@ setuptools==39.1.0
 imgaug==0.2.6
 ipython==7.2.0
 Image==1.5.27
-skimage==0.0
