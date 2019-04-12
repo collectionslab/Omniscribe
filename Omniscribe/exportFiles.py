@@ -18,6 +18,10 @@ def exportHTML(urls):
         with tag('style'):
             text('div' + div + 'img' + img)
         with tag('body'):
+            with tag('h1'):
+                text('Pages Containing Annotations')
+            with tag('p')
+                text('Click on an image to view')
             # generate each image 'box'
             for url in urls:
                 with tag('div'):
