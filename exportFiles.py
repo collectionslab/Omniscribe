@@ -20,7 +20,7 @@ def exportHTML(urls):
         with tag('body'):
             with tag('h1'):
                 text('Pages Containing Annotations')
-            with tag('p')
+            with tag('p'):
                 text('Click on an image to view')
             # generate each image 'box'
             for url in urls:

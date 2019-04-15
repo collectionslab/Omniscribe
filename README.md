@@ -28,4 +28,4 @@ $ pip3 install -r requirements.txt
 
 ### model.h5 (not shown here)
 
-This is the the weights file that implements the model that does the inferencing. 
+This is the the weights file that implements the model that does the inferencing.
