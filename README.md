@@ -2,7 +2,7 @@
 
 Thank you for using Omniscribe! **inferencer.py** implements the command-line interface for users, but does require pre-trained weights as produced by Mask R-CNN.
 
-## Files (Requires Python 3.6+)
+## Files (Requires Python 3.6.x)
 
 ### inferencer.py
 
