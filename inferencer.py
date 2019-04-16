@@ -138,6 +138,7 @@ def infer(manifests):
         if detected(model, img):
             results.add(img)
 
+    print()
     if ARGS.html:
         with open("resultsImages.html", "w") as htmlFile:
             htmlFile.write(exportHTML(results))
