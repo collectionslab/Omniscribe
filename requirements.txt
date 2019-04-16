@@ -1,13 +1,11 @@
 Keras == 2.2.2
 h5py == 2.8.0
 imgaug == 0.2.6
-ipython == 6.2.1
-matplotlib == 3.0.0
 numpy == 1.15.1
-opencv_python == 3.4.0.12
 requests == 2.21.0
 scikit_image == 0.13.1
 scipy == 1.1.0
 tensorflow == 1.10.1
 tqdm == 4.31.1
+urllib3 == 1.24.1
 yattag == 1.11.1

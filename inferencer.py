@@ -6,33 +6,24 @@ Licensed under the MIT License (see LICENSE for details)
 Written by Jonathan Quach of BuildUCLA
 ------------------------------------------------------------
 """
-import argparse
+
 import os
-import sys
 import json
-import datetime
-import numpy as np
-import matplotlib.pyplot as plt
-import skimage.draw
-import cv2
 import requests
-import urllib
-from mrcnn.visualize import display_instances
+import ssl
+import skimage.draw
+import urllib3
+from argparse import ArgumentParser
 from mrcnn.config import Config
 from mrcnn import model as modellib, utils
 from tqdm import tqdm
 from exportFiles import exportHTML, exportManifest
+from pathlib import Path
 
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
-
-# Path to trained weights file
-WEIGHTS_PATH = "model.h5"
-
-parser = argparse.ArgumentParser(
-    'Detects Images containing annotations from mainfest files. Default output is a text file containing the list of images')
+parser = ArgumentParser(
+    'Detects images containing annotations from mainfest files. Default output is a manifest json file compliant with IIIF.')
 parser.add_argument("--confidence", default=0.95, type=float,
-                    help="A score from 0 to 1 that serves as a threshold for detecting annotations. Inferences at or above this score count as detections.")
+                    help="A score from 0 to 1 that serves as a threshold for detecting annotations. Inferences at or above this score are inferred as an annotation.")
 parser.add_argument("--html", action='store_true',
                     help='Saves images in a HTML gallery.')
 parser.add_argument("--text", action='store_true',
@@ -41,47 +32,35 @@ parser.add_argument("--manifest", action='store_true',
                     help='Saves images in a IIIF-compliant manifest.')
 
 ARGS, manifestURLs = parser.parse_known_args()
-############################################################
-#  Configurations
-############################################################
+WEIGHTS_PATH = "model.h5"
+ssl._create_default_https_context = ssl._create_unverified_context
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 class CustomConfig(Config):
-    # Give the configuration a recognizable name
-    NAME = "handwriting"
 
-    # faster to train than using resnet101 as backbone
+    NAME = "annotation"
     BACKBONE = "resnet50"
-
-    # Number of classes (including background)
-    NUM_CLASSES = 1 + 1  # Background + handwriting
-
-    # Skip detections with < confidence
+    NUM_CLASSES = 2
     DETECTION_MIN_CONFIDENCE = ARGS.confidence
 
 
-def detected(model, image_path=None):
+def detected(model, image_path):
     assert image_path
 
-    # Run model detection and generate the color splash effect
-    print()
-    print("RUNNING ON IMAGE: {}".format(image_path))
+    print("\nFinding annotations on image: {}".format(image_path))
 
     image = skimage.io.imread(image_path)
-
-    # Detect objects
     r = model.detect([image], verbose=0)[0]
 
     if len(r['scores']) == 0:
-        print('NO ANNOTATIONS DETECTED')
+        print('No annotations were detected.')
         return None
     else:
-        print('ANNOTATIONS FOUND')
+        print('Annotations were found!')
         return image_path
-
-############################################################
-#  Load a trained model
-############################################################
 
 
 def load_model(weights_path):
@@ -93,11 +72,9 @@ def load_model(weights_path):
         IMAGES_PER_GPU = 1
 
     config = InferenceConfig()
-
     model = modellib.MaskRCNN(mode="inference", config=config,
                               model_dir="logs/")
 
-    # Load weights
     model.load_weights(weights_path, by_name=True)
 
     return model
@@ -107,13 +84,12 @@ def getImages(manifestURL=None):
 
     data = None
 
-    # accessing a manifest URL hosted on another server
-    if urllib.parse.urlparse(manifestURL).scheme != "":
-        r = requests.get(manifestURL, verify=False)
-        data = json.loads(r.content)
-    else:  # accessing a local manifest file
+    if Path(manifestURL).is_file():
         with open(manifestURL, encoding='utf-8') as dataFile:
             data = json.loads(dataFile.read())
+    else:
+        res = requests.get(manifestURL, verify=False)
+        data = json.loads(res.content)
 
     imageURIs = []
     someSequence = data['sequences'][0]
@@ -142,20 +118,22 @@ def getImages(manifestURL=None):
 
 def infer(manifests):
 
-    CURRENT_DIRECTORY = os.getcwd()
-
     if ARGS.confidence < 0 or ARGS.confidence > 1:
         print('Please provide a confidence level between 0 and 1.')
         exit()
 
     model = load_model(WEIGHTS_PATH)
-
+    currentDirectory = os.getcwd()
     results = set()
-
     imageURIs = []
+
     for man in manifests:
         imageURIs += getImages(man)
 
+    imageURIs = set(imageURIs)
+
+    print('Finding annotations on {} images collected from the manifest(s).'.format(
+        len(imageURIs)))
     for img in tqdm(imageURIs):
         if detected(model, img):
             results.add(img)
@@ -163,10 +141,8 @@ def infer(manifests):
     if ARGS.html:
         with open("resultsImages.html", "w") as htmlFile:
             htmlFile.write(exportHTML(results))
-            print("SAVED resultsImages.html TO {}".format(CURRENT_DIRECTORY))
+            print("Saved resultsImages.html to {}".format(currentDirectory))
 
-    # create a text file that contains all image URIS of the images
-    # that contain handwriting (each line contains one image URI)
     if ARGS.text:
         with open("resultsURIs.txt", "w") as imgsFile:
             lines = sorted(results)
@@ -174,12 +150,14 @@ def infer(manifests):
             for img in lines[1:]:
                 imgsFile.write('\n' + img)
 
-            print("SAVED resultsURIS.txt TO {}".format(CURRENT_DIRECTORY))
+            print("Saved resultsURIS.txt to {}".format(currentDirectory))
 
     if ARGS.manifest or not (ARGS.html and ARGS.text and ARGS.manifest):
         with open("resultsManifest.json", "w") as manifestFile:
             manifestFile.write(exportManifest(results))
-            print("SAVED resultsManifest.json TO {}".format(CURRENT_DIRECTORY))
+            print("Saved resultsManifest.json to {}".format(currentDirectory))
+
+    print('Finished detecting annotations on the manifest(s).')
 
 
 def main():
