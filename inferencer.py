@@ -80,7 +80,6 @@ def load_model(weights_path):
 
 
 def getImages(manifestURL=None):
-
     data = None
 
     if os.path.isfile(manifestURL):
@@ -91,7 +90,8 @@ def getImages(manifestURL=None):
             res = requests.get(manifestURL, verify=False)
             data = json.loads(res.content)
         except:
-            print('Could not connect to {}. Please check if the URL provided is correctly typed.'.format(manifestURL))
+            print('Could not connect to {}. Please check if the URL provided is correctly typed.'.format(
+                manifestURL))
             print('Exiting now.')
             exit()
 
