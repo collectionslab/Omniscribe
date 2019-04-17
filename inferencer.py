@@ -13,12 +13,11 @@ import requests
 import ssl
 import skimage.draw
 import urllib3
+from tqdm import tqdm
 from argparse import ArgumentParser
 from mrcnn.config import Config
 from mrcnn import model as modellib, utils
-from tqdm import tqdm
 from exportFiles import exportHTML, exportManifest
-from pathlib import Path
 
 parser = ArgumentParser(
     'Detects images containing annotations from mainfest files. Default output is a manifest json file compliant with IIIF.')
@@ -84,12 +83,17 @@ def getImages(manifestURL=None):
 
     data = None
 
-    if Path(manifestURL).is_file():
+    if os.path.isfile(manifestURL):
         with open(manifestURL, encoding='utf-8') as dataFile:
             data = json.loads(dataFile.read())
     else:
-        res = requests.get(manifestURL, verify=False)
-        data = json.loads(res.content)
+        try:
+            res = requests.get(manifestURL, verify=False)
+            data = json.loads(res.content)
+        except:
+            print('Could not connect to {}. Please check if the URL provided is correctly typed.'.format(manifestURL))
+            print('Exiting now.')
+            exit()
 
     imageURIs = []
     someSequence = data['sequences'][0]
@@ -158,7 +162,7 @@ def infer(manifests):
             manifestFile.write(exportManifest(results))
             print("Saved resultsManifest.json to {}".format(currentDirectory))
 
-    print('Finished detecting annotations on the manifest(s).')
+    print('Finished detecting annotations.')
 
 
 def main():
