@@ -1,6 +1,6 @@
 # Proof of Concept
 
-The following files were used to verify the feasibility of our project and what our project can achieve. **extractROIs.py** is used to prepare crowd-sourced data for training. **inferencer.py** implements the command-line interface for users, but does require pre-trained weights as produced by Mask R-CNN.
+The following files were used to verify the feasibility of our project and what our project can achieve. `extractROIs.py` is used to prepare crowd-sourced data for training. **inferencer.py** implements the command-line interface for users, but does require pre-trained weights as produced by Mask R-CNN.
 
 ## The Pipeline
 
@@ -73,25 +73,32 @@ and we wrote `extractROIs.py` that generated a `data.json` file that formats the
 
 ### 3. Generating the datasets
 
- We wrote **datasetGenerator.py** to split **data.json** to have a roughly 70/15/15 split (70% of the annotations are for training, 15% of the annotations are for validation, and 15% of the annotations are for testing). This split is necessary in order to tune hyperparameters and ultimately prevent overfitting. With `SEED = 42`, we had **2901** annotations for training, **627** annotations for validation, and **615** annotations for testing.
+ We wrote `datasetGenerator.py` to split `data.json` to have a roughly 70/15/15 split (70% of the annotations are for training, 15% of the annotations are for validation, and 15% of the annotations are for testing). This split is necessary in order to tune hyperparameters and ultimately prevent overfitting. With `SEED = 42`, we had **2901** annotations for training, **627** annotations for validation, and **615** annotations for testing.
 
 ### 4. Training the Model
 
  TODO
+#### Training Loss Curve
+
+![training loss curve](images/trainingLoss.png)
+
+#### Validation Loss Curve
+
+![validation loss curve](images/validationLoss.png)
 
 ## Files and Directories (Requires Python 3.6.x)
 
-### data.json
+### `data.json`
 
-The resulting file generated from **extractROIs.py**. It contains all the images with their labeled annotations from **rawData.csv**. It is to be used with **datasetGenerator.py** in order to generate datasets that are ready for training.
+The resulting file generated from `extractROIs.py`. It contains all the images with their labeled annotations from `rawData.csv`. It is to be used with `datasetGenerator.py` in order to generate datasets that are ready for training.
 
-### datasetGenerator.py
+### `datasetGenerator.py`
 
-This scripts reads **data.json** and generates three JSON files for training, validation, and testing. Each of these files have to be renamed to **via_region_data.json** and are to be placed in the same directory where the images they represent are located. Note that changing the `SEED` value will create different datasets.
+This scripts reads `data.json` and generates three JSON files for training, validation, and testing. Each of these files have to be renamed to `via_region_data.json` and are to be placed in the same directory where the images they represent are located. Note that changing the `SEED` value will create different datasets.
 
-### extractROIs.py
+### `extractROIs.py`
 
-This script takes the **rawData.csv** file (hard-coded) and generates **data.json**, a JSON file that contains all the images listed on zooniverse along with all the regions that they may have. The JSON itself is a relatively complex object that stores many images, and those images may themselves have lists of ROIs.
+This script takes the `rawData.csv` file (hard-coded) and generates `data.json`, a JSON file that contains all the images listed on zooniverse along with all the regions that they may have. The JSON itself is a relatively complex object that stores many images, and those images may themselves have lists of ROIs.
 
 To put it simply, every image has a list of ROIs, and every ROI is made up of an `all_points_x"`
 array and an `all_points_y` array such that `all_points_x[i]` and `all_points_y[i]` make up a
@@ -103,19 +110,11 @@ on GitHub require that structure in order to do training.
 
 $ python3 extractROIs.py
 
-#### Training Loss Curve
-
-![training loss curve](images/trainingLoss.png)
-
-#### Validation Loss Curve
-
-![validation loss curve](images/validationLoss.png)
-
 ### handwriting/
 
 Contains a training set and a validation set for images that contain handwriting. These images come from the Collections Lab database. Note that training the model assumes daughter directories "train" and " val" where those directories contain only images.
 
-### inferencer.py
+### `inferencer.py`
 
 This script is the engine that does all the handwriting detection. It currently takes a list of manifests via command line and will save all images referred by the manifest that it predicts has at least one region that contains handwriting.
 
