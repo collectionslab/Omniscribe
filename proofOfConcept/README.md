@@ -103,20 +103,13 @@ on GitHub require that structure in order to do training.
 
 $ python3 extractROIs.py
 
-### graphs/
-
-Stores images of the training and validation loss for the model trained on a small set of data
-and for the model trained on the data collected from zooniverse.
-
 #### Training Loss Curve
 
-![training loss curve](graphs/trainingLoss.png)
+![training loss curve](images/trainingLoss.png)
 
 #### Validation Loss Curve for *m*<sub>small</sub>
 
-![validation loss curve](graphs/validationLoss.png)
-
-#### Training Loss Curve for *m*<sub>zooniverse</sub>
+![validation loss curve](images/validationLoss.png)
 
 ### handwriting/
 
@@ -130,17 +123,9 @@ The script will display information of its configuration for Mask R-CNN, the wei
 
 $ python3 inferencer.py https://marinus.library.ucla.edu/iiif/annotated/uclaclark_SB322S53.json https://marinus.library.ucla.edu/iiif/annotated/uclaclark_BF1681A441713.json
 
-### logs/
-
-This is a directory where weights and TFEvents are to be stored for the training and validation process. A TensorBoard session may use this directory to visualize model architectures along with plotting loss curves.
-
 #### mask-rcnn/
 
 This is the vanilla Mask-RCNN that is re-purposed for detecting handwriting. For more information, please refer to <https://github.com/matterport/Mask_RCNN>.
-
-### regionURIs.txt
-
-A list of images that was inferred to have handwriting. **inferencer.py** generates this text file. This is a sample file of what is generated when running the line in the **inferencer.py** section.
 
 ### requirements.txt
 
