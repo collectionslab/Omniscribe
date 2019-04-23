@@ -136,4 +136,4 @@ them. Further processing of this data is needed before it can be trained.
 
 A list of dependencies needed to run this package. To be used as follows:
 
-$ pip3 install -r requirements.txt
+`$ pip install -r requirements.txt`
