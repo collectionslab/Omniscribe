@@ -1,6 +1,6 @@
 # Proof of Concept
 
-The following files were used to verify the feasibility of our project and what our project can achieve. `extractROIs.py` is used to prepare crowd-sourced data for training. **inferencer.py** implements the command-line interface for users, but does require pre-trained weights as produced by Mask R-CNN.
+The goal of this project is to investigate the learnability of some of the data that is owned by the Collections Lab team at UCLA. Over one year later, we have concluded that the data we have has machine learning applications when the data is transformed appropriately. The following files were used to verify the feasibility of our project and what our project can achieve.
 
 ## The Pipeline
 
@@ -108,7 +108,7 @@ rectangle that captures the ROI).
 These ROIs are constructed as such due to the fact that the Mask R-CNN as released
 on GitHub require that structure in order to do training.
 
-$ python3 extractROIs.py
+`$ python3 extractROIs.py`
 
 ### handwriting/
 
@@ -120,7 +120,7 @@ This script is the engine that does all the handwriting detection. It currently 
 
 The script will display information of its configuration for Mask R-CNN, the weights of the models it will use to infer, the manifest URI it is currently running on, the image URI it is currently inferring on, and confidence scores in range [0.96, 1] of any region it picks up (the higher the score, the more confident the model believes a region contains handwriting).
 
-$ python3 inferencer.py https://marinus.library.ucla.edu/iiif/annotated/uclaclark_SB322S53.json https://marinus.library.ucla.edu/iiif/annotated/uclaclark_BF1681A441713.json
+`$ python3 inferencer.py https://marinus.library.ucla.edu/iiif/annotated/uclaclark_SB322S53.json`
 
 #### mask-rcnn/
 
