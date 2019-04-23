@@ -2,6 +2,82 @@
 
 The following files were used to verify the feasibility of our project and what our project can achieve. **extractROIs.py** is used to prepare crowd-sourced data for training. **inferencer.py** implements the command-line interface for users, but does require pre-trained weights as produced by Mask R-CNN.
 
+## The Pipeline
+
+### 1. Gathering Data
+
+To gather labeled data, we used [Zooniverse](https://www.zooniverse.org/), a crowd-sourcing platform where anyone can help draw bounding boxes on our collection of printed books. In total we had **4143** annotations across 1079 images. These annotations were exported and stored in `rawData.csv`.
+
+### 2. Formatting the Raw Data
+
+In order to leverage [Mask R-CNN](https://github.com/matterport/Mask_RCNN) to detect annotations, we need to provide the training data and validation data in a JSON of this form:
+
+```javascript
+{
+    "Image1": {
+        "imgName": "Image1.png",
+        "regions": {
+            "0": {
+                "shape_attributes": {
+                    "name": "polygon",
+                    "all_points_x": [X1, X2, X2, X1],
+                    "all_points_y": [Y1, Y1, Y2, Y2]
+                }
+            },
+            "1": {
+                "shape_attributes": {
+                    "name": "polygon",
+                    "all_points_x": [X1, X2, X2, X1],
+                    "all_points_y": [Y1, Y1, Y2, Y2]
+                }
+            },
+            "2": {
+                "shape_attributes": {
+                    "name": "polygon",
+                    "all_points_x": [X1, X2, X2, X1],
+                    "all_points_y": [Y1, Y1, Y2, Y2]
+                }
+            }
+        }
+    },
+    "Image2": {
+        "imgName": "Image2.png",
+        "regions": {
+            "0": {
+                "shape_attributes": {
+                    "name": "polygon",
+                    "all_points_x": [X1, X2, X2, X1],
+                    "all_points_y": [Y1, Y1, Y2, Y2]
+                }
+            },
+            "1": {
+                "shape_attributes": {
+                    "name": "polygon",
+                    "all_points_x": [X1, X2, X2, X1],
+                    "all_points_y": [Y1, Y1, Y2, Y2]
+                }
+            }
+        }
+    }
+    // ...
+}
+```
+
+This JSON will have images as keys, where each image has a name and one or more regions (labeled bounding boxes) on that image.
+While every region is labeled as a polygon, `all_points_x` and `all_points_y` store x and y coordinates that form a rectangle, which are the coordinates of the bounding boxes that Zooniverse volunteers have drawn for us.
+
+In short, our data was presented like this: ![snippet of raw data](./images/t4.png)
+
+and we wrote `extractROIs.py` that generated a `data.json` file that formats the data to look more like this:
+ ![snippet of formatted data](./images/formattedData.png)
+
+ ### 3. Generating the datasets
+
+ We wrote `datasetGenerator.py` to split `data.json` to have a roughly 70/15/15 split (70% of the annotations are for training, 15% of the annotations are for validation, and 15% of the annotations are for testing). This split is necessary in order to tune hyperparameters and ultimately prevent overfitting. With `SEED = 42`, we had **2901** annotations for training, **627** annotations for validation, and **615** annotations for testing.
+
+ ### 4. Training the Model
+ TODO
+
 ## Files and Directories (Requires Python 3.6+)
 
 ### books-annotation-classification-classifications-11June2018.csv
