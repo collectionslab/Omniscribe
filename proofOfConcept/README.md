@@ -73,32 +73,32 @@ and we wrote `extractROIs.py` that generated a `data.json` file that formats the
 
 ### 3. Generating the datasets
 
- We wrote `datasetGenerator.py` to split `data.json` to have a roughly 70/15/15 split (70% of the annotations are for training, 15% of the annotations are for validation, and 15% of the annotations are for testing). This split is necessary in order to tune hyperparameters and ultimately prevent overfitting. With `SEED = 42`, we had **2901** annotations for training, **627** annotations for validation, and **615** annotations for testing.
+ We wrote **datasetGenerator.py** to split **data.json** to have a roughly 70/15/15 split (70% of the annotations are for training, 15% of the annotations are for validation, and 15% of the annotations are for testing). This split is necessary in order to tune hyperparameters and ultimately prevent overfitting. With `SEED = 42`, we had **2901** annotations for training, **627** annotations for validation, and **615** annotations for testing.
 
 ### 4. Training the Model
 
  TODO
 
-## Files and Directories (Requires Python 3.6+)
+## Files and Directories (Requires Python 3.6.x)
 
-### rawData.csv
+### data.json
 
-This csv files stores all the labeled data created from zooniverse users. The data includes
-regions of interests that were labeled and provides some information of the user who marked
-them. Further processing of this data is needed before it can be trained.
+The resulting file generated from **extractROIs.py**. It contains all the images with their labeled annotations from **rawData.csv**. It is to be used with **datasetGenerator.py** in order to generate datasets that are ready for training.
+
+### datasetGenerator.py
+
+This scripts reads **data.json** and generates three JSON files for training, validation, and testing. Each of these files have to be renamed to **via_region_data.json** and are to be placed in the same directory where the images they represent are located. Note that changing the `SEED` value will create different datasets.
 
 ### extractROIs.py
 
-This script takes the **rawData.csv** file (hard-coded) and returns a JSON that contains all the images listed on zooniverse along with
-all the regions that they may have. The JSON itself is a relatively complex object that stores
-many images, and those images may themselves have lists of ROIs.
+This script takes the **rawData.csv** file (hard-coded) and generates **data.json**, a JSON file that contains all the images listed on zooniverse along with all the regions that they may have. The JSON itself is a relatively complex object that stores many images, and those images may themselves have lists of ROIs.
 
-To put it simply, every image has a list of ROIs, and every ROI is made up of an "all_points_x"
-array and an "all_points_y" array such that all_points_x[i] and all_points_y[i] make up a
+To put it simply, every image has a list of ROIs, and every ROI is made up of an `all_points_x"`
+array and an `all_points_y` array such that `all_points_x[i]` and `all_points_y[i]` make up a
 coordinate point, where every region would have four of these coordinate points (to make a
 rectangle that captures the ROI).
 
-The way these ROIs are constructed as such due to the fact that the Mask-RCNN as released
+These ROIs are constructed as such due to the fact that the Mask R-CNN as released
 on GitHub require that structure in order to do training.
 
 $ python3 extractROIs.py
@@ -107,7 +107,7 @@ $ python3 extractROIs.py
 
 ![training loss curve](images/trainingLoss.png)
 
-#### Validation Loss Curve for *m*<sub>small</sub>
+#### Validation Loss Curve
 
 ![validation loss curve](images/validationLoss.png)
 
@@ -126,6 +126,12 @@ $ python3 inferencer.py https://marinus.library.ucla.edu/iiif/annotated/uclaclar
 #### mask-rcnn/
 
 This is the vanilla Mask-RCNN that is re-purposed for detecting handwriting. For more information, please refer to <https://github.com/matterport/Mask_RCNN>.
+
+### rawData.csv
+
+This csv files stores all the labeled data created from zooniverse users. The data includes
+regions of interests that were labeled and provides some information of the user who marked
+them. Further processing of this data is needed before it can be trained.
 
 ### requirements.txt
 
