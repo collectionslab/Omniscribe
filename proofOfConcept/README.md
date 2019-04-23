@@ -126,13 +126,13 @@ The script will display information of its configuration for Mask R-CNN, the wei
 
 This is the vanilla Mask-RCNN that is re-purposed for detecting handwriting. For more information, please refer to <https://github.com/matterport/Mask_RCNN>.
 
-### rawData.csv
+### `rawData.csv`
 
 This csv files stores all the labeled data created from zooniverse users. The data includes
 regions of interests that were labeled and provides some information of the user who marked
 them. Further processing of this data is needed before it can be trained.
 
-### requirements.txt
+### `requirements.txt`
 
 A list of dependencies needed to run this package. To be used as follows:
 
