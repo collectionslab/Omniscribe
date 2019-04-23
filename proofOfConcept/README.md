@@ -71,35 +71,25 @@ In short, our data was presented like this: ![snippet of raw data](./images/t4.p
 and we wrote `extractROIs.py` that generated a `data.json` file that formats the data to look more like this:
  ![snippet of formatted data](./images/formattedData.png)
 
- ### 3. Generating the datasets
+### 3. Generating the datasets
 
  We wrote `datasetGenerator.py` to split `data.json` to have a roughly 70/15/15 split (70% of the annotations are for training, 15% of the annotations are for validation, and 15% of the annotations are for testing). This split is necessary in order to tune hyperparameters and ultimately prevent overfitting. With `SEED = 42`, we had **2901** annotations for training, **627** annotations for validation, and **615** annotations for testing.
 
- ### 4. Training the Model
+### 4. Training the Model
+
  TODO
 
 ## Files and Directories (Requires Python 3.6+)
 
-### books-annotation-classification-classifications-11June2018.csv
+### rawData.csv
 
 This csv files stores all the labeled data created from zooniverse users. The data includes
 regions of interests that were labeled and provides some information of the user who marked
 them. Further processing of this data is needed before it can be trained.
 
-### books meta data.csv
-
-This csv stores information of which images have annotations from 10 books that the UCLA
-Collections Lab has archived. Notice that there is no labeled data of any coordinates where
-these regions lay; there is only simple binary labeling.
-
-### detectedImages/
-
-This directory is where **inferencer.py** stores any splashed images if that boolean is set to True. Otherwise this remains an empty directory.
-
 ### extractROIs.py
 
-This script takes the **books-annotation-classification-classifications-11June2018.csv** file
-(hard-coded) and returns a JSON that contains all the images listed on zooniverse along with
+This script takes the **rawData.csv** file (hard-coded) and returns a JSON that contains all the images listed on zooniverse along with
 all the regions that they may have. The JSON itself is a relatively complex object that stores
 many images, and those images may themselves have lists of ROIs.
 
@@ -118,21 +108,15 @@ $ python3 extractROIs.py
 Stores images of the training and validation loss for the model trained on a small set of data
 and for the model trained on the data collected from zooniverse.
 
-#### Training Loss Curve for *m*<sub>small</sub>
+#### Training Loss Curve
 
-![training loss graph for m_small](graphs/smallData_training_loss.PNG)
+![training loss curve](graphs/trainingLoss.png)
 
 #### Validation Loss Curve for *m*<sub>small</sub>
 
-![validation loss grpah for m_small](graphs/smallData_validation_loss.png)
+![validation loss curve](graphs/validationLoss.png)
 
 #### Training Loss Curve for *m*<sub>zooniverse</sub>
-
-![training loss graph for m_zooniverse](graphs/zooniverse_training_loss.png)
-
-#### Validation Loss Curve for *m*<sub>zooniverse</sub>
-
-![validation loss graph for m_zooniverse](graphs/zooniverse_validation_loss.PNG)
 
 ### handwriting/
 
@@ -158,19 +142,8 @@ This is the vanilla Mask-RCNN that is re-purposed for detecting handwriting. For
 
 A list of images that was inferred to have handwriting. **inferencer.py** generates this text file. This is a sample file of what is generated when running the line in the **inferencer.py** section.
 
-
 ### requirements.txt
 
 A list of dependencies needed to run this package. To be used as follows:
 
 $ pip3 install -r requirements.txt
-
-### weights/ (not shown here)
-
-This stores all the weights of any models of interest. It currently stores the best weights for *m*<sub>small </sub> and *m*<sub>zoo</sub>. (Note that these files tend to be large so they cannot be uploaded onto GitHub.)
-
-## Current Issues to Address as of 2/18/19
-
-* Need some way to ensure safe connections to manifest URIs (perhaps writing custom SSL certificates).
-
-* Replacing the command-line interface with a web interface.
