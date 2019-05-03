@@ -1,22 +1,16 @@
 # Omniscribe
 
-## Collections Lab / BuildUCLA Team
+Omniscribe automates the process of sifting through every page manually to find the annotations and other markings in digitized printed books. Why do we care about finding annotations? Annotations and other marks are traces left behind by previous readers and owners. Through these markings, we can better understand how readers in the past have used their books or interpreted their contents.
+
+### Collections Lab / BuildUCLA Team
 
 Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboration with a team consisting of UCLA library staff and students based in the UCLA Digital Library Program.
 
-### Objective
-
-Develop software that detects annotations in historical printed books that are available online via the International Image Interoperability Framework (IIIF).
-
 ![annotations.png](sample.png)
 
-**Fig. 1 A sample image generated from using Mask-RCNN.**
+**Fig. 1 A sample image generated using our Mask-RCNN model.**
 
-This tool will automate the process of sifting through every page manually to
-retrieve annotations, thus being useful for scholars who are interested in
-active reading or even the annotations themselves.
-
-## Data
+### Data
 
 <https://ucla.app.box.com/folder/45481483089>
 
