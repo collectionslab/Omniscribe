@@ -6,22 +6,14 @@ Omniscribe automates the process of sifting through every page manually to find 
 
 Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboration with a team consisting of UCLA library staff and students based in the UCLA Digital Library Program.
 
-![annotations.png](sample.png)
-
-**Fig. 1 A sample image generated using our Mask-RCNN model.**
-
-### Data
-
-<https://ucla.app.box.com/folder/45481483089>
-
-### Phase 2 Project team: train model and develop application
+#### Phase 2 Project team: train model and develop application
 * Dawn Childress (project lead, 12/17-05/19)
 * Jonathan Quach (12/17-05/19)
 * Morgan Madjukie (12/17-05/19)
 * Pete Broadwell (12/17-12/18)
 * Andrew Wallace (12/17-01/19)
 
-### Phase 1 Project team: research and testing
+#### Phase 1 Project team: research and testing
 * Dawn Childress (project lead, 12/17-05/19)
 * Pete Broadwell (12/17-12/18)
 * Johnny Ho (12/17-06/18)
@@ -30,6 +22,14 @@ Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboratio
 * Morgan Madjukie (12/17-05/19)
 * Emily Chen (12/17-06/18)
 * Rahul Malavalli (12/17-06/18)
+
+![annotations.png](sample.png)
+
+**Fig. 1 A sample image generated using our Mask-RCNN model.**
+
+### Data
+
+<https://ucla.app.box.com/folder/45481483089>
 
 ## UPDATE #2 February 13, 2019
 
