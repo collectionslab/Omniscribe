@@ -1,6 +1,6 @@
-# Book Annotation Detection Engine
+# Omniscribe
 
-## Collections Lab Team
+## Collections Lab / BuildUCLA Team
 
 Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboration with a team consisting of UCLA library staff and students based in the UCLA Digital Library Program.
 
@@ -20,14 +20,20 @@ active reading or even the annotations themselves.
 
 <https://ucla.app.box.com/folder/45481483089>
 
-### Project team
-
-* Dawn Childress (project lead, 12/17- )
+### Phase 2 Project team: train model and develop application
+* Dawn Childress (project lead, 12/17-05/19)
+* Jonathan Quach (12/17-05/19)
+* Morgan Madjukie (12/17-05/19)
 * Pete Broadwell (12/17-12/18)
-* Andrew Wallace (12/17- )
-* Jonathan Quach (12/17- )
-* Morgan Madjukie (12/17- )
+* Andrew Wallace (12/17-01/19)
+
+### Phase 1 Project team: research and testing
+* Dawn Childress (project lead, 12/17-05/19)
+* Pete Broadwell (12/17-12/18)
 * Johnny Ho (12/17-06/18)
+* Andrew Wallace (12/17-01/19)
+* Jonathan Quach (12/17-05/19)
+* Morgan Madjukie (12/17-05/19)
 * Emily Chen (12/17-06/18)
 * Rahul Malavalli (12/17-06/18)
 
@@ -61,13 +67,7 @@ interface that can instead retrieve annotations from IIIF manifests.
 
 ___
 
-### Current TODO
-
-1. Integrate Flask with the model to have a web interface.
-
-2. Look into GUI input/output and how the user may interact.
-
-## Approaches we Have Attempted During July 2018 - August 2018
+## Approaches we explored during Phase 1
 
 * Mask-RCNN (current approach)
 
