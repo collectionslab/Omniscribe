@@ -1,12 +1,3 @@
-"""
-Mask R-CNN
-The main Mask R-CNN model implementation.
-
-Copyright (c) 2017 Matterport, Inc.
-Licensed under the MIT License (see LICENSE for details)
-Written by Waleed Abdulla
-"""
-
 import os
 import random
 import datetime
@@ -30,6 +21,8 @@ from distutils.version import LooseVersion
 assert LooseVersion(tf.__version__) >= LooseVersion("1.3")
 assert LooseVersion(keras.__version__) >= LooseVersion('2.0.8')
 
+# Suppress warnings
+tf.logging.set_verbosity(tf.logging.ERROR)
 
 ############################################################
 #  Utility Functions

@@ -35,7 +35,7 @@ WEIGHTS_PATH = "model.h5"
 ssl._create_default_https_context = ssl._create_unverified_context
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 class CustomConfig(Config):
@@ -157,7 +157,7 @@ def infer(manifests):
 
             print("Saved resultsURIS.txt to {}".format(currentDirectory))
 
-    if ARGS.manifest or not (ARGS.html and ARGS.text and ARGS.manifest):
+    if ARGS.manifest or not (ARGS.html or ARGS.text):
         with open("resultsManifest.json", "w") as manifestFile:
             manifestFile.write(exportManifest(results))
             print("Saved resultsManifest.json to {}".format(currentDirectory))
