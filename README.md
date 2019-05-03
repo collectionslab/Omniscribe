@@ -6,8 +6,7 @@ Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboratio
 
 ### Objective
 
-Develop software that detects annotations in historical printed books that are
-stored in International Image Interoperability Framework (IIIF) servers.
+Develop software that detects annotations in historical printed books that are available online via the International Image Interoperability Framework (IIIF).
 
 ![annotations.png](sample.png)
 **Fig. 1 A sample image generated from using Mask-RCNN.**
