@@ -1,35 +1,33 @@
-# Book Annotation Detection Engine
+# Omniscribe
 
-## Collections Lab Team
+Omniscribe was developed to detect annotations (margnialia, interlinear markings, provenance marks, etc.) in digitized printed books hosted via the International Image Interoperability Framework (IIIF). Why do we care about finding annotations? Annotations and other marks are traces left behind by previous readers and owners. Through these markings, we can better understand how readers in the past have used their books or interpreted their contents.
 
-Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboration with a team consisting of UCLA library staff and students based in the UCLA Digital Library Program.
+Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboration with a team of UCLA Digital Library staff and UCLA students.
 
-### Objective
+#### Phase 2 Project team: train model and develop application
+* Dawn Childress, project lead
+* Jonathan Quach, Mask-RCNN model and app development
+* Morgan Madjukie, app development 
+* Pete Broadwell, consultant
+* Andrew Wallace, consultant
 
-Develop software that detects annotations in historical printed books that are
-stored in International Image Interoperability Framework (IIIF) servers.
+#### Phase 1 Project team: research and testing
+* Dawn Childress
+* Pete Broadwell
+* Johnny Ho
+* Andrew Wallace
+* Jonathan Quach
+* Morgan Madjukie
+* Emily Chen
+* Rahul Malavalli
 
 ![annotations.png](sample.png)
-**Fig. 1 A sample image generated from using Mask-RCNN.**
 
-This tool will automate the process of sifting through every page manually to
-retrieve annotations, thus being useful for scholars who are interested in
-active reading or even the annotations themselves.
+**Fig. 1 A sample image generated using our Mask-RCNN model.**
 
-## Data
+### Data
 
 <https://ucla.app.box.com/folder/45481483089>
-
-### Project team
-
-* Dawn Childress (project lead, 12/17- )
-* Pete Broadwell (12/17-12/18)
-* Andrew Wallace (12/17- )
-* Jonathan Quach (12/17- )
-* Morgan Madjukie (12/17- )
-* Johnny Ho (12/17-06/18)
-* Emily Chen (12/17-06/18)
-* Rahul Malavalli (12/17-06/18)
 
 ## UPDATE #2 February 13, 2019
 
@@ -61,13 +59,7 @@ interface that can instead retrieve annotations from IIIF manifests.
 
 ___
 
-### Current TODO
-
-1. Integrate Flask with the model to have a web interface.
-
-2. Look into GUI input/output and how the user may interact.
-
-## Approaches we Have Attempted During July 2018 - August 2018
+## Approaches we explored during Phase 1
 
 * Mask-RCNN (current approach)
 
