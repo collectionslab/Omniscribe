@@ -71,11 +71,11 @@ In short, our data was presented like this: ![snippet of raw data](./images/t4.p
 and we wrote `extractROIs.py` that generated a `data.json` file that formats the data to look more like this:
  ![snippet of formatted data](./images/formattedData.png)
 
- Note that it is arbitrary of how this data is formatted. They could be stored in CSV or other desirable format. We chose this format to reflect [VIA](http://www.robots.ox.ac.uk/~vgg/software/via/), an image annotation tool that also follows this format. 
+ Note that it is arbitrary of how this data is formatted. They could be stored in CSV or other desirable format. We chose this format to reflect [VIA](http://www.robots.ox.ac.uk/~vgg/software/via/), an image annotation tool that also follows this format.
 
 ### 3. Generating the datasets
 
- We wrote `datasetGenerator.py` to split `data.json` to have a roughly 70/15/15 split (70% of the annotations are for training, 15% of the annotations are for validation, and 15% of the annotations are for testing). This split is necessary in order to tune hyperparameters and ultimately prevent overfitting. With `SEED = 42`, we had **2901** annotations for training, **627** annotations for validation, and **612** annotations for testing.
+ We wrote `datasetGenerator.py` to split `data.json` to have a roughly 70/15/15 split (70% of the annotations are for training, 15% of the annotations are for validation, and 15% of the annotations are for testing). This split is necessary in order to tune hyperparameters and ultimately prevent overfitting. With `SEED = 42`, we had **2901** annotations for training, **627** annotations for validation, and **615** annotations for testing.
 
 ### 4. Training the Model
 
