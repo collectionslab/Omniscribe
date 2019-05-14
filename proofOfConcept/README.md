@@ -1,6 +1,6 @@
 # Proof of Concept
 
-The goal of this project is to investigate the learnability of some of the data that is owned by the Collections Lab team at UCLA. Over one year later, we have concluded that the data we have has machine learning applications when the data is transformed appropriately.
+The goal of this project is to investigate the learnability of some of the data that is owned by the Collections Lab team at UCLA. We have found that there are interesting machine learning applications with this data. Our focus was detecting annotations that are written in printed books.
 
 Resources: <br>
 [Mask R-CNN Paper](https://arxiv.org/abs/1703.06870) <br>
