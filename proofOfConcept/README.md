@@ -1,6 +1,10 @@
 # Proof of Concept
 
-The goal of this project is to investigate the learnability of some of the data that is owned by the Collections Lab team at UCLA. Over one year later, we have concluded that the data we have has machine learning applications when the data is transformed appropriately. The following files were used to verify the feasibility of our project and what our project can achieve.
+The goal of this project is to investigate the learnability of some of the data that is owned by the Collections Lab team at UCLA. Over one year later, we have concluded that the data we have has machine learning applications when the data is transformed appropriately.
+
+Resources:
+[Mask R-CNN](https://arxiv.org/abs/1703.06870)
+[High Level Explanation of Mask R-CNN](https://medium.com/@jonathan_hui/image-segmentation-with-mask-r-cnn-ebe6d793272)
 
 ## The Pipeline
 
@@ -71,7 +75,7 @@ In short, our data was presented like this: ![snippet of raw data](./images/t4.p
 and we wrote `extractROIs.py` that generated a `data.json` file that formats the data to look more like this:
  ![snippet of formatted data](./images/formattedData.png)
 
- Note that it is arbitrary of how this data is formatted. They could be stored in CSV or other desirable format. We chose this format to reflect [VIA](http://www.robots.ox.ac.uk/~vgg/software/via/), an image annotation tool that also follows this format.
+ Note that it is arbitrary of how this data is formatted. They could be stored in CSV or other desirable formats. We chose this format to reflect [VIA](http://www.robots.ox.ac.uk/~vgg/software/via/), an image annotation tool that also follows this convention.
 
 ### 3. Generating the datasets
 
