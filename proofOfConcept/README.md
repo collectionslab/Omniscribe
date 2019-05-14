@@ -6,6 +6,9 @@ Resources:
 <br> [Mask R-CNN Paper](https://arxiv.org/abs/1703.06870) <br>
 [High Level Explanation of Mask R-CNN](https://medium.com/@jonathan_hui/image-segmentation-with-mask-r-cnn-ebe6d793272)
 
+![sample](images/sample.png)
+
+
 ## The Pipeline
 
 ### 1. Gathering Data
