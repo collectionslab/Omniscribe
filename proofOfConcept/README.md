@@ -1,9 +1,9 @@
 # Proof of Concept
 
-The goal of this project is to investigate the learnability of some of the data that is owned by the Collections Lab team at UCLA. We have found that there are interesting machine learning applications with this data. Our focus was detecting annotations that are written in printed books.
+The goal of this project is to investigate the learnability of some of the data that is owned by the Collections Lab team at UCLA. We have found that there are interesting machine learning applications with this data. Our focus was detecting annotations that are written in printed books. To do this, we utilized Mask R-CNN, a regional convolutional neural network that excels in instance segmentation. In our case, the instances to be segmented away from the image are annotations (e.g. marginalia and interlinear annotations)
 
-Resources: <br>
-[Mask R-CNN Paper](https://arxiv.org/abs/1703.06870) <br>
+Resources:
+<br> [Mask R-CNN Paper](https://arxiv.org/abs/1703.06870) <br>
 [High Level Explanation of Mask R-CNN](https://medium.com/@jonathan_hui/image-segmentation-with-mask-r-cnn-ebe6d793272)
 
 ## The Pipeline
