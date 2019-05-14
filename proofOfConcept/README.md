@@ -3,7 +3,7 @@
 The goal of this project is to investigate the learnability of some of the data that is owned by the Collections Lab team at UCLA. Over one year later, we have concluded that the data we have has machine learning applications when the data is transformed appropriately.
 
 Resources:
-[Mask R-CNN](https://arxiv.org/abs/1703.06870)
+[Mask R-CNN Paper](https://arxiv.org/abs/1703.06870) <br>
 [High Level Explanation of Mask R-CNN](https://medium.com/@jonathan_hui/image-segmentation-with-mask-r-cnn-ebe6d793272)
 
 ## The Pipeline
