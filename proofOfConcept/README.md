@@ -105,7 +105,7 @@ After 40 epochs, we found that the model had the least loss at the 34th epoch (t
 
 ![precision-recall curve](images/pr.png)
 
-We defined a positive prediction if the region inferred on has an Intersection over Union (IoU) of 0.95 or higher (where 0 ≤ IoU ≤ 1). That is, an annotation is detected if the region receives an IoU ≥ 0.95. 
+We defined a positive prediction of an annotation to be a region that receives an Intersection over Union (IoU) score of 0.95 or higher (where 0 ≤ IoU ≤ 1). That is, an annotation is detected if the region receives an IoU ≥ 0.95. 
 
 We found that the model does maintain a high precision as the recall value increases. We also discovered that interlinear annotations rarely exceed an IoU of 0.95 (they typically get picked up around IoU = 0.75). This is likely due to the fact that most of our data consists of marginalia, so there is a bias towards detecting marginalia. We believe that if interlinear annotations were more equally represented with marginalia, then average precision would improve drastically. As such, lowering the IoU threshold to 0.75 helps in detecting interlinear annotations (at the cost of getting more false positives and decreasing average precision). Overall, we believe that most scholars would be more interested in marginalia as it contains more content than interlinear annotations, and we expect our users to be happy with using this model to speed up the process of finding all annotations in IIIF manifests.
 
