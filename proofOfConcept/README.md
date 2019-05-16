@@ -1,6 +1,6 @@
 # Proof of Concept
 
-The goal of this project is to investigate the learnability of some of the data that is owned by the Collections Lab team at UCLA. We have found that there are interesting machine learning applications with this data. For instance, we were able to train a model that was able to detect annotations that are written in printed books. To do this, we utilized Mask R-CNN, a regional convolutional neural network that excels in instance segmentation. In our case, the instances to be segmented away from the image are annotations (e.g. marginalia and interlinear annotations).
+The goal of this project is to investigate the feasability of traning models using images of textual data, for example digital images of printed books and manuscripts. We have identified several interesting machine learning applications for use with this type of data, among these is training a model to detect annotations in printed books which servers as our proof of concept. To do this, we utilized Mask R-CNN, a regional convolutional neural network that excels in instance segmentation. In our case, the instances to be segmented away from the image are annotations (e.g. marginalia and interlinear annotations).
 
 ![sample](images/sample.png)
 
