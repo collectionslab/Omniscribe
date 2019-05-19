@@ -1,5 +1,7 @@
 # Omniscribe
 
+[![DOI](https://zenodo.org/badge/114576206.svg)](https://zenodo.org/badge/latestdoi/114576206)
+
 Omniscribe was developed to detect annotations (margnialia, interlinear markings, provenance marks, etc.) in digitized printed books hosted via the International Image Interoperability Framework (IIIF). Why do we care about finding annotations? Annotations and other marks are traces left behind by previous readers and owners. Through these markings, we can better understand how readers in the past have used their books or interpreted their contents.
 
 Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboration with a team of UCLA Digital Library staff and UCLA students.
