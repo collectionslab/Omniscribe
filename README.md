@@ -7,7 +7,7 @@ Omniscribe was developed to detect annotations (margnialia, interlinear markings
 Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboration with a team of UCLA Digital Library staff and UCLA students.
 
 #### Phase 2 Project team: train model and develop application
-* Dawn Childress, project lead
+* Dawn Childress, PI
 * Jonathan Quach, Mask-RCNN model and app development
 * Morgan Madjukie, app development 
 * Pete Broadwell, consultant
