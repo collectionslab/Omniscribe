@@ -29,15 +29,35 @@ Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboratio
 
 ### Data
 
-<https://ucla.app.box.com/folder/45481483089>
+Thank you for using Omniscribe! **inferencer.py** implements the command-line interface for users, but does require pre-trained weights as produced by Mask R-CNN.
+
+## Files (Requires Python 3.6.x)
+
+### inferencer.py
+
+This script is the engine that does all the handwriting detection. It currently takes a list of manifests via command line and will save all images referred by the manifest that it predicts has at least one region that contains handwriting.
+
+The script will display information of its configuration for Mask R-CNN, the weights of the models it will use to infer, the manifest URI it is currently running on, the image URI it is currently inferring on, and confidence scores in range [0.96, 1] of any region it picks up (the higher the score, the more confident the model believes a region contains handwriting).
+
+$ python3 inferencer.py https://marinus.library.ucla.edu/iiif/annotated/uclaclark_SB322S53.json https://marinus.library.ucla.edu/iiif/annotated/uclaclark_BF1681A441713.json
+
+### exportFiles.py
+
+A utility script that **inferencer.py** imports to allow for exporting the results in HTML format and manifest (JSON) format.
 
 ## UPDATE #2 February 13, 2019
 
-🎉 Happy Valentine's Day Eve!🎉
+#### mask-rcnn/
 
-The team has met bi-weekly throughout the winter quarter and is transitioning from R&D workflows to a product development workflow.
+This is the vanilla Mask-RCNN that is re-purposed for detecting annotations. For more information, please refer to <https://github.com/matterport/Mask_RCNN>.
 
-Up until recent, the only data we had readily available for training came from one of the members of the team annotating a hundred or so regions, which is hardly representative of all the possible annotations that exist in the world. To gather more data, we used Zooniverse to crowdsource more data. We received over 2000 responses and gathered several hundred regions of annotations and made that data readily available to train. Thus, we now have two models: the model that was trained on a smaller set of annotations (call it *m*<sub>small</sub>), and another model trained based on the data gathered from zooniverse (call it *m*<sub>zoo</sub>).
+### requirements.txt
+
+A list of dependencies needed to run this package. To be used as follows:
+
+$ pip3 install -r requirements.txt
+
+### model.h5 (not shown here)
 
 There are various ways that we can evaluate these models. Ideally, we would have these models see a test set, know the total amount of annotated regions in this test set, and perhaps compute an F1 score and an accuracy score. However, what makes something a "region" for us is arguably blurred. For example, when considering a whole page of handwriting, *m*<sub>small</sub> would detect multiple regions, stratisfying the page. *m*<sub>zoo</sub> however, would see the entire page as one region of annotation. Both models are correct, but accuracy score would not account for the difference in their predictions. We also should not use F1 because there are uncountably many regions that are not annotated, which makes for an indefinite amount of True Negatives in the F1 calculation. For now, we have settled on using a True Positive / False Positive ratio (TP/FP) as a metric of evaluation. That is, the higher the TP/FP, the better a model is performing.
 
@@ -114,3 +134,5 @@ including project overview, data preparation, data pre-processing, and
 comparing non-ML v.s. ML approaches.
 
 <https://docs.google.com/presentation/d/1rqTioMwiLpMBgRY8NdbcbXLtifYfNxk7ZT2d6d3Yyes/edit#slide=id.g353a76bac2_0_525>
+
+This is the the weights file that implements the model that does the inferencing.
