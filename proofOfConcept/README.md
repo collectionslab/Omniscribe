@@ -1,6 +1,6 @@
 # Proof of Concept
 
-The goal of this project is to investigate the feasability of training models to detect certain features in image data available via the IIIF Image API, for example digitized collections of printed books and manuscripts. We have identified several interesting machine learning applications for use with this type of data, among these is training a model to detect annotations in printed books. For this proof of concept, we used Mask R-CNN, a regional convolutional neural network that excels in instance segmentation. In our case, the instances to be segmented away from the image are annotations (e.g. marginalia and interlinear annotations).
+The goal of this project is to investigate the feasibility of training models to detect certain features in image data available via the IIIF Image API, for example digitized collections of printed books and manuscripts. We have identified several interesting machine learning applications for use with this type of data, among these is training a model to detect annotations in printed books. For this proof of concept, we used Mask R-CNN, a regional convolutional neural network that excels in instance segmentation. In our case, the instances to be segmented away from the image are annotations (e.g. marginalia and interlinear annotations).
 
 ![sample](images/sample.png)
 
