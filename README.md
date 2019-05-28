@@ -57,7 +57,11 @@ A list of dependencies needed to run this package. To be used as follows:
 
 $ pip3 install -r requirements.txt
 
-### model.h5 (not shown here)
+### model.h5
+
+This is the weights file that implements the model that does the inferencing. It can be downloaded from the
+[releases]|(https://github.com/collectionslab/Omniscribe/releases) page and should be saved into the root folder
+of the project.
 
 There are various ways that we can evaluate these models. Ideally, we would have these models see a test set, know the total amount of annotated regions in this test set, and perhaps compute an F1 score and an accuracy score. However, what makes something a "region" for us is arguably blurred. For example, when considering a whole page of handwriting, *m*<sub>small</sub> would detect multiple regions, stratisfying the page. *m*<sub>zoo</sub> however, would see the entire page as one region of annotation. Both models are correct, but accuracy score would not account for the difference in their predictions. We also should not use F1 because there are uncountably many regions that are not annotated, which makes for an indefinite amount of True Negatives in the F1 calculation. For now, we have settled on using a True Positive / False Positive ratio (TP/FP) as a metric of evaluation. That is, the higher the TP/FP, the better a model is performing.
 
@@ -134,5 +138,3 @@ including project overview, data preparation, data pre-processing, and
 comparing non-ML v.s. ML approaches.
 
 <https://docs.google.com/presentation/d/1rqTioMwiLpMBgRY8NdbcbXLtifYfNxk7ZT2d6d3Yyes/edit#slide=id.g353a76bac2_0_525>
-
-This is the the weights file that implements the model that does the inferencing.

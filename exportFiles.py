@@ -33,10 +33,12 @@ def exportHTML(urls):
 
     return doc.getvalue()
 
+def slash_join(*args):
+    return "/".join(arg.strip("/") for arg in args)
 
-def exportManifest(urls, annotations=None):
+def exportManifest(urls, iiif_root, annotations=None, ):
 
-    manifest_id = "http://localhost/iiif/resultsManifest.json"
+    manifest_id = slash_join(iiif_root + "/resultsManifest.json")
 
     manifest = {
         "@context": "http://iiif.io/api/presentation/2/context.json",
@@ -84,6 +86,8 @@ def exportManifest(urls, annotations=None):
     if (annotations):
         annotations_data = {}
 
+    annolist_count = 0
+
     for url in urls:
 
         image_template = json.loads(jsonObj)
@@ -118,17 +122,16 @@ def exportManifest(urls, annotations=None):
             # See https://iiif.io/api/presentation/2.1/#annotation-list
             # also https://github.com/UCLAXLabs/iiif-annotation-converter/blob/master/iiif_face_annotator.py
 
-            anno_id = canvas_id.split('/')[-1].replace(".json", "")
-            #anno_list_filename = anno_id + ".json"
-            anno_list_filename = "annotations.json"
+            annolist_count += 1
 
-            anno_data = { #"@id": anno_id,
-                          "@id": "http://localhost:8887/annotations.json",
+            anno_id = slash_join(iiif_root, "annotations", "image" + str(annolist_count))
+            anno_list_filename = slash_join("annotations", "image" + str(annolist_count))
+
+            anno_data = { "@id": anno_id,
                           "@context": "http://iiif.io/api/presentation/2/context.json",
                           "@type": "sc:AnnotationList",
                           "resources": []
             }
-            #print(annotations[url])
 
             for i, roi in enumerate(annotations[url]['rois']):
 
@@ -137,15 +140,14 @@ def exportManifest(urls, annotations=None):
 
                 polygons = Mask(mask).polygons()
                 points = polygons.points[0]
-                #print(points[0])
 
                 poly = Polygon(points)
 
                 hull = poly.convex_hull
 
                 hull_coords = list(hull.exterior.coords)
-                print(hull_coords)
-                print(hull_coords[0])
+                #print(hull_coords)
+                #print(hull_coords[0])
 
                 # ROI: [1413, 1988, 1592, 2244]
 
@@ -156,7 +158,7 @@ def exportManifest(urls, annotations=None):
 
                 xywh_string = ','.join(list(map(str,xywh)))
 
-                print(xywh_string)
+                #print(xywh_string)
 
                 # This code makes a rectangular path:
                 
@@ -166,7 +168,7 @@ def exportManifest(urls, annotations=None):
                 # After initial M startX, startY, X and Y movements seem to be prefaced by 'l'; z finishes the path.
 
                 confidence_string = "confidence: " + "{:.0%}".format(annotations[url]['scores'][i])
-                print(confidence_string)
+                #print(confidence_string)
 
                 box_uuid = str(uuid.uuid4())
                 pathTopLeft = [ str(float(xywh[0])), str(float(xywh[1])) ]
@@ -199,7 +201,7 @@ def exportManifest(urls, annotations=None):
 
                 svg_path += 'z'
                 svg_string = "<svg xmlns='http://www.w3.org/2000/svg'><path xmlns=\"http://www.w3.org/2000/svg\" d=\"" + svg_path + "\" data-paper-data=\"{&quot;strokeWidth&quot;:1,&quot;editable&quot;:true,&quot;deleteIcon&quot;:null,&quot;annotation&quot;:null}\" id=\"rough_path_" + mask_uuid + "\" fill-opacity=\"0.2\" fill=\"#3f3fa3\" fill-rule=\"nonzero\" stroke=\"#00bfff\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\" stroke-miterlimit=\"10\" stroke-dasharray=\"\" stroke-dashoffset=\"0\" font-family=\"none\" font-weight=\"none\" font-size=\"none\" text-anchor=\"none\" style=\"mix-blend-mode: normal\"/></svg>"
-                print(svg_string)
+                #print(svg_string)
 
                 mask_annotation = { '@type': "oa:Annotation",
                                     'motivation': [ "oa:commenting", "oa:tagging" ],

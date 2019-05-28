@@ -27,10 +27,12 @@ parser.add_argument("--html", action='store_true',
                     help='Saves images in a HTML gallery.')
 parser.add_argument("--text", action='store_true',
                     help='Saves image links in a text file.')
-parser.add_argument("--annotate", action='store_true',
-                    help='Record detected annotations to IIIF manifest.')
 parser.add_argument("--manifest", action='store_true',
-                    help='Saves images in a IIIF-compliant manifest.')
+                    help='Saves image data to a IIIF-compliant manifest.')
+parser.add_argument("--annotate", action='store_true',
+                    help='Record detected annotations to IIIF AnnotationList file(s).')
+parser.add_argument("--iiif_root", default="http://localhost/iiif", type=str,
+                    help='Web-accessible address from which output IIIF manifests and annotations will be served.')
 
 ARGS, manifestURLs = parser.parse_known_args()
 WEIGHTS_PATH = "model.h5"
@@ -169,12 +171,18 @@ def infer(manifests):
 
     if ARGS.manifest or not (ARGS.html or ARGS.text):
         if ARGS.annotate:
-            [manifestJSON, annotations_data] = exportManifest(results, annotations)
-            for anno_file_id in annotations_data:    
-                with open(anno_file_id, "w") as annotationsFile:
-                    annotationsFile.write(annotations_data[anno_file_id])
+            [manifestJSON, annotations_data] = exportManifest(results, ARGS.iiif_root, annotations)
+            for anno_path in annotations_data:
+                anno_dir = '/'.join(anno_path.split('/')[:-1])
+                os.makedirs(anno_dir, 0o755, True)
+                with open(anno_path, "w") as annotations_file:
+                    annotations_file.write(annotations_data[anno_path])
+                    print("Saved annotations file to {}".format(anno_path))
+
         else:
-            manifestJSON = exportManifest(results)
+            manifestJSON = exportManifest(results, ARGS.iiif_root)
+            print("Saved resultsManifest.json to {}".format(currentDirectory))
+
 
         with open("resultsManifest.json", "w") as manifestFile:
             manifestFile.write(manifestJSON)
@@ -184,8 +192,8 @@ def infer(manifests):
 
 
 def main():
-    #infer(manifestURLs)
-    infer(["uclaclark_SB322S53-shorter.json"])
+    infer(manifestURLs)
+    #infer(["uclaclark_SB322S53-shorter.json", "syriacManifest.json"])
 
 
 if __name__ == '__main__':
