@@ -20,7 +20,7 @@ from mrcnn import model as modellib, utils
 from exportFiles import exportHTML, exportManifest
 
 parser = ArgumentParser(
-    'Detects images containing annotations from mainfest files. Default output is a manifest json file compliant with IIIF.')
+    'Detects images containing annotations from manifest files. Default output is a manifest json file compliant with IIIF.')
 parser.add_argument("--confidence", default=0.95, type=float,
                     help="A score from 0 to 1 that serves as a threshold for detecting annotations. Inferences at or above this score are inferred as an annotation.")
 parser.add_argument("--html", action='store_true',
@@ -28,7 +28,11 @@ parser.add_argument("--html", action='store_true',
 parser.add_argument("--text", action='store_true',
                     help='Saves image links in a text file.')
 parser.add_argument("--manifest", action='store_true',
-                    help='Saves images in a IIIF-compliant manifest.')
+                    help='Saves image data to a IIIF-compliant manifest.')
+parser.add_argument("--annotate", action='store_true',
+                    help='Saves detected annotations to IIIF AnnotationList file(s), linked from the manifest.')
+parser.add_argument("--iiif_root", default="http://127.0.0.1/iiif", type=str,
+                    help='Web-accessible address from which output IIIF manifests and annotations will be served.')
 
 ARGS, manifestURLs = parser.parse_known_args()
 WEIGHTS_PATH = "model.h5"
@@ -59,7 +63,7 @@ def detected(model, image_path):
         return None
     else:
         print('Annotations were found!')
-        return image_path
+        return r
 
 
 def load_model(weights_path):
@@ -106,6 +110,7 @@ def getImages(manifestURL=None):
         for i in imgs:
 
             resourceID = i['resource']['@id']
+            print("looking at image " + resourceID)
             potentialFileExtension = resourceID[-3:].lower()
 
             fileExtensions = set(['jpg', 'peg', 'png', 'iff'])
@@ -129,6 +134,7 @@ def infer(manifests):
     model = load_model(WEIGHTS_PATH)
     currentDirectory = os.getcwd()
     results = set()
+    annotations = {}
     imageURIs = []
 
     for man in manifests:
@@ -139,8 +145,13 @@ def infer(manifests):
     print('Finding annotations on {} images collected from the manifest(s).'.format(
         len(imageURIs)))
     for img in tqdm(imageURIs):
-        if detected(model, img):
+        detection_results = detected(model, img)
+        if detection_results:
             results.add(img)
+            if ARGS.annotate:
+                annotations[img] = detection_results
+            # DEV: only consider the first matching image
+            continue
 
     print()
     if ARGS.html:
@@ -158,15 +169,30 @@ def infer(manifests):
             print("Saved resultsURIS.txt to {}".format(currentDirectory))
 
     if ARGS.manifest or not (ARGS.html or ARGS.text):
+        if ARGS.annotate:
+            [manifestJSON, annotations_data] = exportManifest(results, ARGS.iiif_root, annotations)
+            for anno_path in annotations_data:
+                anno_dir = '/'.join(anno_path.split('/')[:-1])
+                os.makedirs(anno_dir, 0o755, True)
+                with open(anno_path, "w") as annotations_file:
+                    annotations_file.write(annotations_data[anno_path])
+                    print("Saved annotations file to {}".format(anno_path))
+
+        else:
+            manifestJSON = exportManifest(results, ARGS.iiif_root)
+            print("Saved resultsManifest.json to {}".format(currentDirectory))
+
+
         with open("resultsManifest.json", "w") as manifestFile:
-            manifestFile.write(exportManifest(results))
+            manifestFile.write(manifestJSON)
             print("Saved resultsManifest.json to {}".format(currentDirectory))
 
     print('Finished detecting annotations.')
 
 
 def main():
-    infer(manifestURLs)
+    #infer(manifestURLs)
+    infer(["uclaclark_SB322S53-shorter.json", "syriacManifest.json"])
 
 
 if __name__ == '__main__':
