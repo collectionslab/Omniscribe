@@ -30,8 +30,8 @@ parser.add_argument("--text", action='store_true',
 parser.add_argument("--manifest", action='store_true',
                     help='Saves image data to a IIIF-compliant manifest.')
 parser.add_argument("--annotate", action='store_true',
-                    help='Record detected annotations to IIIF AnnotationList file(s).')
-parser.add_argument("--iiif_root", default="http://localhost/iiif", type=str,
+                    help='Saves detected annotations to IIIF AnnotationList file(s), linked from the manifest.')
+parser.add_argument("--iiif_root", default="http://127.0.0.1/iiif", type=str,
                     help='Web-accessible address from which output IIIF manifests and annotations will be served.')
 
 ARGS, manifestURLs = parser.parse_known_args()
@@ -138,7 +138,6 @@ def infer(manifests):
     imageURIs = []
 
     for man in manifests:
-        print("looking at manifest " + man)
         imageURIs += getImages(man)
 
     imageURIs = set(imageURIs)
@@ -192,8 +191,8 @@ def infer(manifests):
 
 
 def main():
-    infer(manifestURLs)
-    #infer(["uclaclark_SB322S53-shorter.json", "syriacManifest.json"])
+    #infer(manifestURLs)
+    infer(["uclaclark_SB322S53-shorter.json", "syriacManifest.json"])
 
 
 if __name__ == '__main__':

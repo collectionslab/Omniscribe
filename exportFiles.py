@@ -146,10 +146,6 @@ def exportManifest(urls, iiif_root, annotations=None, ):
                 hull = poly.convex_hull
 
                 hull_coords = list(hull.exterior.coords)
-                #print(hull_coords)
-                #print(hull_coords[0])
-
-                # ROI: [1413, 1988, 1592, 2244]
 
                 roi_width = roi[3] - roi[1]
                 roi_height = roi[2] - roi[0]
@@ -158,28 +154,26 @@ def exportManifest(urls, iiif_root, annotations=None, ):
 
                 xywh_string = ','.join(list(map(str,xywh)))
 
-                #print(xywh_string)
-
-                # This code makes a rectangular path:
-                
-                # This is what a polygon annotation region looks like:
-                # First it includes the fragmentSelector with the xywh bounding box, then
-                # "value": "<svg xmlns='http://www.w3.org/2000/svg'><path xmlns=\"http://www.w3.org/2000/svg\" d=\"M369.34609,1260.26646l-28.38438,51.09188l-5.67688,136.24502l62.44564,22.7075l210.04441,17.03063l45.41501,-68.12251l51.09188,-113.53752l-181.66003,-39.73813l-147.59877,-5.67688z\" data-paper-data=\"{&quot;strokeWidth&quot;:1,&quot;editable&quot;:true,&quot;deleteIcon&quot;:null,&quot;annotation&quot;:null}\" id=\"rough_path_271150e9-b7b7-48df-9fd2-daeadaabb9c9\" fill=\"#3f3fa3\" fill-rule=\"nonzero\" stroke=\"#00bfff\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\" stroke-miterlimit=\"10\" stroke-dasharray=\"\" stroke-dashoffset=\"0\" font-family=\"none\" font-weight=\"none\" font-size=\"none\" text-anchor=\"none\" style=\"mix-blend-mode: normal\"/></svg>"
-                # After initial M startX, startY, X and Y movements seem to be prefaced by 'l'; z finishes the path.
-
                 confidence_string = "confidence: " + "{:.0%}".format(annotations[url]['scores'][i])
-                #print(confidence_string)
+
+                # Colors for the box outline and fill
+                box_stroke = "#003366"
+                box_fill = "#00bfff"
+                # Colors for the path (mask) outline and fill
+                path_stroke = "#00bfff"
+                path_fill = "#3f3fa3"
 
                 box_uuid = str(uuid.uuid4())
                 pathTopLeft = [ str(float(xywh[0])), str(float(xywh[1])) ]
                 pathHalfWidth = str(float(xywh[2]) / 2)
                 pathHalfHeight = str(float(xywh[3]) / 2)
                 svgPath = "M" + pathTopLeft[0] + "," + pathTopLeft[1] + 'h' + pathHalfWidth + 'h' + pathHalfWidth + 'v' + pathHalfHeight + 'v' + pathHalfHeight + 'h-' + pathHalfWidth + 'h-' + pathHalfWidth + 'v-' + pathHalfHeight + 'z'
-                svg_string = "<svg xmlns='http://www.w3.org/2000/svg'>" + '<path xmlns="http://www.w3.org/2000/svg" d="' + svgPath + '" data-paper-data="{&quot;strokeWidth&quot;:1,&quot;rotation&quot;:0,&quot;deleteIcon&quot;:null,&quot;rotationIcon&quot;:null,&quot;group&quot;:null,&quot;editable&quot;:true,&quot;annotation&quot;:null}" id="rectangle_' + box_uuid + '" fill-opacity="0" fill="#00bfff" fill-rule="nonzero" stroke="#003366" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="8" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"/></svg>'
+                svg_string = "<svg xmlns='http://www.w3.org/2000/svg'>" + '<path xmlns="http://www.w3.org/2000/svg" d="' + svgPath + '" data-paper-data="{&quot;strokeWidth&quot;:1,&quot;rotation&quot;:0,&quot;deleteIcon&quot;:null,&quot;rotationIcon&quot;:null,&quot;group&quot;:null,&quot;editable&quot;:true,&quot;annotation&quot;:null}" id="rectangle_' + box_uuid + '" fill-opacity="0" fill="' + box_fill + '" fill-rule="nonzero" stroke="' + box_stroke + '" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="8" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"/></svg>'
 
                 box_annotation = { '@type': "oa:Annotation",
                                     'motivation': [ "oa:commenting", "oa:tagging" ],
-                                    "resource": [ { '@id': "_:b2", '@type': "dctypes:Text", 'http://dev.llgc.org.uk/sas/full_text': confidence_string, 'format': "text/html", 'chars': confidence_string } ],
+                                    "resource": [ { '@id': "_:b2", '@type': "oa:Tag", 'http://dev.llgc.org.uk/sas/full_text': "handwriting", 'chars': "handwriting" },
+                                                  { '@id': "_:b3", '@type': "dctypes:Text", 'http://dev.llgc.org.uk/sas/full_text': "", 'format': "text/html", 'chars': "" } ],
                                     "on": [ { '@id': "_:b0", '@type': "oa:SpecificResource", 
                                         'within': { '@id': manifest_id,
                                                     '@type': "sc:Manifest" },
@@ -200,18 +194,16 @@ def exportManifest(urls, iiif_root, annotations=None, ):
                     svg_path += 'l' + str(delta_x) + "," + str(delta_y)
 
                 svg_path += 'z'
-                svg_string = "<svg xmlns='http://www.w3.org/2000/svg'><path xmlns=\"http://www.w3.org/2000/svg\" d=\"" + svg_path + "\" data-paper-data=\"{&quot;strokeWidth&quot;:1,&quot;editable&quot;:true,&quot;deleteIcon&quot;:null,&quot;annotation&quot;:null}\" id=\"rough_path_" + mask_uuid + "\" fill-opacity=\"0.2\" fill=\"#3f3fa3\" fill-rule=\"nonzero\" stroke=\"#00bfff\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\" stroke-miterlimit=\"10\" stroke-dasharray=\"\" stroke-dashoffset=\"0\" font-family=\"none\" font-weight=\"none\" font-size=\"none\" text-anchor=\"none\" style=\"mix-blend-mode: normal\"/></svg>"
-                #print(svg_string)
+                svg_string = "<svg xmlns='http://www.w3.org/2000/svg'><path xmlns=\"http://www.w3.org/2000/svg\" d=\"" + svg_path + "\" data-paper-data=\"{&quot;strokeWidth&quot;:1,&quot;editable&quot;:true,&quot;deleteIcon&quot;:null,&quot;annotation&quot;:null}\" id=\"rough_path_" + mask_uuid + "\" fill-opacity=\"0.2\" fill=\"" + path_fill + "\" fill-rule=\"nonzero\" stroke=\"" + path_stroke + "\" stroke-width=\"1\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\" stroke-miterlimit=\"10\" stroke-dasharray=\"\" stroke-dashoffset=\"0\" font-family=\"none\" font-weight=\"none\" font-size=\"none\" text-anchor=\"none\" style=\"mix-blend-mode: normal\"/></svg>"
 
                 mask_annotation = { '@type': "oa:Annotation",
-                                    'motivation': [ "oa:commenting", "oa:tagging" ],
-                                    "resource": [ { '@id': "_:b2", '@type': "dctypes:Text", 'http://dev.llgc.org.uk/sas/full_text': "", 'format': "text/html", 'chars': "" },
-                                                  { '@id': "_:b3", '@type': "oa:Tag", 'http://dev.llgc.org.uk/sas/full_text': "handwriting", 'chars': "handwriting" } ],
+                                    'motivation': [ "oa:commenting" ],
+                                    "resource": [ { '@id': "_:b2", '@type': "dctypes:Text", 'http://dev.llgc.org.uk/sas/full_text': confidence_string, 'format': "text/html", 'chars': confidence_string } ],
                                     "on": [ { '@id': "_:b0", '@type': "oa:SpecificResource", 
                                         'within': { '@id': manifest_id,
                                                     '@type': "sc:Manifest" },
-                                                    'selector': { '@id': "_:b1", '@type': "oa:Choice", 'default': { '@id': "_:b4", '@type': "oa:FragmentSelector", 'value': "xywh=" + xywh_string },
-                                                                  'item': { '@id': "_:b5", '@type': "oa:SvgSelector", 'value': svg_string } }, 'full': canvas_id} ], 
+                                                    'selector': { '@id': "_:b1", '@type': "oa:Choice", 'default': { '@id': "_:b3", '@type': "oa:FragmentSelector", 'value': "xywh=" + xywh_string },
+                                                                  'item': { '@id': "_:b4", '@type': "oa:SvgSelector", 'value': svg_string } }, 'full': canvas_id} ], 
                                                     "@context": "http://iiif.io/api/presentation/2/context.json" }
 
                 anno_data["resources"].append(mask_annotation)
