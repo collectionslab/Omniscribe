@@ -180,8 +180,6 @@ def infer(manifests):
 
         else:
             manifestJSON = exportManifest(results, ARGS.iiif_root)
-            print("Saved resultsManifest.json to {}".format(currentDirectory))
-
 
         with open("resultsManifest.json", "w") as manifestFile:
             manifestFile.write(manifestJSON)
@@ -191,8 +189,8 @@ def infer(manifests):
 
 
 def main():
-    #infer(manifestURLs)
-    infer(["uclaclark_SB322S53-shorter.json", "syriacManifest.json"])
+    infer(manifestURLs)
+    #infer(["uclaclark_SB322S53-shorter.json", "syriacManifest.json"])
 
 
 if __name__ == '__main__':
