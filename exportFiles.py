@@ -122,6 +122,9 @@ def exportManifest(urls, iiif_root, annotations=None, ):
             # See https://iiif.io/api/presentation/2.1/#annotation-list
             # also https://github.com/UCLAXLabs/iiif-annotation-converter/blob/master/iiif_face_annotator.py
 
+            width_ratio = annotations[url][1]
+            height_ratio = annotations[url][2]
+
             annolist_count += 1
 
             anno_id = slash_join(iiif_root, "annotations", "image" + str(annolist_count))
@@ -133,10 +136,10 @@ def exportManifest(urls, iiif_root, annotations=None, ):
                           "resources": []
             }
 
-            for i, roi in enumerate(annotations[url]['rois']):
+            for i, roi in enumerate(annotations[url][0]['rois']):
 
                 # This is the actual bitmap mask of the annotation region
-                mask = annotations[url]["masks"][:, :, i]
+                mask = annotations[url][0]["masks"][:, :, i]
 
                 polygons = Mask(mask).polygons()
                 points = polygons.points[0]
@@ -145,16 +148,23 @@ def exportManifest(urls, iiif_root, annotations=None, ):
 
                 hull = poly.convex_hull
 
-                hull_coords = list(hull.exterior.coords)
+                unscaled_hull_coords = list(hull.exterior.coords)
 
-                roi_width = roi[3] - roi[1]
-                roi_height = roi[2] - roi[0]
+                hull_coords = []
 
-                xywh = [roi[1], roi[0], roi_width, roi_height]
+                for coord in unscaled_hull_coords:
+                    scaled_coord = [float(coord[0]) * width_ratio, float(coord[1]) * height_ratio]
+                    print("Unscaled coord: " + str(coord) + ", scaled coord: " + str(scaled_coord))
+                    hull_coords.append(scaled_coord)
+
+                roi_width = (float(roi[3]) - float(roi[1])) * width_ratio
+                roi_height = (float(roi[2]) - float(roi[0])) * height_ratio
+
+                xywh = [float(roi[1]) * width_ratio, float(roi[0]) * height_ratio, roi_width, roi_height]
 
                 xywh_string = ','.join(list(map(str,xywh)))
 
-                confidence_string = "confidence: " + "{:.0%}".format(annotations[url]['scores'][i])
+                confidence_string = "confidence: " + "{:.0%}".format(annotations[url][0]['scores'][i])
 
                 # Colors for the box outline and fill
                 box_stroke = "#003366"

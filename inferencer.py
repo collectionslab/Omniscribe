@@ -33,6 +33,8 @@ parser.add_argument("--annotate", action='store_true',
                     help='Saves detected annotations to IIIF AnnotationList file(s), linked from the manifest.')
 parser.add_argument("--iiif_root", default="http://127.0.0.1/iiif", type=str,
                     help='Web-accessible address from which output IIIF manifests and annotations will be served.')
+parser.add_argument("--max_pages", default=-1, type=int,
+                    help='Maximum number of images (IIIF canvases) to process.')
 
 ARGS, manifestURLs = parser.parse_known_args()
 WEIGHTS_PATH = "model.h5"
@@ -56,6 +58,8 @@ def detected(model, image_path):
     print("\nFinding annotations on image: {}".format(image_path))
 
     image = skimage.io.imread(image_path)
+    print("shape of image is ", image.shape)
+
     r = model.detect([image], verbose=0)[0]
 
     if len(r['scores']) == 0:
@@ -63,7 +67,7 @@ def detected(model, image_path):
         return None
     else:
         print('Annotations were found!')
-        return r
+        return [r, image.shape[1], image.shape[0]]
 
 
 def load_model(weights_path):
@@ -99,9 +103,16 @@ def getImages(manifestURL=None):
             print('Exiting now.')
             exit()
 
-    imageURIs = []
+    # This should be a dictionary keyed on the image service @id,
+    # with width and height as the values
+    imageURIs = {}
     someSequence = data['sequences'][0]
     canvases = someSequence['canvases']
+
+    # Example of a manifest that indicates that the "full" sized
+    # image from the "resource" entry is smaller than max
+    # http://iiif.gdmrdigital.com/nlw/4004562-cutdown.json
+    # @id: "http://dams.llgc.org.uk/iiif/2.0/image/4004566/full/1024,/0/default.jpg"
 
     for c in canvases:
         imgs = c['images']
@@ -110,17 +121,32 @@ def getImages(manifestURL=None):
         for i in imgs:
 
             resourceID = i['resource']['@id']
-            print("looking at image " + resourceID)
-            potentialFileExtension = resourceID[-3:].lower()
 
-            fileExtensions = set(['jpg', 'peg', 'png', 'iff'])
-            if potentialFileExtension not in fileExtensions:
-                if potentialFileExtension[-1] == '/':
-                    imageURIs.append(resourceID + 'full/full/0/default.jpg')
-                else:
-                    imageURIs.append(resourceID + '/full/full/0/default.jpg')
+            if ('width' in i['resource']):
+                width = i['resource']['width']
+            if ('height' in i['resource']):
+                height = i['resource']['height']
+
+            serviceID = i['resource']['service']['@id']
+
+            if ('width' in i['resource']['service']):
+                width = i['resource']['service']['width']
+            if ('height' in i['resource']['service']):
+                height = i['resource']['service']['height']
+
+            if (len(serviceID) > len(resourceID)):
+                imageURL = serviceID
             else:
-                imageURIs.append(i['resource']['@id'])
+                imageURL = resourceID
+
+            print("service image URL is " + imageURL)
+            if (imageURL.find('/default.jpg') < 0):
+                if (imageURL[-1] != '/'):
+                    imageURL += '/'
+                imageURL += 'full/full/0/default.jpg'
+        
+            print("looking at image " + imageURL)
+            imageURIs[imageURL] = [width, height]
 
     return imageURIs
 
@@ -135,12 +161,18 @@ def infer(manifests):
     currentDirectory = os.getcwd()
     results = set()
     annotations = {}
-    imageURIs = []
+    imageURIs = {}
+
+    total_images = 0
 
     for man in manifests:
-        imageURIs += getImages(man)
-
-    imageURIs = set(imageURIs)
+        image_info = getImages(man)
+        # imageURIs is a dict keyed on the @id value from the resource section
+        # Its value is a [width, height] tuple
+        for image_url in image_info:
+            if ((ARGS.max_pages < 0) or (total_images < ARGS.max_pages)):
+                imageURIs[image_url] = [image_info[image_url][0], image_info[image_url][1]]
+                total_images += 1
 
     print('Finding annotations on {} images collected from the manifest(s).'.format(
         len(imageURIs)))
@@ -149,7 +181,22 @@ def infer(manifests):
         if detection_results:
             results.add(img)
             if ARGS.annotate:
-                annotations[img] = detection_results
+                # TO DO: Compare size of image used for inference to the reported size
+                # of the image in the service section of the manifest. If they're
+                # different, compute and return scaling ratios (=1 otherwise)
+                service_width = imageURIs[img][0]
+                service_height = imageURIs[img][1]
+                inference_width = detection_results[1]
+                inference_height = detection_results[2]
+
+                width_ratio = 1.0
+                if (service_width != inference_width):
+                    width_ratio = float(service_width) / float(inference_width)
+                height_ratio = 1.0
+                if (service_height != inference_height):
+                    height_ratio = float(service_height) / float(inference_height)
+
+                annotations[img] = [detection_results[0], width_ratio, height_ratio]
             # DEV: only consider the first matching image
             continue
 
@@ -189,8 +236,9 @@ def infer(manifests):
 
 
 def main():
-    infer(manifestURLs)
-    #infer(["uclaclark_SB322S53-shorter.json", "syriacManifest.json"])
+    #infer(manifestURLs)
+    infer(["uclaclark_SB322S53-shorter.json"])
+    #infer(["http://iiif.gdmrdigital.com/nlw/4004562-cutdown.json"])
 
 
 if __name__ == '__main__':
