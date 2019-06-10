@@ -243,9 +243,7 @@ def infer(manifests):
 
 
 def main():
-    #infer(manifestURLs)
-    infer(["uclaclark_SB322S53-short.json"])
-    #infer(["http://iiif.gdmrdigital.com/nlw/4004562-cutdown.json"])
+    infer(manifestURLs)
 
 
 if __name__ == '__main__':
