@@ -4,6 +4,7 @@ import uuid
 from yattag import Doc
 from imantics import Mask, Polygons
 from shapely.geometry import Polygon
+from shapely.ops import cascaded_union
 
 def exportHTML(urls):
     div = ('{display:inline-block;'
@@ -36,7 +37,7 @@ def exportHTML(urls):
 def slash_join(*args):
     return "/".join(arg.strip("/") for arg in args)
 
-def exportManifest(urls, iiif_root, annotations=None, ):
+def exportManifest(urls, iiif_root, annotations, annotate=False):
 
     manifest_id = slash_join(iiif_root + "/resultsManifest.json")
 
@@ -52,16 +53,16 @@ def exportManifest(urls, iiif_root, annotations=None, ):
         ]
     }
 
-    image_template_id = '{"@id": "[image url].json",'
-    image_template_type = '"@type": "sc:Canvas",'
-    image_template_height = '"height": 0,'
-    image_template_width = '"width": 0,'
-    image_template_images = '"images": [{'
+    canvas_template_id = '{"@id": "[canvas url].json",'
+    canvas_template_type = '"@type": "sc:Canvas",'
+    canvas_template_height = '"height": 0,'
+    canvas_template_width = '"width": 0,'
+    canvas_template_images = '"images": [{'
 
-    images_type = '"@type": "oa:Annotation",'
-    images_motivation = '"motivation": "sc:painting",'
-    images_on = '"on": "[image url].json",'
-    images_resource = '"resource": {'
+    image_type = '"@type": "oa:Annotation",'
+    image_motivation = '"motivation": "sc:painting",'
+    image_on = '"on": "[canvas url].json",'
+    image_resource = '"resource": {'
 
     resource_id = '"@id": "[image url]/full/full/0/default.jpg",'
     resource_type = '"@type": "dctypes:Image",'
@@ -72,58 +73,59 @@ def exportManifest(urls, iiif_root, annotations=None, ):
     service_id = '"@id": "[image url]",'
     service_profile = '"profile": "http://iiif.io/api/image/2/level1.json"'
 
-    image_template_string = image_template_id
-    image_template_string += image_template_type + image_template_height
-    image_template_string += image_template_width + image_template_images
-    image_template_string += images_type + images_motivation + images_on
-    image_template_string += images_resource + resource_id + resource_type
-    image_template_string += resource_format + resource_service
-    image_template_string += service_context + \
-        service_id + service_profile + '} } } ] }'
+    canvas_template_string = canvas_template_id
+    canvas_template_string += canvas_template_type + canvas_template_height
+    canvas_template_string += canvas_template_width + canvas_template_images
+    canvas_template_string += image_type + image_motivation + image_on
+    canvas_template_string += image_resource + resource_id + resource_type
+    canvas_template_string += resource_format + resource_service
+    canvas_template_string += service_context + service_id + \
+                              service_profile + '} } } ] }'
 
-    jsonObj = eval(json.dumps(image_template_string))
+    jsonObj = eval(json.dumps(canvas_template_string))
 
-    if (annotations):
+    if (annotate):
         annotations_data = {}
 
     annolist_count = 0
 
     for url in urls:
 
-        image_template = json.loads(jsonObj)
-        # Retrive main image url
+        canvas_template = json.loads(jsonObj)
+
+        # Get base image url
         img_url = url.split('/')[:-4]
         img_url = '/'.join(img_url)
 
+        '''
         # get height width metadata
         info_request = urllib.request.urlopen(img_url + '/info.json')
         info = info_request.read()
         info = info.decode("utf8")
         info_request.close()
-
         info = json.loads(info)
-        height = info['height']
-        width = info['width']
+        image_height = info['height']
+        image_width = info['width']
+        '''
 
-        image = dict(image_template)
+        image_width = annotations[url][1]
+        image_height = annotations[url][2]
+
+        canvas = dict(canvas_template)
 
         canvas_id = img_url + '.json'
 
-        image['@id'] = canvas_id
-        image['height'] = height
-        image['width'] = width
-        image['images'][0]['on'] = canvas_id
-        image['images'][0]['resource']['@id'] = img_url + \
+        canvas['@id'] = canvas_id
+        canvas['width'] = image_width
+        canvas['height'] = image_height
+        canvas['images'][0]['resource']['@id'] = img_url + \
             '/full/full/0/default.jpg'
-        image['images'][0]['resource']['service']['@id'] = img_url
+        canvas['images'][0]['resource']['service']['@id'] = img_url
 
         if (annotations and (url in annotations)):
-            # Annotation lists are generated *per canvas (image)*
-            # See https://iiif.io/api/presentation/2.1/#annotation-list
-            # also https://github.com/UCLAXLabs/iiif-annotation-converter/blob/master/iiif_face_annotator.py
 
-            width_ratio = annotations[url][1]
-            height_ratio = annotations[url][2]
+            width_ratio = annotations[url][3]
+            height_ratio = annotations[url][4]
 
             annolist_count += 1
 
@@ -142,19 +144,26 @@ def exportManifest(urls, iiif_root, annotations=None, ):
                 mask = annotations[url][0]["masks"][:, :, i]
 
                 polygons = Mask(mask).polygons()
-                points = polygons.points[0]
 
-                poly = Polygon(points)
+                raw_polygons = [Polygon(pts) for pts in polygons.points]
+                all_polygons = []
 
-                hull = poly.convex_hull
+                for pg in raw_polygons:
+                    if (not pg.is_valid):
+                        pg_cleaned = pg.buffer(0)
+                        if (pg_cleaned.is_valid):
+                            all_polygons.append(pg_cleaned)
+                    else:
+                        all_polygons.append(pg)
 
+                merged_polygon = cascaded_union(all_polygons)
+                hull = merged_polygon.convex_hull
                 unscaled_hull_coords = list(hull.exterior.coords)
 
                 hull_coords = []
 
                 for coord in unscaled_hull_coords:
                     scaled_coord = [float(coord[0]) * width_ratio, float(coord[1]) * height_ratio]
-                    print("Unscaled coord: " + str(coord) + ", scaled coord: " + str(scaled_coord))
                     hull_coords.append(scaled_coord)
 
                 roi_width = (float(roi[3]) - float(roi[1])) * width_ratio
@@ -185,11 +194,11 @@ def exportManifest(urls, iiif_root, annotations=None, ):
                                     "resource": [ { '@id': "_:b2", '@type': "oa:Tag", 'http://dev.llgc.org.uk/sas/full_text': "handwriting", 'chars': "handwriting" },
                                                   { '@id': "_:b3", '@type': "dctypes:Text", 'http://dev.llgc.org.uk/sas/full_text': "", 'format': "text/html", 'chars': "" } ],
                                     "on": [ { '@id': "_:b0", '@type': "oa:SpecificResource", 
-                                        'within': { '@id': manifest_id,
-                                                    '@type': "sc:Manifest" },
-                                                    'selector': { '@id': "_:b1", '@type': "oa:Choice", 'default': { '@id': "_:b4", '@type': "oa:FragmentSelector", 'value': "xywh=" + xywh_string },
-                                                                  'item': { '@id': "_:b5", '@type': "oa:SvgSelector", 'value': svg_string } }, 'full': canvas_id} ], 
-                                                    "@context": "http://iiif.io/api/presentation/2/context.json" }
+                                        'within': { '@id': canvas_id,
+                                                    '@type': "sc:Canvas" },
+                                        'selector': { '@id': "_:b1", '@type': "oa:Choice", 'default': { '@id': "_:b4", '@type': "oa:FragmentSelector", 'value': "xywh=" + xywh_string },
+                                                      'item': { '@id': "_:b5", '@type': "oa:SvgSelector", 'value': svg_string } } } ], 
+                                    "@context": "http://iiif.io/api/presentation/2/context.json" }
 
                 anno_data["resources"].append(box_annotation)
 
@@ -210,10 +219,10 @@ def exportManifest(urls, iiif_root, annotations=None, ):
                                     'motivation': [ "oa:commenting" ],
                                     "resource": [ { '@id': "_:b2", '@type': "dctypes:Text", 'http://dev.llgc.org.uk/sas/full_text': confidence_string, 'format': "text/html", 'chars': confidence_string } ],
                                     "on": [ { '@id': "_:b0", '@type': "oa:SpecificResource", 
-                                        'within': { '@id': manifest_id,
-                                                    '@type': "sc:Manifest" },
+                                        'within': { '@id': canvas_id,
+                                                    '@type': "sc:Canvas" },
                                                     'selector': { '@id': "_:b1", '@type': "oa:Choice", 'default': { '@id': "_:b3", '@type': "oa:FragmentSelector", 'value': "xywh=" + xywh_string },
-                                                                  'item': { '@id': "_:b4", '@type': "oa:SvgSelector", 'value': svg_string } }, 'full': canvas_id} ], 
+                                                                  'item': { '@id': "_:b4", '@type': "oa:SvgSelector", 'value': svg_string } } } ], 
                                                     "@context": "http://iiif.io/api/presentation/2/context.json" }
 
                 anno_data["resources"].append(mask_annotation)
@@ -222,11 +231,11 @@ def exportManifest(urls, iiif_root, annotations=None, ):
 
             # Need to add a link to the annotations list to the canvas otherContent attribute
             anno_list_link = { "@id": anno_id, "@type": "sc:Annotationlist" }
-            image["otherContent"] = [anno_list_link]
+            canvas["otherContent"] = [anno_list_link]
 
-        manifest['sequences'][0]['canvases'].append(image)
+        manifest['sequences'][0]['canvases'].append(canvas)
 
-    if (annotations):
+    if (annotate):
         return [json.dumps(manifest, indent=4), annotations_data]
     else:
         return json.dumps(manifest, indent=4)

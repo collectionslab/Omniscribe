@@ -58,7 +58,7 @@ def detected(model, image_path):
     print("\nFinding annotations on image: {}".format(image_path))
 
     image = skimage.io.imread(image_path)
-    print("shape of image is ", image.shape)
+    #print("shape of image is ", image.shape)
 
     r = model.detect([image], verbose=0)[0]
 
@@ -120,32 +120,34 @@ def getImages(manifestURL=None):
         width = c['width']
         for i in imgs:
 
-            resourceID = i['resource']['@id']
+            # ASSUMPTION: Each image takes up the entire canvas.
+            # This assumes a simplified use of the IIIF Presentation API,
+            # which explicitly states that multiple images can exist on
+            # the same canvas.
+            # In the future, this should be supported by checking for and
+            # parsing any "canvas fragment" #xywh= coordinates that are
+            # specified at the end of the "on" parameter of each image.
+            # In that case, the output of the handwriting detection would need
+            # to be projected into these spaces, rather than onto the full
+            # canvas.
 
-            if ('width' in i['resource']):
-                width = i['resource']['width']
-            if ('height' in i['resource']):
-                height = i['resource']['height']
+            resourceID = i['resource']['@id']
 
             serviceID = i['resource']['service']['@id']
 
-            if ('width' in i['resource']['service']):
-                width = i['resource']['service']['width']
-            if ('height' in i['resource']['service']):
-                height = i['resource']['service']['height']
-
+            # Just in case the image server URL is in the
+            # servide @id parameter
             if (len(serviceID) > len(resourceID)):
                 imageURL = serviceID
             else:
                 imageURL = resourceID
 
-            print("service image URL is " + imageURL)
             if (imageURL.find('/default.jpg') < 0):
                 if (imageURL[-1] != '/'):
                     imageURL += '/'
                 imageURL += 'full/full/0/default.jpg'
         
-            print("looking at image " + imageURL)
+            #print("looking at image " + imageURL)
             imageURIs[imageURL] = [width, height]
 
     return imageURIs
@@ -181,22 +183,27 @@ def infer(manifests):
         if detection_results:
             results.add(img)
             if ARGS.annotate:
-                # TO DO: Compare size of image used for inference to the reported size
-                # of the image in the service section of the manifest. If they're
-                # different, compute and return scaling ratios (=1 otherwise)
-                service_width = imageURIs[img][0]
-                service_height = imageURIs[img][1]
-                inference_width = detection_results[1]
-                inference_height = detection_results[2]
 
-                width_ratio = 1.0
-                if (service_width != inference_width):
-                    width_ratio = float(service_width) / float(inference_width)
-                height_ratio = 1.0
-                if (service_height != inference_height):
-                    height_ratio = float(service_height) / float(inference_height)
+                canvas_width = imageURIs[img][0]
+                canvas_height = imageURIs[img][1]
 
-                annotations[img] = [detection_results[0], width_ratio, height_ratio]
+                image_width = detection_results[1]
+                image_height = detection_results[2]
+
+                width_ratio = 1
+                height_ratio = 1
+
+                #if (img.find('full/full/0/default') == -1):
+                #if ((canvas_width != image_width) or (canvas_height != image_height)):
+
+                #    width_ratio = float(canvas_width) / float(image_width)
+                #    height_ratio = float(canvas_height) / float(image_height)
+
+                #print("canvas dims are " + str(canvas_width) + ", " + str(canvas_height))
+                #print("scaling ratios are " + str(width_ratio) + ", " + str(height_ratio))
+
+                annotations[img] = [detection_results[0], image_width, image_height, width_ratio, height_ratio]
+
             # DEV: only consider the first matching image
             continue
 
@@ -217,7 +224,7 @@ def infer(manifests):
 
     if ARGS.manifest or not (ARGS.html or ARGS.text):
         if ARGS.annotate:
-            [manifestJSON, annotations_data] = exportManifest(results, ARGS.iiif_root, annotations)
+            [manifestJSON, annotations_data] = exportManifest(results, ARGS.iiif_root, annotations, True)
             for anno_path in annotations_data:
                 anno_dir = '/'.join(anno_path.split('/')[:-1])
                 os.makedirs(anno_dir, 0o755, True)
@@ -226,7 +233,7 @@ def infer(manifests):
                     print("Saved annotations file to {}".format(anno_path))
 
         else:
-            manifestJSON = exportManifest(results, ARGS.iiif_root)
+            manifestJSON = exportManifest(results, ARGS.iiif_root, annotations, False)
 
         with open("resultsManifest.json", "w") as manifestFile:
             manifestFile.write(manifestJSON)
@@ -237,7 +244,7 @@ def infer(manifests):
 
 def main():
     #infer(manifestURLs)
-    infer(["uclaclark_SB322S53-shorter.json"])
+    infer(["uclaclark_SB322S53-short.json"])
     #infer(["http://iiif.gdmrdigital.com/nlw/4004562-cutdown.json"])
 
 
