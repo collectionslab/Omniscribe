@@ -103,8 +103,7 @@ def getImages(manifestURL=None):
             print('Exiting now.')
             exit()
 
-    # This should be a dictionary keyed on the image service @id,
-    # with width and height as the values
+    # This should be a dictionary keyed on the image service @id
     imageURIs = {}
     someSequence = data['sequences'][0]
     canvases = someSequence['canvases']
@@ -115,6 +114,7 @@ def getImages(manifestURL=None):
     # @id: "http://dams.llgc.org.uk/iiif/2.0/image/4004566/full/1024,/0/default.jpg"
 
     for c in canvases:
+        canvas_id = c['@id']
         imgs = c['images']
         height = c['height']
         width = c['width']
@@ -122,8 +122,7 @@ def getImages(manifestURL=None):
 
             # ASSUMPTION: Each image takes up the entire canvas.
             # This assumes a simplified use of the IIIF Presentation API,
-            # which explicitly states that multiple images can exist on
-            # the same canvas.
+            # which allows for multiple images to exist on the same canvas.
             # In the future, this should be supported by checking for and
             # parsing any "canvas fragment" #xywh= coordinates that are
             # specified at the end of the "on" parameter of each image.
@@ -135,7 +134,7 @@ def getImages(manifestURL=None):
 
             serviceID = i['resource']['service']['@id']
 
-            # Just in case the image server URL is in the
+            # Just in case the image server URL is erroneously in the
             # servide @id parameter
             if (len(serviceID) > len(resourceID)):
                 imageURL = serviceID
@@ -146,9 +145,9 @@ def getImages(manifestURL=None):
                 if (imageURL[-1] != '/'):
                     imageURL += '/'
                 imageURL += 'full/full/0/default.jpg'
-        
+
             #print("looking at image " + imageURL)
-            imageURIs[imageURL] = [width, height]
+            imageURIs[imageURL] = [width, height, canvas_id]
 
     return imageURIs
 
@@ -170,10 +169,10 @@ def infer(manifests):
     for man in manifests:
         image_info = getImages(man)
         # imageURIs is a dict keyed on the @id value from the resource section
-        # Its value is a [width, height] tuple
         for image_url in image_info:
             if ((ARGS.max_pages < 0) or (total_images < ARGS.max_pages)):
-                imageURIs[image_url] = [image_info[image_url][0], image_info[image_url][1]]
+                imageURIs[image_url] = [image_info[image_url][0],
+                                        image_info[image_url][1], image_info[image_url][2]]
                 total_images += 1
 
     print('Finding annotations on {} images collected from the manifest(s).'.format(
@@ -182,27 +181,17 @@ def infer(manifests):
         detection_results = detected(model, img)
         if detection_results:
             results.add(img)
-            if ARGS.annotate:
 
-                canvas_width = imageURIs[img][0]
-                canvas_height = imageURIs[img][1]
+            canvas_width = imageURIs[img][0]
+            canvas_height = imageURIs[img][1]
 
-                image_width = detection_results[1]
-                image_height = detection_results[2]
+            canvas_id = imageURIs[img][2]
 
-                width_ratio = 1
-                height_ratio = 1
+            image_width = detection_results[1]
+            image_height = detection_results[2]
 
-                #if (img.find('full/full/0/default') == -1):
-                #if ((canvas_width != image_width) or (canvas_height != image_height)):
-
-                #    width_ratio = float(canvas_width) / float(image_width)
-                #    height_ratio = float(canvas_height) / float(image_height)
-
-                #print("canvas dims are " + str(canvas_width) + ", " + str(canvas_height))
-                #print("scaling ratios are " + str(width_ratio) + ", " + str(height_ratio))
-
-                annotations[img] = [detection_results[0], image_width, image_height, width_ratio, height_ratio]
+            annotations[img] = [detection_results[0], canvas_width,
+                                canvas_height, image_width, image_height, canvas_id]
 
             # DEV: only consider the first matching image
             continue
@@ -224,7 +213,8 @@ def infer(manifests):
 
     if ARGS.manifest or not (ARGS.html or ARGS.text):
         if ARGS.annotate:
-            [manifestJSON, annotations_data] = exportManifest(results, ARGS.iiif_root, annotations, True)
+            [manifestJSON, annotations_data] = exportManifest(
+                results, ARGS.iiif_root, annotations, True)
             for anno_path in annotations_data:
                 anno_dir = '/'.join(anno_path.split('/')[:-1])
                 os.makedirs(anno_dir, 0o755, True)
@@ -233,7 +223,8 @@ def infer(manifests):
                     print("Saved annotations file to {}".format(anno_path))
 
         else:
-            manifestJSON = exportManifest(results, ARGS.iiif_root, annotations, False)
+            manifestJSON = exportManifest(
+                results, ARGS.iiif_root, annotations, False)
 
         with open("resultsManifest.json", "w") as manifestFile:
             manifestFile.write(manifestJSON)
