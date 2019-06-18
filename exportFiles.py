@@ -6,6 +6,12 @@ from imantics import Mask, Polygons
 from shapely.geometry import Polygon
 from shapely.ops import cascaded_union
 
+# Colors for the box outline and fill
+box_stroke = "#003366"
+box_fill = "#00bfff"
+# Colors for the path (mask) outline and fill
+path_stroke = "#00bfff"
+path_fill = "#3f3fa3"
 
 def exportHTML(urls):
     div = ('{display:inline-block;'
@@ -105,7 +111,7 @@ def exportManifest(urls, iiif_root, annotations, annotate=False):
 
         '''
         # get height width metadata
-        # XXX No need to do this; we get this info from the inference image
+        # No need to do this here; we get this info from the inference image
         info_request = urllib.request.urlopen(img_url + '/info.json')
         info = info_request.read()
         info = info.decode("utf8")
@@ -230,13 +236,6 @@ def exportManifest(urls, iiif_root, annotations, annotate=False):
                 confidence_string = "confidence: " + \
                     "{:.0%}".format(annotations[url][0]['scores'][i])
 
-                # Colors for the box outline and fill
-                box_stroke = "#003366"
-                box_fill = "#00bfff"
-                # Colors for the path (mask) outline and fill
-                path_stroke = "#00bfff"
-                path_fill = "#3f3fa3"
-
                 box_uuid = str(uuid.uuid4())
                 pathTopLeft = [str(float(xywh[0])), str(float(xywh[1]))]
                 pathHalfWidth = str(float(xywh[2]) / 2)
@@ -250,13 +249,13 @@ def exportManifest(urls, iiif_root, annotations, annotate=False):
 
                 box_annotation = {'@type': "oa:Annotation",
                                   'motivation': ["oa:commenting", "oa:tagging"],
-                                  "resource": [{'@id': "_:b2", '@type': "oa:Tag", 'http://dev.llgc.org.uk/sas/full_text': "handwriting", 'chars': "handwriting"},
-                                               {'@id': "_:b3", '@type': "dctypes:Text", 'http://dev.llgc.org.uk/sas/full_text': "", 'format': "text/html", 'chars': ""}],
-                                  "on": [{'@id': "_:b0", '@type': "oa:SpecificResource",
+                                  "resource": [{'@type': "oa:Tag", 'chars': "handwriting"},
+                                               {'@type': "dctypes:Text", 'format': "text/html", 'chars': ""}],
+                                  "on": [{'@type': "oa:SpecificResource",
                                           'within': {'@id': canvas_id,
                                                      '@type': "sc:Canvas"},
-                                          'selector': {'@id': "_:b1", '@type': "oa:Choice", 'default': {'@id': "_:b4", '@type': "oa:FragmentSelector", 'value': "xywh=" + xywh_string},
-                                                       'item': {'@id': "_:b5", '@type': "oa:SvgSelector", 'value': svg_string}}}],
+                                          'selector': {'@type': "oa:Choice", 'default': {'@type': "oa:FragmentSelector", 'value': "xywh=" + xywh_string},
+                                                       'item': {'@type': "oa:SvgSelector", 'value': svg_string}}}],
                                   "@context": "http://iiif.io/api/presentation/2/context.json"}
 
                 anno_data["resources"].append(box_annotation)
@@ -278,12 +277,12 @@ def exportManifest(urls, iiif_root, annotations, annotate=False):
 
                 mask_annotation = {'@type': "oa:Annotation",
                                    'motivation': ["oa:commenting"],
-                                   "resource": [{'@id': "_:b2", '@type': "dctypes:Text", 'http://dev.llgc.org.uk/sas/full_text': confidence_string, 'format': "text/html", 'chars': confidence_string}],
-                                   "on": [{'@id': "_:b0", '@type': "oa:SpecificResource",
+                                   "resource": [{'@type': "dctypes:Text", 'format': "text/html", 'chars': confidence_string}],
+                                   "on": [{'@type': "oa:SpecificResource",
                                             'within': {'@id': canvas_id,
                                                        '@type': "sc:Canvas"},
-                                            'selector': {'@id': "_:b1", '@type': "oa:Choice", 'default': {'@id': "_:b3", '@type': "oa:FragmentSelector", 'value': "xywh=" + xywh_string},
-                                                         'item': {'@id': "_:b4", '@type': "oa:SvgSelector", 'value': svg_string}}}],
+                                            'selector': {'@type': "oa:Choice", 'default': {'@type': "oa:FragmentSelector", 'value': "xywh=" + xywh_string},
+                                                         'item': {'@type': "oa:SvgSelector", 'value': svg_string}}}],
                                    "@context": "http://iiif.io/api/presentation/2/context.json"}
 
                 anno_data["resources"].append(mask_annotation)
