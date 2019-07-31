@@ -10,7 +10,7 @@ Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboratio
 * Dawn Childress, PI
 * Jonathan Quach, Mask-RCNN model and app development
 * Morgan Madjukie, app development 
-* Pete Broadwell, consultant
+* Pete Broadwell, Academic Projects Developer
 * Andrew Wallace, consultant
 
 #### Phase 1 Project team: research and testing
