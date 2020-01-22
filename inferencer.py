@@ -33,6 +33,8 @@ parser.add_argument("--annotate", action='store_true',
                     help='Saves detected annotations to IIIF AnnotationList file(s), linked from the manifest.')
 parser.add_argument("--iiif_root", default="http://127.0.0.1/iiif", type=str,
                     help='Web-accessible address from which output IIIF manifests and annotations will be served.')
+parser.add_argument("--max_pages", default=-1, type=int,
+                    help='Maximum number of images (IIIF canvases) to process.')
 
 ARGS, manifestURLs = parser.parse_known_args()
 WEIGHTS_PATH = "model.h5"
@@ -56,6 +58,8 @@ def detected(model, image_path):
     print("\nFinding annotations on image: {}".format(image_path))
 
     image = skimage.io.imread(image_path)
+    #print("shape of image is ", image.shape)
+
     r = model.detect([image], verbose=0)[0]
 
     if len(r['scores']) == 0:
@@ -63,7 +67,7 @@ def detected(model, image_path):
         return None
     else:
         print('Annotations were found!')
-        return r
+        return [r, image.shape[1], image.shape[0]]
 
 
 def load_model(weights_path):
@@ -99,28 +103,51 @@ def getImages(manifestURL=None):
             print('Exiting now.')
             exit()
 
-    imageURIs = []
+    # This should be a dictionary keyed on the image service @id
+    imageURIs = {}
     someSequence = data['sequences'][0]
     canvases = someSequence['canvases']
 
+    # Example of a manifest that indicates that the "full" sized
+    # image from the "resource" entry is smaller than max
+    # http://iiif.gdmrdigital.com/nlw/4004562-cutdown.json
+    # @id: "http://dams.llgc.org.uk/iiif/2.0/image/4004566/full/1024,/0/default.jpg"
+
     for c in canvases:
+        canvas_id = c['@id']
         imgs = c['images']
         height = c['height']
         width = c['width']
         for i in imgs:
 
-            resourceID = i['resource']['@id']
-            print("looking at image " + resourceID)
-            potentialFileExtension = resourceID[-3:].lower()
+            # ASSUMPTION: Each image takes up the entire canvas.
+            # This assumes a simplified use of the IIIF Presentation API,
+            # which allows for multiple images to exist on the same canvas.
+            # In the future, this should be supported by checking for and
+            # parsing any "canvas fragment" #xywh= coordinates that are
+            # specified at the end of the "on" parameter of each image.
+            # In that case, the output of the handwriting detection would need
+            # to be projected into these spaces, rather than onto the full
+            # canvas.
 
-            fileExtensions = set(['jpg', 'peg', 'png', 'iff'])
-            if potentialFileExtension not in fileExtensions:
-                if potentialFileExtension[-1] == '/':
-                    imageURIs.append(resourceID + 'full/full/0/default.jpg')
-                else:
-                    imageURIs.append(resourceID + '/full/full/0/default.jpg')
+            resourceID = i['resource']['@id']
+
+            serviceID = i['resource']['service']['@id']
+
+            # Just in case the image server URL is erroneously in the
+            # servide @id parameter
+            if (len(serviceID) > len(resourceID)):
+                imageURL = serviceID
             else:
-                imageURIs.append(i['resource']['@id'])
+                imageURL = resourceID
+
+            if (imageURL.find('/default.jpg') < 0):
+                if (imageURL[-1] != '/'):
+                    imageURL += '/'
+                imageURL += 'full/full/0/default.jpg'
+
+            #print("looking at image " + imageURL)
+            imageURIs[imageURL] = [width, height, canvas_id]
 
     return imageURIs
 
@@ -135,12 +162,18 @@ def infer(manifests):
     currentDirectory = os.getcwd()
     results = set()
     annotations = {}
-    imageURIs = []
+    imageURIs = {}
+
+    total_images = 0
 
     for man in manifests:
-        imageURIs += getImages(man)
-
-    imageURIs = set(imageURIs)
+        image_info = getImages(man)
+        # imageURIs is a dict keyed on the @id value from the resource section
+        for image_url in image_info:
+            if ((ARGS.max_pages < 0) or (total_images < ARGS.max_pages)):
+                imageURIs[image_url] = [image_info[image_url][0],
+                                        image_info[image_url][1], image_info[image_url][2]]
+                total_images += 1
 
     print('Finding annotations on {} images collected from the manifest(s).'.format(
         len(imageURIs)))
@@ -148,8 +181,18 @@ def infer(manifests):
         detection_results = detected(model, img)
         if detection_results:
             results.add(img)
-            if ARGS.annotate:
-                annotations[img] = detection_results
+
+            canvas_width = imageURIs[img][0]
+            canvas_height = imageURIs[img][1]
+
+            canvas_id = imageURIs[img][2]
+
+            image_width = detection_results[1]
+            image_height = detection_results[2]
+
+            annotations[img] = [detection_results[0], canvas_width,
+                                canvas_height, image_width, image_height, canvas_id]
+
             # DEV: only consider the first matching image
             continue
 
@@ -170,7 +213,8 @@ def infer(manifests):
 
     if ARGS.manifest or not (ARGS.html or ARGS.text):
         if ARGS.annotate:
-            [manifestJSON, annotations_data] = exportManifest(results, ARGS.iiif_root, annotations)
+            [manifestJSON, annotations_data] = exportManifest(
+                results, ARGS.iiif_root, annotations, True)
             for anno_path in annotations_data:
                 anno_dir = '/'.join(anno_path.split('/')[:-1])
                 os.makedirs(anno_dir, 0o755, True)
@@ -179,9 +223,8 @@ def infer(manifests):
                     print("Saved annotations file to {}".format(anno_path))
 
         else:
-            manifestJSON = exportManifest(results, ARGS.iiif_root)
-            print("Saved resultsManifest.json to {}".format(currentDirectory))
-
+            manifestJSON = exportManifest(
+                results, ARGS.iiif_root, annotations, False)
 
         with open("resultsManifest.json", "w") as manifestFile:
             manifestFile.write(manifestJSON)
@@ -191,8 +234,7 @@ def infer(manifests):
 
 
 def main():
-    #infer(manifestURLs)
-    infer(["uclaclark_SB322S53-shorter.json", "syriacManifest.json"])
+    infer(manifestURLs)
 
 
 if __name__ == '__main__':
