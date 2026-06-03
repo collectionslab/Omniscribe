@@ -113,7 +113,7 @@ We found that the model does maintain a high precision as the recall value incre
 
 We released a [command line interface](https://github.com/collectionslab/Omniscribe/releases) that takes in IIIF manifests, detects all annotations from all the images from each manifest, and exports them to the user's desired format of .txt, .html, and/or .json. The weights file is also found there as a .h5 file for anyone to load a model with our weights.
 
-## Files and Directories (Requires Python 3.6.x)
+## Files and Directories (Requires Python 3.6+)
 
 ### `data.json`
 
@@ -139,7 +139,7 @@ on GitHub require that structure in order to do training.
 
 ### handwriting/
 
-Contains a training set and a validation set for images that contain handwriting. These images come from the Collections Lab database. Note that training the model assumes daughter directories "train" and " val" where those directories contain only images.
+Training images and annotation datasets are available at [collectionslab/omniscribe-training-data](https://github.com/collectionslab/omniscribe-training-data). Download and place the `train/`, `val/`, and `test/` directories here before training.
 
 ### `inferencer.py`
 
@@ -147,7 +147,7 @@ This script is the engine that does all the handwriting detection. It currently 
 
 The script will display information of its configuration for Mask R-CNN, the weights of the models it will use to infer, the manifest URI it is currently running on, the image URI it is currently inferring on, and confidence scores in range [0.96, 1] of any region it picks up (the higher the score, the more confident the model believes a region contains handwriting).
 
-`$ python3 inferencer.py https://marinus.library.ucla.edu/iiif/annotated/uclaclark_SB322S53.json`
+`$ python3 inferencer.py <iiif_manifest_url>`
 
 #### mask-rcnn/
 

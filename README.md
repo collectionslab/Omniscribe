@@ -2,6 +2,10 @@
 
 [![DOI](https://zenodo.org/badge/114576206.svg)](https://zenodo.org/badge/latestdoi/114576206)
 
+> **This project is archived.** Active development has concluded. The trained model weights are available in [GitHub Releases](https://github.com/collectionslab/Omniscribe/releases). Training data is available at [omniscribe-training-data](https://github.com/collectionslab/omniscribe-training-data).
+
+For technical details on the pipeline, training methodology, and evaluation, see the [Proof of Concept documentation](proofOfConcept/README.md).
+
 Omniscribe was developed to detect annotations (marginalia, interlinear markings, provenance marks, etc.) in digitized printed books hosted via the International Image Interoperability Framework (IIIF). Why do we care about finding annotations? Annotations and other marks are traces left behind by previous readers and owners. Through these markings, we can better understand how readers in the past have used their books or interpreted their contents.
 
 Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboration with a team of UCLA Digital Library staff and UCLA students.
@@ -29,7 +33,7 @@ Formed in December 2018, the project is a Collections Lab/BuildUCLA collaboratio
 
 ### Data
 
-<https://ucla.app.box.com/folder/45481483089>
+Training data (images and annotations) are available at [collectionslab/omniscribe-training-data](https://github.com/collectionslab/omniscribe-training-data).
 
 ## UPDATE #2 February 13, 2019
 
@@ -43,7 +47,7 @@ There are various ways that we can evaluate these models. Ideally, we would have
 
 In our test set, *m*<sub>small</sub> scored a TP/FP of 140/14, while *m*<sub>zoo</sub> received a higher TP/FP of 87/7. However, a qualitative anaylsis suggests that neither of these models should be used alone. We found that *m*<sub>small</sub> detected interlinear annotations and rarely detected tiny annotations (e.g. a lone # or a scribbled number), while *m*<sub>zoo</sub> detected tiny annotations but never found interlinear annotations. At this point, we have made the decision to allow both models to observe an image, and further process the image should either model detect at least one region in it.
 
-We are also now looking to wrap up these models in a nice package for others to use. The plan is to integrate Flask with our machine learning tools to achieve the goal of usability. In the meantime, we are also planning to upload more of our data onto Zooniverse so that we can later train a third model that may improve on our current choice of having two models.
+We are also now looking to wrap up these models in a nice package for others to use. The plan was to integrate Flask for a web interface, which was not completed. In the meantime, we are also planning to upload more of our data onto Zooniverse so that we can later train a third model that may improve on our current choice of having two models.
 ___
 
 ## UPDATE #1 January 3, 2019

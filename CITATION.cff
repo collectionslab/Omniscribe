@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: Omniscribe
+abstract: "A machine learning tool for detecting annotations (marginalia, interlinear markings, provenance marks, etc.) in digitized printed books hosted via IIIF, using Mask R-CNN instance segmentation."
+authors:
+  - family-names: Quach
+    given-names: Jonathan
+  - family-names: Malavalli
+    given-names: Rahul
+  - family-names: Childress
+    given-names: Dawn
+  - family-names: Broadwell
+    given-names: Pete
+  - family-names: Madjukie
+    given-names: Morgan
+repository-code: "https://github.com/collectionslab/Omniscribe"
+doi: 10.5281/zenodo.3731572
+date-released: "2019-02-13"
+license: MIT
+keywords:
+  - IIIF
+  - machine learning
+  - computer vision
+  - annotations
+  - marginalia
+  - digital humanities
+  - Mask R-CNN

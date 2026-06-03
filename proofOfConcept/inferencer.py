@@ -19,10 +19,6 @@ from mrcnn.visualize import display_instances
 from mrcnn.config import Config
 from mrcnn import model as modellib, utils
 
-# frowned upon because of security breaches but needed to connect to manifests
-import ssl
-ssl._create_default_https_context = ssl._create_unverified_context
-
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
@@ -133,7 +129,7 @@ def load_model(weights_path):
 
 def getImageURIs(manifestURL=None):
     url = manifestURL
-    r = requests.get(url, verify=False)
+    r = requests.get(url, verify=True)
     data = json.loads(r.content)
 
     imageURIs = []

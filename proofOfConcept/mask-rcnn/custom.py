@@ -47,7 +47,7 @@ COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
 
 # Directory to save logs and model checkpoints, if not provided
 # through the command line argument --logs
-DEFAULT_LOGS_DIR = "/Users/silver/Desktop/mask-rcnn/Annotation-Detector/logs/"
+DEFAULT_LOGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
 via_region_file = "via_region_data.json"
 ############################################################
 #  Configurations
