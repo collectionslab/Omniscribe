@@ -3,7 +3,7 @@ numpy==1.16.6
 requests>=2.20.0
 opencv_python==3.4.9.33
 matplotlib==3.2.2
-keras==2.3.1
+keras==3.15.0
 pandas==0.25.3
 scipy==1.2.3
 scikit_image==0.14.5
